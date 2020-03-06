@@ -3,7 +3,7 @@
 ## Installation du front
 
 Il s'agit du dossier Front. Après avoir cloné le git, il faut exécuter la commande suivante : `npm install` (cette commande va installer tous les modules).  
-Pour lancer le serveur Angular, exécutez la commande suivante : `ng serve -o` (le -o va ouvrir automatiquement une fenêtre avec le front).  
+Pour lancer le serveur Angular, exécutez la commande suivante : `ng serve -o` (le `-o` va ouvrir automatiquement une fenêtre avec le front).  
 
 ## Installation du back
 
