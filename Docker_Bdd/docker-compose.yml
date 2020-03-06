@@ -1,0 +1,32 @@
+version: "3.2"
+services:
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./databases:/var/lib/mysql:rw
+#    user: mysql
+    networks:
+      - frontend
+      - reseau_interne_base
+    ports:
+      - 3306:3306
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - 8888:80
+    links:
+      - db:db
+    networks:
+      - reseau_interne_base
+      - frontend
+
+networks:
+  reseau_interne_base:
+    external:
+      name: reseau_interne_base # utilisation du réseau isolated_nw déjà existent (sinon, il en créé un nouveau)
+  frontend:
