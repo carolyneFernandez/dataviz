@@ -24,33 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-
-/*
-DB_SETTING : paramètre de connection à la bdd (/!\ A changer en fonction du dockercompose)
-*/
-const DB_SETTINGS = {
-    DB_NAME: 'db_dataviz',
-    DB_USERNAME: 'dataviz',
-    DB_PASSWORD: 'dataviz',
-    DB_HOST: 'localhost',
-    DB_DIALECT: 'mysql'
-}
-const sequelize = new Sequelize(
-    DB_SETTINGS.DB_NAME,
-    DB_SETTINGS.DB_USERNAME,
-    DB_SETTINGS.DB_PASSWORD, {
-        host: DB_SETTINGS.DB_HOST,
-        dialect: DB_SETTINGS.DB_DIALECT /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
-    });
-
-// test de la connection (code donnée par sequelize doc (BUG A REGLER))
-
-try {
-    sequelize.authenticate();
-    console.log("Connection to database succeed.");
-} catch (error) {
-    console.error('Unable to connect to the database:', error);
-}
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
