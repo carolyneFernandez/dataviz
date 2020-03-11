@@ -11,6 +11,9 @@ Pour lancer le serveur Angular, exécutez la commande suivante : `ng serve -o` (
 Il s'agit du dossier Back. Il faut faire la même commande que celle du front pour installer :  
 `npm install`
 
+## Utilisation de sequelize poour créer la base de donnée:
+`sequelize db:migrate` (je vous invite à vous documenter [dessus](https://sequelize.org/v5/))
+
 ## Lancement du docker-bdd et création de la base de donnée
 
 Il faut se rendre dans le dossier Docker-Bdd. Une fois dans le dossier, exécutez la commande suivante pour créer le réseau interne du docker :  
