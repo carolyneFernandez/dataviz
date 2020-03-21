@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrevisionService } from '../services/prevision.service';
+import { WeatherService } from '../services/weather.service';
 
 
 @Component({
@@ -22,8 +22,8 @@ export class GraphicComponent implements OnInit {
   onChartClick(event) {
     console.log(event);
   }
-  constructor(private url:PrevisionService) { 
-   // console.log(url.get_articles())
+  constructor(private url:WeatherService) { 
+    // console.log(url.get_articles())
   }
 
   ngOnInit() {
