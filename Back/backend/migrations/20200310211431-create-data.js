@@ -8,14 +8,11 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            date: {
-                type: Sequelize.DATE
-            },
             pression: {
-                type: Sequelize.DECIMAL
+                type: Sequelize.DECIMAL(10, 2)
             },
             humidity: {
-                type: Sequelize.DECIMAL
+                type: Sequelize.DECIMAL(10, 2)
             },
             weather: {
                 type: Sequelize.STRING
@@ -25,35 +22,40 @@ module.exports = {
                 references: {
                     model: "Temperatures",
                     key: "id"
-                }
+                },
+                allowNull: true
             },
             windId: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: "Winds",
                     key: "id"
-                }
+                },
+                allowNull: true
             },
             precipitationId: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: "Precipitations",
                     key: "id"
-                }
+                },
+                allowNull: true
             },
             cloudId: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: "Clouds",
                     key: "id"
-                }
+                },
+                allowNull: true
             },
             cityId: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: "Cities",
                     key: "id"
-                }
+                },
+                allowNull: true
             },
             createdAt: {
                 allowNull: false,

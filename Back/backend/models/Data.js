@@ -1,7 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
     const Data = sequelize.define('Data', {
-        date: DataTypes.DATE,
         pression: DataTypes.DECIMAL,
         humidity: DataTypes.DECIMAL,
         weather: DataTypes.STRING

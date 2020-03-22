@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
         code_city: DataTypes.INTEGER,
         name: DataTypes.STRING,
         department: DataTypes.STRING,
-        x: DataTypes.DECIMAL,
-        y: DataTypes.DECIMAL
+        lon: DataTypes.DECIMAL,
+        lat: DataTypes.DECIMAL
     }, {});
     City.associate = function(models) {
         // associations can be defined here

@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 const { Sequelize } = require('sequelize');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var datas = require('./routes/Data');
+var temperatures = require('./routes/temperature');
 
 var app = express();
 
@@ -23,6 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/api/data', datas);
+app.use('/api/temperature', temperatures);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
