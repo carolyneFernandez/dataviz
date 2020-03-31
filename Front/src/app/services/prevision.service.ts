@@ -16,5 +16,10 @@ export class PrevisionService {
   //  return this.http.get( this.baseUrl.map(Response =>json())
     //)
   }
-  
+
+  getTemperatureForOneCity(city){
+      return this
+             .http
+             .get(`http://localhost:3000/api/temperature/Paris`);
+  }
 }
