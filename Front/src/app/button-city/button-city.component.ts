@@ -1,29 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { PrevisionService } from '../services/prevision.service';
 
 @Component({
-  selector: 'app-button-city',
+  selector: 'button-city',
   templateUrl: './button-city.component.html',
   styleUrls: ['./button-city.component.scss']
 })
 export class ButtonCityComponent implements OnInit {
-  @Input() city: string;
-  @Input() temperature: Float64Array;
+  @Input() city: any;
 
-  temp: any;
-  constructor(private router: Router, private ps: PrevisionService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.ps
-    .getTemperatureForOneCity("Paris")
-    .subscribe(t => {
-      this.temp = t
-    });
   }
 
   onClick(navCity) {
     this.router.navigate([`meteo/${navCity}`]);
   }
-
 }

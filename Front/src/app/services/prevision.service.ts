@@ -20,6 +20,6 @@ export class PrevisionService {
   getTemperatureForOneCity(city){
       return this
              .http
-             .get(`http://localhost:3000/api/temperature/Paris`);
+             .get(`http://localhost:3000/api/temperature/Lyon`);
   }
 }

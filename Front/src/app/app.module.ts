@@ -11,8 +11,7 @@ import { ButtonCityComponent } from './button-city/button-city.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GraphicComponent,
-    ButtonCityComponent,
+    GraphicComponent
   ],
   imports: [
     BrowserModule,

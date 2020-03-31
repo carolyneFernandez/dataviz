@@ -9,7 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var datas = require('./routes/Data');
 var temperatures = require('./routes/temperature');
-
+var cors = require('cors');
 var app = express();
 
 // view engine setup
@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 app.use('/', routes);
 app.use('/users', users);
