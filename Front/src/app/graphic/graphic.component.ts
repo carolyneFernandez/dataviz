@@ -32,7 +32,7 @@ export class GraphicComponent implements OnInit {
           scaleLabel: {
             display: true,
             labelString: "Temperature",
-          },	
+          },
           ticks: {
             beginAtZero: true,
           },

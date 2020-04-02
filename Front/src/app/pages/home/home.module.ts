@@ -10,7 +10,6 @@ import { ChartsModule } from "ng2-charts";
 @NgModule({
   declarations: [HomeComponent, ButtonCityComponent],
 
-
   imports: [
     CommonModule,
     HomeRoutingModule,
