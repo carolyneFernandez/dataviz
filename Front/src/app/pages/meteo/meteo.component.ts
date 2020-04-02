@@ -37,6 +37,8 @@ export class MeteoComponent implements OnInit {
         ]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         legend: { display: false },
         title: {
           display: true,
