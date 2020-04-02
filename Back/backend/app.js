@@ -10,7 +10,9 @@ var users = require('./routes/users');
 var datas = require('./routes/Data');
 var temperatures = require('./routes/temperature');
 var cors = require('cors');
+
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
