@@ -6,9 +6,6 @@ import { GraphicComponent } from './graphic/graphic.component';
 const routes: Routes = [
   { path: '', loadChildren: "./pages/home/home.module#HomeModule" },
   { path:'meteo/:idcity', loadChildren: "./pages/meteo/meteo.module#MeteoModule" },
-  {path: 'bar-chart', component: GraphicComponent},
-  {path: 'graphic', component: GraphicComponent},
-
 ];
 
 @NgModule({

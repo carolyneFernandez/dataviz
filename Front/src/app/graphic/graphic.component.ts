@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherService } from '../services/weather.service';
-import { ChartDataSets, ChartOptions } from 'chart.js';
+import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { WeatherService } from '../services/weather.service';
 
 @Component({
   selector: 'app-graphic',
@@ -10,8 +10,26 @@ import { Color, Label } from 'ng2-charts';
 })
 export class GraphicComponent implements OnInit {
 
-  public datos:any;//todo lo que nos responde persona
-  public listaPer:Object[]; //el array de objetos
+//  protected datos:any;//todo lo que nos responde persona
+  public dataVille:Object[]; //el array de objetos
+
+
+
+  constructor(private url: WeatherService) { 
+
+  }
+
+  ngOnInit() {
+   
+    this.url.searchWeatherInfo("Paris").subscribe(data =>{
+      this.AssignData(data["Temperature"]);
+    });
+
+  }
+
+  AssignData(data:Object[]){
+    this.dataVille=data;
+  }
 
   lineChartData: ChartDataSets[] = [
     { data: [20, 25, 30, 25,35,21,20], label: 'Min' },
@@ -44,23 +62,6 @@ export class GraphicComponent implements OnInit {
   lineChartPlugins = [];
   lineChartType = 'line';
 
-  constructor(private url: WeatherService) { 
 
-   url.peti().subscribe(donne =>{
-      console.log(donne);
-      console.log("s");
-
-   });
- 
-   
-     
-  }
-
-  ngOnInit() {
-      this.url.peti().subscribe(data => {
-        console.log(data);
-        console.log("s");
-    });
-  }
 
 }
