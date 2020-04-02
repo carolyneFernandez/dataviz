@@ -1,0 +1,792 @@
+[{
+        "code_city": "62041",
+        "name": "Arras",
+        "departement": "Pas-de-Calais",
+        "longitude": "2.7772211",
+        "latitude": "50.2910480"
+    },
+    {
+
+        "code_city": "75000",
+        "name": "Paris",
+        "departement": "Paris",
+        "longitude": "2.3514616",
+        "latitude": "48.8566969"
+    },
+    {
+
+        "code_city": "59000",
+        "name": "Lille",
+        "departement": "Nord",
+        "longitude": "3.0635282",
+        "latitude": "50.6365654"
+    },
+    {
+
+        "code_city": "80000",
+        "name": "Amiens",
+        "departement": "Somme",
+        "longitude": "2.2956951",
+        "latitude": "49.8941708"
+    },
+    {
+
+        "code_city": "76000",
+        "name": "Rouen",
+        "departement": "Seine Maritime",
+        "longitude": "1.0939658",
+        "latitude": "49.4404591"
+    },
+    {
+
+        "code_city": "27000",
+        "name": "Evreux",
+        "departement": "Eure",
+        "longitude": "1.1510164",
+        "latitude": "49.0268903"
+    },
+    {
+
+        "code_city": "14000",
+        "name": "Caen",
+        "departement": "Calvados",
+        "longitude": "-0.3690815",
+        "latitude": "49.1828008"
+    },
+    {
+
+        "code_city": "50000",
+        "name": "Saint-Lô",
+        "departement": "Manche",
+        "longitude": "-1.0906637",
+        "latitude": "49.1157004"
+    },
+    {
+
+        "code_city": "72000",
+        "name": "Le Mans",
+        "departement": "Sarthe",
+        "longitude": "0.1967379",
+        "latitude": "48.0073498"
+    },
+    {
+
+        "code_city": "49000",
+        "name": "Angers",
+        "departement": "Maine et Loire",
+        "longitude": "-0.5515588",
+        "latitude": "47.4739884"
+    },
+    {
+
+        "code_city": "44000",
+        "name": "Nantes",
+        "departement": "Loire Atlantique",
+        "longitude": "-1.5541362",
+        "latitude": "47.2186371"
+    },
+    {
+
+        "code_city": "85000",
+        "name": "La Roche-sur-Yon",
+        "departement": "Vendée",
+        "longitude": "-1.4269698",
+        "latitude": "46.6705431"
+    },
+    {
+
+        "code_city": "35000",
+        "name": "Rennes",
+        "departement": "Ille et Vilaine",
+        "longitude": "-1.6800198",
+        "latitude": "48.1113387"
+    },
+    {
+
+        "code_city": "56000",
+        "name": "Vannes",
+        "departement": "Morbihan",
+        "longitude": "-2.7599079",
+        "latitude": "47.6586772"
+    },
+    {
+
+        "code_city": "22000",
+        "name": "Saint-Brieuc",
+        "departement": "Côtes d\\'Armor",
+        "longitude": "-2.7645226",
+        "latitude": "48.5138054"
+    },
+    {
+
+        "code_city": "29000",
+        "name": "Quimper",
+        "departement": "Finistère",
+        "longitude": "-4.1024782",
+        "latitude": "47.9960325"
+    },
+    {
+
+        "code_city": "28000",
+        "name": "Chartres",
+        "departement": "Eure et Loir",
+        "longitude": "1.4881434",
+        "latitude": "48.4438601"
+    },
+    {
+
+        "code_city": "45000",
+        "name": "Orléans",
+        "departement": "Loiret",
+        "longitude": "1.9086066",
+        "latitude": "47.9027336"
+    },
+    {
+
+        "code_city": "18000",
+        "name": "Bourges",
+        "departement": "Cher",
+        "longitude": "2.3989320",
+        "latitude": "47.0805693"
+    },
+    {
+
+        "code_city": "41000",
+        "name": "Blois",
+        "departement": "Loir et Cher",
+        "longitude": "1.3337639",
+        "latitude": "47.5876861"
+    },
+    {
+
+        "code_city": "37000",
+        "name": "Tours",
+        "departement": "Indre et Loire",
+        "longitude": "0.6889268",
+        "latitude": "47.3900474"
+    },
+    {
+
+        "code_city": "36000",
+        "name": "Châteauroux",
+        "departement": "Indre",
+        "longitude": "1.6957099",
+        "latitude": "46.8047000"
+    },
+    {
+
+        "code_city": "23000",
+        "name": "Guéret",
+        "departement": "Creuse",
+        "longitude": "1.8713349",
+        "latitude": "46.1686865"
+    },
+    {
+
+        "code_city": "19000",
+        "name": "Tulle",
+        "departement": "Corrèze",
+        "longitude": "1.7706904",
+        "latitude": "45.2678158"
+    },
+    {
+
+        "code_city": "87000",
+        "name": "Limoges",
+        "departement": "Haute-Vienne",
+        "longitude": "1.2644847",
+        "latitude": "45.8354243"
+    },
+    {
+
+        "code_city": "79000",
+        "name": "Niort",
+        "departement": "Deux-Sèvres",
+        "longitude": "-0.4645212",
+        "latitude": "46.3239455"
+    },
+    {
+
+        "code_city": "16000",
+        "name": "Angoulême",
+        "departement": "Charente",
+        "longitude": "0.1576745",
+        "latitude": "45.6512748"
+    },
+    {
+
+        "code_city": "17000",
+        "name": "La Rochelle",
+        "departement": "Charente Maritime",
+        "longitude": "-1.1520434",
+        "latitude": "46.1591126"
+    },
+    {
+
+        "code_city": "24000",
+        "name": "Périgueux",
+        "departement": "Dordogne",
+        "longitude": "0.7184407",
+        "latitude": "45.1909365"
+    },
+    {
+
+        "code_city": "56000",
+        "name": "Vannes",
+        "departement": "Morbihan",
+        "longitude": "-2.7599079",
+        "latitude": "47.6586772"
+    },
+    {
+
+        "code_city": "47000",
+        "name": "Agen",
+        "departement": "Lot et Garonne",
+        "longitude": "0.6176324",
+        "latitude": "44.2015624"
+    },
+    {
+
+        "code_city": "33000",
+        "name": "Bordeaux",
+        "departement": "Gironde",
+        "longitude": "-0.5800364",
+        "latitude": "44.8412250"
+    },
+    {
+
+        "code_city": "40000",
+        "name": "Mont-de-Marsan",
+        "departement": "Landes",
+        "longitude": "-0.5009720",
+        "latitude": "43.8911318"
+    },
+    {
+
+        "code_city": "64000",
+        "name": "Pau",
+        "departement": "Pyrénées Atlantiques",
+        "longitude": "-0.3685668",
+        "latitude": "43.2957547"
+    },
+    {
+
+        "code_city": "65000",
+        "name": "Tarbes",
+        "departement": "Hautes-Pyrénées",
+        "longitude": "0.0781021",
+        "latitude": "43.2328580"
+    },
+    {
+
+        "code_city": "32000",
+        "name": "Auch",
+        "departement": "Gers",
+        "longitude": "0.5850507",
+        "latitude": "43.6463558"
+    },
+    {
+
+        "code_city": "82000",
+        "name": "Montauban",
+        "departement": "Tarn et Garonne",
+        "longitude": "44.0175835",
+        "latitude": "1.3549991"
+    },
+    {
+
+        "code_city": "46000",
+        "name": "Cahors",
+        "departement": "Lot",
+        "longitude": "1.4364999",
+        "latitude": "44.4495000"
+    },
+    {
+
+        "code_city": "12000",
+        "name": "Rodez",
+        "departement": "Aveyron",
+        "longitude": "2.5728419",
+        "latitude": "44.3516207"
+    },
+    {
+
+        "code_city": "48000",
+        "name": "Mende",
+        "departement": "Lozère",
+        "longitude": "3.4991057",
+        "latitude": "44.5180226"
+    },
+    {
+
+        "code_city": "30000",
+        "name": "Nîmes",
+        "departement": "Gard",
+        "longitude": "4.3600687",
+        "latitude": "43.8374249"
+    },
+    {
+
+        "code_city": "34000",
+        "name": "Montpellier",
+        "departement": "Hérault",
+        "longitude": "3.8767337",
+        "latitude": "43.6112422"
+    },
+    {
+
+        "code_city": "11000",
+        "name": "Carcassonne",
+        "departement": "Aude",
+        "longitude": "2.3491069",
+        "latitude": "43.2130358"
+    },
+    {
+
+        "code_city": "66000",
+        "name": "Perpignan",
+        "departement": "Pyrénées Orientales",
+        "longitude": "2.8953121",
+        "latitude": "42.6985304"
+    },
+    {
+
+        "code_city": "9000",
+        "name": "Foix",
+        "departement": "Ariège",
+        "longitude": "1.6053807",
+        "latitude": "42.9638998"
+    },
+    {
+
+        "code_city": "31000",
+        "name": "Toulouse",
+        "departement": "Haute-Garonne",
+        "longitude": "1.4442469",
+        "latitude": "43.6044622"
+    },
+    {
+
+        "code_city": "81000",
+        "name": "Albi",
+        "departement": "Tarn",
+        "longitude": "2.1478990",
+        "latitude": "43.9277552"
+    },
+    {
+
+        "code_city": "13001",
+        "name": "Marseille",
+        "departement": "Bouches du Rhône",
+        "longitude": "5.3699525",
+        "latitude": "43.2961743"
+    },
+    {
+
+        "code_city": "83000",
+        "name": "Toulon",
+        "departement": "Var",
+        "longitude": "5.9304919",
+        "latitude": "43.1257311"
+    },
+    {
+
+        "code_city": "6000",
+        "name": "Nice",
+        "departement": "Alpes Maritimes",
+        "longitude": "7.2683912",
+        "latitude": "43.7009358"
+    },
+    {
+
+        "code_city": "4000",
+        "name": "Digne-les-Bains",
+        "departement": "Alpes de Haute-Provence",
+        "longitude": "6.2351431",
+        "latitude": "44.0918144"
+    },
+    {
+
+        "code_city": "84000",
+        "name": "Avignon",
+        "departement": "Vaucluse",
+        "longitude": "4.8059012",
+        "latitude": "43.9492493"
+    },
+    {
+
+        "code_city": "5000",
+        "name": "Gap",
+        "departement": "Hautes-Alpes",
+        "longitude": "6.0820018",
+        "latitude": "44.5611978"
+    },
+    {
+
+        "code_city": "7000",
+        "name": "Privas",
+        "departement": "Ardèche",
+        "longitude": "4.5986733",
+        "latitude": "44.7352708"
+    },
+    {
+
+        "code_city": "26000",
+        "name": "Valence",
+        "departement": "Drôme",
+        "longitude": "4.8920811",
+        "latitude": "44.9332277"
+    },
+    {
+
+        "code_city": "38000",
+        "name": "Grenoble",
+        "departement": "Isère",
+        "longitude": "5.7357819",
+        "latitude": "45.1875602"
+    },
+    {
+
+        "code_city": "73000",
+        "name": "Chambéry",
+        "departement": "Savoie",
+        "longitude": "5.9203636",
+        "latitude": "45.5662672"
+    },
+    {
+
+        "code_city": "74000",
+        "name": "Annecy",
+        "departement": "Haute-Savoie",
+        "longitude": "6.1288847",
+        "latitude": "45.8992348"
+    },
+    {
+
+        "code_city": "1000",
+        "name": "Bourg-en-Bresse",
+        "departement": "Ain",
+        "longitude": "5.2250324",
+        "latitude": "46.2051192"
+    },
+    {
+
+        "code_city": "69001",
+        "name": "Lyon",
+        "departement": "Rhône",
+        "longitude": "4.8320114",
+        "latitude": "45.7578137"
+    },
+    {
+
+        "code_city": "42000",
+        "name": "Saint-Étienne",
+        "departement": "Loire",
+        "longitude": "4.3873058",
+        "latitude": "45.4401467"
+    },
+    {
+
+        "code_city": "43000",
+        "name": "Le Puy-en-Velay",
+        "departement": "Haute-Loire",
+        "longitude": "3.8855537",
+        "latitude": "45.0459739"
+    },
+    {
+
+        "code_city": "15000",
+        "name": "Aurillac",
+        "departement": "Cantal",
+        "longitude": "2.4433101",
+        "latitude": "44.9285441"
+    },
+    {
+
+        "code_city": "63000",
+        "name": "Clermont-Ferrand",
+        "departement": "Puy de Dôme",
+        "longitude": "3.0819427",
+        "latitude": "45.7774551"
+    },
+    {
+
+        "code_city": "3000",
+        "name": "Moulins",
+        "departement": "Allier",
+        "longitude": "3.3331703",
+        "latitude": "46.5660526"
+    },
+    {
+
+        "code_city": "71",
+        "name": "Mâcon",
+        "departement": "Saône et Loire",
+        "longitude": "4.8322266",
+        "latitude": "46.3036683"
+    },
+    {
+
+        "code_city": "39000",
+        "name": "Lons-le-Saunier",
+        "departement": "Jura",
+        "longitude": "5.5586167",
+        "latitude": "46.6739021"
+    },
+    {
+
+        "code_city": "21000",
+        "name": "Dijon",
+        "departement": "Côte d\\'Or",
+        "longitude": "5.0414701",
+        "latitude": "47.3215806"
+    },
+    {
+
+        "code_city": "25000",
+        "name": "Besançon",
+        "departement": "Doubs",
+        "longitude": "6.0243622",
+        "latitude": "47.2380222"
+    },
+    {
+
+        "code_city": "90000",
+        "name": "Belfort",
+        "departement": "Territoire de Belfort",
+        "longitude": "6.8628942",
+        "latitude": "47.6379599"
+    },
+    {
+
+        "code_city": "70000",
+        "name": "Vesoul",
+        "departement": "Haute-Saône",
+        "longitude": "6.1545239",
+        "latitude": "47.6197251"
+    },
+    {
+
+        "code_city": "89000",
+        "name": "Auxerre",
+        "departement": "Yonne",
+        "longitude": "3.5705790",
+        "latitude": "47.7961287"
+    },
+    {
+
+        "code_city": "58000",
+        "name": "Nevers",
+        "departement": "Nièvre",
+        "longitude": "3.1577203",
+        "latitude": "46.9876601"
+    },
+    {
+
+        "code_city": "1000",
+        "name": "Troyes",
+        "departement": "Aube",
+        "longitude": "4.0746257",
+        "latitude": "48.2971626"
+    },
+    {
+
+        "code_city": "52000",
+        "name": "Chaumont",
+        "departement": "Haute-Marne",
+        "longitude": "5.1395849",
+        "latitude": "48.1111324"
+    },
+    {
+
+        "code_city": "88000",
+        "name": "Épinal",
+        "departement": "Vosges",
+        "longitude": "6.4503643",
+        "latitude": "48.1747684"
+    },
+    {
+
+        "code_city": "68000",
+        "name": "Colmar",
+        "departement": "Haut-Rhin",
+        "longitude": "7.3579641",
+        "latitude": "48.0777517"
+    },
+    {
+
+        "code_city": "67000",
+        "name": "Strasbourg",
+        "departement": "Bas-Rhin",
+        "longitude": "7.7507127",
+        "latitude": "48.5846140"
+    },
+    {
+
+        "code_city": "57000",
+        "name": "Metz",
+        "departement": "Moselle",
+        "longitude": "6.1763552",
+        "latitude": "49.1196964"
+    },
+    {
+
+        "code_city": "54000",
+        "name": "Nancy",
+        "departement": "Meurthe et Moselle",
+        "longitude": "6.1834097",
+        "latitude": "48.6937223"
+    },
+    {
+
+        "code_city": "55000",
+        "name": "Bar-le-Duc",
+        "departement": "Meuse",
+        "longitude": "5.1623805",
+        "latitude": "48.7712673"
+    },
+    {
+
+        "code_city": "8000",
+        "name": "Charleville-Mézières",
+        "departement": "Ardennes",
+        "longitude": "4.7206939",
+        "latitude": "49.7735712"
+    },
+    {
+
+        "code_city": "51000",
+        "name": "Châlons-en-Champagne",
+        "departement": "Marne",
+        "longitude": "4.3628851",
+        "latitude": "48.9566218"
+    },
+    {
+
+        "code_city": "77000",
+        "name": "Melun",
+        "departement": "Seine et Marne",
+        "longitude": "2.6608169",
+        "latitude": "48.5399270"
+    },
+    {
+
+        "code_city": "95000",
+        "name": "Pontoise",
+        "departement": "Val d\\'Oise",
+        "longitude": "2.1008067",
+        "latitude": "49.0508845"
+    },
+    {
+
+        "code_city": "78000",
+        "name": "Versailles",
+        "departement": "Yvelines",
+        "longitude": "2.1266886",
+        "latitude": "48.8035403"
+    },
+    {
+
+        "code_city": "91000",
+        "name": "Évry",
+        "departement": "Essonne",
+        "longitude": "3.2560400",
+        "latitude": "48.2640600"
+    },
+    {
+
+        "code_city": "94000",
+        "name": "Créteil",
+        "departement": "Val de Marne",
+        "longitude": "2.4530731",
+        "latitude": "48.7771486"
+    },
+    {
+
+        "code_city": "93000",
+        "name": "Bobigny",
+        "departement": "Seine Saint-Denis",
+        "longitude": "2.4452231",
+        "latitude": "48.9063870"
+    },
+    {
+
+        "code_city": "92000",
+        "name": "Nanterre",
+        "departement": "Hauts de Seine",
+        "longitude": "2.2071267",
+        "latitude": "48.8924273"
+    },
+    {
+
+        "code_city": "0",
+        "name": "Laon",
+        "departement": "Aisne",
+        "longitude": "3.6206860",
+        "latitude": "49.5646650"
+    },
+    {
+
+        "code_city": "60000",
+        "name": "Beauvais",
+        "departement": "Oise",
+        "longitude": "2.0823355",
+        "latitude": "49.4300997"
+    },
+    {
+
+        "code_city": "97100",
+        "name": "Basse-Terre",
+        "departement": "Guadeloupe",
+        "longitude": "-61.7333373",
+        "latitude": "16.0000778"
+    },
+    {
+
+        "code_city": "97200",
+        "name": "Fort-de-France",
+        "departement": "Martinique",
+        "longitude": "-61.0676724",
+        "latitude": "14.6027962"
+    },
+    {
+
+        "code_city": "97300",
+        "name": "Cayenne",
+        "departement": "Guyane",
+        "longitude": "-52.3258307",
+        "latitude": "4.9371143"
+    },
+    {
+
+        "code_city": "20000",
+        "name": "Ajaccio",
+        "departement": "Corse du sud",
+        "longitude": "8.7376029",
+        "latitude": "41.9263991"
+    },
+    {
+
+        "code_city": "20200",
+        "name": "Bastia",
+        "departement": "Haute-Corse",
+        "longitude": "9.4525420",
+        "latitude": "42.7065505"
+    },
+    {
+
+        "code_city": "97400",
+        "name": "Saint-Denis",
+        "departement": "Réunion",
+        "longitude": "55.4481370",
+        "latitude": "-20.8799889"
+    },
+    {
+
+        "code_city": "97600",
+        "name": "Mamoudzou",
+        "departement": "Mayotte",
+        "longitude": "45.2279908",
+        "latitude": "-12.7805856"
+    }
+]

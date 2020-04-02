@@ -17,6 +17,11 @@ module.exports = {
             weather: {
                 type: Sequelize.STRING
             },
+            date: {
+                type: Sequelize.DATE,
+                defaultValue: Sequelize.fn('now'),
+                allowNull: false
+            },
             temperatureId: {
                 type: Sequelize.INTEGER,
                 references: {
