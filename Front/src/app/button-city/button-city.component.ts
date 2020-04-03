@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { PrevisionService } from '../services/prevision.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'button-city',
@@ -9,12 +11,17 @@ import { Router } from '@angular/router';
 export class ButtonCityComponent implements OnInit {
   @Input() city: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private previsionService: PrevisionService) { }
 
   ngOnInit(): void {
   }
 
   onClick(navCity) {
     this.router.navigate([`meteo/${navCity}`]);
+  }
+
+  testWater() {
+    this.previsionService.getWatersList("Longuyon")
+      .then(result => console.log(result.data));
   }
 }

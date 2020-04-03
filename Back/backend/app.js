@@ -28,6 +28,7 @@ const Temperature = models.Temperature;
 const Cloud = models.Cloud;
 const Precipitation = models.Precipitation;
 const Wind = models.Wind;
+var waters = require('./routes/waters');
 var cors = require('cors');
 
 var app = express();
@@ -941,6 +942,7 @@ async function readCities() {
 }
 
 //readCities();
+app.use('/api/waters', waters);
 
 /// catch 404 and forwarding to error handler
 app.use(function (req, res, next) {
