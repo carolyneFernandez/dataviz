@@ -5,12 +5,14 @@ import { MeteoComponent } from "./meteo.component";
 import { MeteoRoutingModule } from "./meteo-routing.module";
 import { CurrentWeatherComponent } from "../../current-weather/current-weather.component";
 import { FollowingWeatherComponent } from "src/app/following-weather/following-weather.component";
+import { WindGraphComponent } from '../../wind-graph/wind-graph.component';
 
 @NgModule({
   declarations: [
     MeteoComponent,
     CurrentWeatherComponent,
     FollowingWeatherComponent,
+    WindGraphComponent
   ],
   imports: [CommonModule, MeteoRoutingModule],
 })

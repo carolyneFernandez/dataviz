@@ -1,30 +1,26 @@
-import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ChartsModule } from 'ng2-charts';
+import { Router } from '@angular/router';
 import * as Chart from 'chart.js';
 
 @Component({
-  selector: "app-meteo",
-  templateUrl: "./meteo.component.html",
-  styleUrls: ["./meteo.component.scss"],
+  selector: 'wind-graph',
+  templateUrl: './wind-graph.component.html',
+  styleUrls: ['./wind-graph.component.scss']
 })
-export class MeteoComponent implements OnInit {
+export class WindGraphComponent implements OnInit {
   public city: any;
-  constructor(private route: ActivatedRoute, private router: Router, private elementRef: ElementRef) {
-    this.city = this.router.getCurrentNavigation().extras.state.myCity;
-   }
+
+  constructor(private router: Router, private elementRef: ElementRef) {
+
+    // this.city = this.router.getCurrentNavigation().extras.state.myCity;
+    // Ici on récupère la ville depuis le service.
+  }
 
   ngOnInit(): void {
-    this.city = this.route.snapshot.paramMap.get("idcity");
     this.initChart(this.city);
   }
 
-  onClick() {
-    this.router.navigate([`/`]);
-  }
-
   initChart(city) {
-    console.log(city);
     let htmlRef = this.elementRef.nativeElement.querySelector(`#myChart`);
     var myBarChart = new Chart(htmlRef, {
       type: 'bar',
