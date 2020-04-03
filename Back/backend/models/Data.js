@@ -3,7 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     const Data = sequelize.define('Data', {
         pression: DataTypes.DECIMAL,
         humidity: DataTypes.DECIMAL,
-        weather: DataTypes.STRING
+        weather: DataTypes.STRING,
+        date: DataTypes.DATE,
+        icon: DataTypes.STRING
     }, {});
     Data.associate = function(models) {
         // associations can be defined here

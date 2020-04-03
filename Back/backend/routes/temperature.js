@@ -16,7 +16,7 @@ router.get('/:city', function(req, res, next) {
         }
     }).then(findedCity => {
         var findedCityID = findedCity.get("id");
-        Data.findOne({
+        Data.findAll({
             where: {
                 cityId: findedCityID
             },
