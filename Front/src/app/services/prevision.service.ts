@@ -22,4 +22,10 @@ export class PrevisionService {
              .http
              .get(`http://localhost:3000/api/temperature/Lyon`);
   }
+
+  getWindForOneCity(city){
+    return this
+             .http
+             .get(`http://localhost:3000/api/wind/Lyon`);
+  }
 }

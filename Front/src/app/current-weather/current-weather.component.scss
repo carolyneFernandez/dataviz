@@ -1,0 +1,30 @@
+* {
+    font-family: 'ubuntu';
+    font-weight: bold;
+}
+
+.card-body{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+#date{
+}
+
+#weather{
+    align-self: flex-start;
+    display: flex;
+    flex-flow: row;
+    margin-left: 15px;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+#sun{
+    width: 75px;
+    height: auto;
+}
