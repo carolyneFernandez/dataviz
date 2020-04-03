@@ -12,8 +12,6 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var datas = require('./routes/Data');
 var temperatures = require('./routes/temperature');
-
-
 /**
  * TOKEN LIST
  * OpenWeather Data : 06554607b71839e1b22e07e0fbd2e215
@@ -28,8 +26,7 @@ const Temperature = models.Temperature;
 const Cloud = models.Cloud;
 const Precipitation = models.Precipitation;
 const Wind = models.Wind;
-
-
+var cors = require('cors');
 var app = express();
 
 // view engine setup
@@ -42,6 +39,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 app.use('/', routes);
 app.use('/users', users);

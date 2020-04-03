@@ -16,7 +16,9 @@ Il s'agit du dossier Back. Il faut faire la même commande que celle du front po
 
 ## Lancement du docker-bdd et création de la base de donnée
 
-Il faut se rendre dans le dossier Docker-Bdd. Une fois dans le dossier, exécutez la commande suivante pour lancer le docker :  
+Il faut se rendre dans le dossier Docker-Bdd. Une fois dans le dossier, exécutez la commande suivante pour créer le réseau interne du docker :  
+`docker network create --internal reseau_interne_base`  
+Ensuite, lancer le docker en exécutant la commande suivante :  
 `docker-compose up -d`  
 Une fois lancé, allez sur [localhost:8888](localhost:8888). Vous arriverez sur la page de connexion de PhpMyAdmin.  
 L'identifiant est **root** et le mot de passe est **root**.  
