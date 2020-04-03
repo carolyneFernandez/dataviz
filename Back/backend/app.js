@@ -1,5 +1,4 @@
 var express = require('express');
-const util = require('util');
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
