@@ -287,7 +287,9 @@ async function requestAndDb(cityName, cityCode, cityDepartement, cityLong, cityL
         qs: {
             appid: OpenWeatherToken, // -> uri + '?access_token=xxxxx%20xxxxx'
             q: cityName,
-            mode: "xml"
+            mode: "xml",
+            lang: "fr",
+            units: "metric"
         },
         headers: {
             'User-Agent': 'Request-Promise'
@@ -321,10 +323,10 @@ async function requestAndDb(cityName, cityCode, cityDepartement, cityLong, cityL
             windSpeed = result.weatherdata.forecast[0].time[0].windSpeed[0].$.mps;
             windSpeedName = result.weatherdata.forecast[0].time[0].windSpeed[0].$.name;
 
-            cityTemperature = (result.weatherdata.forecast[0].time[0].temperature[0].$.value - 273.15).toFixed(2);
-            cityTemperatureMin = (result.weatherdata.forecast[0].time[0].temperature[0].$.min - 273.15).toFixed(2);
-            cityTemperatureMax = (result.weatherdata.forecast[0].time[0].temperature[0].$.max - 273.15).toFixed(2);
-            cityTempFeelLike = (result.weatherdata.forecast[0].time[0].feels_like[0].$.value - 273.15).toFixed(2);
+            cityTemperature = (result.weatherdata.forecast[0].time[0].temperature[0].$.value);
+            cityTemperatureMin = (result.weatherdata.forecast[0].time[0].temperature[0].$.min);
+            cityTemperatureMax = (result.weatherdata.forecast[0].time[0].temperature[0].$.max);
+            cityTempFeelLike = (result.weatherdata.forecast[0].time[0].feels_like[0].$.value);
 
             cityCloudValue = result.weatherdata.forecast[0].time[0].clouds[0].$.value;
             cityCloudPercent = result.weatherdata.forecast[0].time[0].clouds[0].$.all;
@@ -400,10 +402,10 @@ async function requestAndDb(cityName, cityCode, cityDepartement, cityLong, cityL
             var windSpeed2 = result.weatherdata.forecast[0].time[8].windSpeed[0].$.mps;
             var windSpeedName2 = result.weatherdata.forecast[0].time[8].windSpeed[0].$.name;
 
-            var cityTemperature2 = (result.weatherdata.forecast[0].time[8].temperature[0].$.value - 273.15).toFixed(2);
-            var cityTemperatureMin2 = (result.weatherdata.forecast[0].time[8].temperature[0].$.min - 273.15).toFixed(2);
-            var cityTemperatureMax2 = (result.weatherdata.forecast[0].time[8].temperature[0].$.max - 273.15).toFixed(2);
-            var cityTempFeelLike2 = (result.weatherdata.forecast[0].time[8].feels_like[0].$.value - 273.15).toFixed(2);
+            var cityTemperature2 = (result.weatherdata.forecast[0].time[8].temperature[0].$.value);
+            var cityTemperatureMin2 = (result.weatherdata.forecast[0].time[8].temperature[0].$.min);
+            var cityTemperatureMax2 = (result.weatherdata.forecast[0].time[8].temperature[0].$.max);
+            var cityTempFeelLike2 = (result.weatherdata.forecast[0].time[8].feels_like[0].$.value);
 
             var cityCloudValue2 = result.weatherdata.forecast[0].time[8].clouds[0].$.value;
             var cityCloudPercent2 = result.weatherdata.forecast[0].time[8].clouds[0].$.all;
@@ -478,10 +480,10 @@ async function requestAndDb(cityName, cityCode, cityDepartement, cityLong, cityL
             var windSpeed3 = result.weatherdata.forecast[0].time[16].windSpeed[0].$.mps;
             var windSpeedName3 = result.weatherdata.forecast[0].time[16].windSpeed[0].$.name;
 
-            var cityTemperature3 = (result.weatherdata.forecast[0].time[16].temperature[0].$.value - 273.15).toFixed(2);
-            var cityTemperatureMin3 = (result.weatherdata.forecast[0].time[16].temperature[0].$.min - 273.15).toFixed(2);
-            var cityTemperatureMax3 = (result.weatherdata.forecast[0].time[16].temperature[0].$.max - 273.15).toFixed(2);
-            var cityTempFeelLike3 = (result.weatherdata.forecast[0].time[16].feels_like[0].$.value - 273.15).toFixed(2);
+            var cityTemperature3 = (result.weatherdata.forecast[0].time[16].temperature[0].$.value);
+            var cityTemperatureMin3 = (result.weatherdata.forecast[0].time[16].temperature[0].$.min);
+            var cityTemperatureMax3 = (result.weatherdata.forecast[0].time[16].temperature[0].$.max);
+            var cityTempFeelLike3 = (result.weatherdata.forecast[0].time[16].feels_like[0].$.value);
 
             var cityCloudValue3 = result.weatherdata.forecast[0].time[16].clouds[0].$.value;
             var cityCloudPercent3 = result.weatherdata.forecast[0].time[16].clouds[0].$.all;
@@ -550,10 +552,10 @@ async function requestAndDb(cityName, cityCode, cityDepartement, cityLong, cityL
             var windSpeed4 = result.weatherdata.forecast[0].time[24].windSpeed[0].$.mps;
             var windSpeedName4 = result.weatherdata.forecast[0].time[24].windSpeed[0].$.name;
 
-            var cityTemperature4 = (result.weatherdata.forecast[0].time[24].temperature[0].$.value - 273.15).toFixed(2);
-            var cityTemperatureMin4 = (result.weatherdata.forecast[0].time[24].temperature[0].$.min - 273.15).toFixed(2);
-            var cityTemperatureMax4 = (result.weatherdata.forecast[0].time[24].temperature[0].$.max - 273.15).toFixed(2);
-            var cityTempFeelLike4 = (result.weatherdata.forecast[0].time[24].feels_like[0].$.value - 273.15).toFixed(2);
+            var cityTemperature4 = (result.weatherdata.forecast[0].time[24].temperature[0].$.value);
+            var cityTemperatureMin4 = (result.weatherdata.forecast[0].time[24].temperature[0].$.min);
+            var cityTemperatureMax4 = (result.weatherdata.forecast[0].time[24].temperature[0].$.max);
+            var cityTempFeelLike4 = (result.weatherdata.forecast[0].time[24].feels_like[0].$.value);
 
             var cityCloudValue4 = result.weatherdata.forecast[0].time[24].clouds[0].$.value;
             var cityCloudPercent4 = result.weatherdata.forecast[0].time[24].clouds[0].$.all;
@@ -620,10 +622,10 @@ async function requestAndDb(cityName, cityCode, cityDepartement, cityLong, cityL
             var windSpeed5 = result.weatherdata.forecast[0].time[32].windSpeed[0].$.mps;
             var windSpeedName5 = result.weatherdata.forecast[0].time[32].windSpeed[0].$.name;
 
-            var cityTemperature5 = (result.weatherdata.forecast[0].time[32].temperature[0].$.value - 273.15).toFixed(2);
-            var cityTemperatureMin5 = (result.weatherdata.forecast[0].time[32].temperature[0].$.min - 273.15).toFixed(2);
-            var cityTemperatureMax5 = (result.weatherdata.forecast[0].time[32].temperature[0].$.max - 273.15).toFixed(2);
-            var cityTempFeelLike5 = (result.weatherdata.forecast[0].time[32].feels_like[0].$.value - 273.15).toFixed(2);
+            var cityTemperature5 = (result.weatherdata.forecast[0].time[32].temperature[0].$.value);
+            var cityTemperatureMin5 = (result.weatherdata.forecast[0].time[32].temperature[0].$.min);
+            var cityTemperatureMax5 = (result.weatherdata.forecast[0].time[32].temperature[0].$.max);
+            var cityTempFeelLike5 = (result.weatherdata.forecast[0].time[32].feels_like[0].$.value);
 
             var cityCloudValue5 = result.weatherdata.forecast[0].time[32].clouds[0].$.value;
             var cityCloudPercent5 = result.weatherdata.forecast[0].time[32].clouds[0].$.all;
