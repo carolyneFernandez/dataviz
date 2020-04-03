@@ -19,8 +19,11 @@ module.exports = {
             },
             date: {
                 type: Sequelize.DATE,
-                defaultValue: Sequelize.fn('now'),
                 allowNull: false
+            },
+            icon: {
+                type: Sequelize.STRING,
+                allowNull: true
             },
             temperatureId: {
                 type: Sequelize.INTEGER,
