@@ -17,7 +17,7 @@ module.exports = {
             weather: {
                 type: Sequelize.STRING
             },
-            date: {
+            dateObj: {
                 type: Sequelize.DATE,
                 allowNull: false
             },
