@@ -90,40 +90,50 @@ function dbRemplissageJour1(cityModelData,
     cityWeather,
     dateRetrive,
     cityIcon) {
+
     return new Promise(resolve => {
-        City.create(cityModelData).then(newCity => {
-            var newcityId = newCity.get("id");
-            Temperature.create(temperatureModelData).then(newTemp => {
-                var newTempId = newTemp.get("id");
-                Cloud.create(cloudModelData).then(newCloud => {
-                    var newCloudId = newCloud.get("id");
-                    Wind.create(windModelData).then(newWind => {
-                        var newWindId = newWind.get("id");
-                        Precipitation.create(precipitationModelData).then(newPrecipitation => {
-                            var newPrecipitationId = newPrecipitation.get("id");
-                            Data.create({
-                                pression: cityPression,
-                                humidity: cityHumidity,
-                                weather: cityWeather,
-                                date: dateRetrive,
-                                icon: cityIcon,
-                                temperatureId: newTempId,
-                                windId: newWindId,
-                                precipitationId: newPrecipitationId,
-                                cloudId: newCloudId,
-                                cityId: newcityId
-                            }).then(_ => {
-                                console.log(`DAY 1, ${cityName} : OK.`);
+        City.findOne({
+            where: {
+                name: cityName
+            }
+        }).then(cityfinded => {
+
+            if (cityfinded === undefined) {
+                console.log(`la ville ${cityName} n'existe pas.`);
+            } else {
+                City.create(cityModelData).then(newCity => {
+                    var newcityId = newCity.get("id");
+                    Temperature.create(temperatureModelData).then(newTemp => {
+                        var newTempId = newTemp.get("id");
+                        Cloud.create(cloudModelData).then(newCloud => {
+                            var newCloudId = newCloud.get("id");
+                            Wind.create(windModelData).then(newWind => {
+                                var newWindId = newWind.get("id");
+                                Precipitation.create(precipitationModelData).then(newPrecipitation => {
+                                    var newPrecipitationId = newPrecipitation.get("id");
+                                    Data.create({
+                                        pression: cityPression,
+                                        humidity: cityHumidity,
+                                        weather: cityWeather,
+                                        dateObj: dateRetrive,
+                                        icon: cityIcon,
+                                        temperatureId: newTempId,
+                                        windId: newWindId,
+                                        precipitationId: newPrecipitationId,
+                                        cloudId: newCloudId,
+                                        cityId: newcityId
+                                    }).then(_ => {
+                                        console.log(`DAY 1, ${cityName} : OK.`);
+                                    }).catch(err => console.log(err))
+                                }).catch(err => console.log(err))
                             }).catch(err => console.log(err))
                         }).catch(err => console.log(err))
-                    }).catch(err => console.log(err))
-                }).catch(err => console.log(err))
-            }).catch(err => console.log(err));
-        }).catch(err => console.log(err));
+                    }).catch(err => console.log(err));
+                }).catch(err => console.log(err));
+            }
+        }).catch(err => console.log(`Erreur rechecherche ville ${cityName} : ${err}.`))
         resolve("resolved!");
     })
-
-
 }
 
 function dbRemplissageJour2(cityModelData2, temperatureModelData2, cloudModelData2, windModelData2, precipitationModelData2, cityName, cityPression2, cityHumidity2, cityWeather2, dateRetrive2, cityIcon2) {
@@ -143,7 +153,7 @@ function dbRemplissageJour2(cityModelData2, temperatureModelData2, cloudModelDat
                                 pression: cityPression2,
                                 humidity: cityHumidity2,
                                 weather: cityWeather2,
-                                date: dateRetrive2,
+                                dateObj: dateRetrive2,
                                 icon: cityIcon2,
                                 temperatureId: newTempId2,
                                 windId: newWindId2,
@@ -180,7 +190,7 @@ function dbRemplissageJour3(cityModelData3, temperatureModelData3, cloudModelDat
                                 pression: cityPression3,
                                 humidity: cityHumidity3,
                                 weather: cityWeather3,
-                                date: dateRetrive3,
+                                dateObj: dateRetrive3,
                                 icon: cityIcon3,
                                 temperatureId: newTempId3,
                                 windId: newWindId3,
@@ -218,7 +228,7 @@ function dbRemplissageJour4(cityModelData4, temperatureModelData4, cloudModelDat
                                 pression: cityPression4,
                                 humidity: cityHumidity4,
                                 weather: cityWeather4,
-                                date: dateRetrive4,
+                                dateObj: dateRetrive4,
                                 icon: cityIcon4,
                                 temperatureId: newTempId4,
                                 windId: newWindId4,
@@ -256,7 +266,7 @@ function dbRemplissageJour5(cityModelData5, temperatureModelData5, cloudModelDat
                                 pression: cityPression5,
                                 humidity: cityHumidity5,
                                 weather: cityWeather5,
-                                date: dateRetrive5,
+                                dateObj: dateRetrive5,
                                 icon: cityIcon5,
                                 temperatureId: newTempId5,
                                 windId: newWindId5,
@@ -688,7 +698,7 @@ async function readCities() {
     });
 }
 
-readCities();
+// readCities();
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
