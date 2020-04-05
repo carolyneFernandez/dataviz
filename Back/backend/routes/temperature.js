@@ -18,14 +18,13 @@ router.get('/forecast/:city', (req, res) => {
     }
 
     var date = new Date();
-    var todayDay = date.getDay();
+    var todayDay = date.getDate();
     var todayMonth = date.getMonth() + 1;
     var todayYear = date.getFullYear();
     var todayDate = `${todayYear}-${todayMonth}-${todayDay} 11:00:00.00`;
     var fiveDayAfter = `${todayYear}-${todayMonth}-${todayDay + 5} 11:00:00.00`;
     startDate = new Date(todayDate);
     endDate = new Date(fiveDayAfter);
-
     City.findOne({
             where: {
                 name: city,
@@ -46,7 +45,6 @@ router.get('/forecast/:city', (req, res) => {
                         include: [Temperature],
                     })
                     .then((findedData) => {
-                        //console.log(`TODAY : ${todayDate}, END : ${fiveDayAfter}`);
                         return res.status(200).send(findedData);
                     })
                     .catch((err) => console.log(err));
