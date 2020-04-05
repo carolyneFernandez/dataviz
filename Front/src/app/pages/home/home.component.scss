@@ -1,0 +1,12 @@
+#list-button{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+button-city{
+    margin-left: 1px;
+    margin-top: 20px;
+    width: 17%;
+}
