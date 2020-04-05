@@ -6,6 +6,7 @@ const Op = Sequelize.Op;
 const City = models.City;
 const Temperature = models.Temperature;
 const Data = models.Data;
+
 //GET Temperature de la ville sur 5 jours
 router.get('/forecast/:city', (req, res) => {
     var city = req.params.city;
@@ -56,8 +57,48 @@ router.get('/forecast/:city', (req, res) => {
             return res.status(404).send("Votre ville n'a pas été trouvé.");
         });
 });
+
+
+
+//GET temperature for all cities
+router.get('/', function (req, res, next) {
+    let finded = [];
+    let toSend = [];
+    City.findAll().then(allcities => {
+        const promises = [];
+        allcities.forEach(cities => {
+            cityid = cities.id;
+            cityName = cities.name;
+            promises.push(
+                Data.findAll({
+                    where: {
+                        cityId: cityid
+                    },
+                    include: [City, Temperature]
+                }));
+        });
+        Promise.all(promises).then((data) => {
+            data.forEach((datum) => finded.push(datum));
+            //Parser
+            for (i in finded) {
+                if (finded[i][0]['City'] != [] && finded[i][0]['City'] != null) {
+                    toSend.push({
+                        name: finded[i][0]['City']['dataValues'].name,
+                        temp: finded[i][0]['Temperature']['dataValues'].value,
+                        icon: `http://openweathermap.org/img/wn/${finded[i][0]['dataValues'].icon}@2x.png`
+                    });
+                } else {
+                    console.log("error on : " + finded[i]);
+                }
+            }
+            console.log(toSend);
+            res.status(200).send(toSend);
+        })
+    })
+});
+
 // GET temperature of a city
-router.get('/:city', function(req, res, next) {
+router.get('/:city', function (req, res, next) {
     var city = req.params.city;
 
     City.findOne({
@@ -76,7 +117,6 @@ router.get('/:city', function(req, res, next) {
         }).catch(err => console.log("err : ", err))
 
     }).catch(err => console.log("err : ", err))
-
 });
 
 module.exports = router;

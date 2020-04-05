@@ -1,1 +1,7 @@
-<button (click)="onClick(city.name)" class="btn">{{city.name}} {{city.temp}}°C</button>
+<a (click)="onClick(city.name)" class="btn">
+    <p>{{city.name}}</p>
+    <div id="weather">
+        <img [src]="city.icon" alt="icon">
+        <p>{{city.temp}}°C</p>
+    </div>
+</a>

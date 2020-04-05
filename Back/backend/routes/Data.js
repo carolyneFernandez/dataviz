@@ -6,6 +6,7 @@ const Data = models.Data;
 const City = models.City;
 const Temperature = models.Temperature;
 const Cloud = models.Cloud;
+const Wind = models.Wind;
 /**
  * POUR OPENWEATHER DATA
  * TOKEN : 06554607b71839e1b22e07e0fbd2e215
