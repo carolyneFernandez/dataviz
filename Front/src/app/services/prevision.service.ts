@@ -8,17 +8,19 @@ const basicUrl = "http://localhost:3000";
 })
 export class PrevisionService {
   constructor(private http: HttpClient) {}
-  /* Return name and temperature for unique city */
-  getTemperatureForOneCity(city) {
-    return this.http.get(`${basicUrl}/api/temperature/${city}`);
-  }
 
   /* Return table of cities and its temperature */
   getCitiesAndTemperatures() {
     return this.http.get(`${basicUrl}/api/temperature/`);
   }
 
+  /* Return name and temperature for unique city */
+  getTemperatureForOneCity(city) {
+    return this.http.get(`${basicUrl}/api/temperature/${city}`);
+  }
+
+  /* Return wind for one city */
   getWindForOneCity(city) {
-    return this.http.get(`http://localhost:3000/api/wind/${city}`);
+    return this.http.get(`${basicUrl}/api/wind/${city}`);
   }
 }

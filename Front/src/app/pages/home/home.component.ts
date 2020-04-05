@@ -9,7 +9,7 @@ import { PrevisionService } from "src/app/services/prevision.service";
 export class HomeComponent implements OnInit {
   cities: any = [];
 
-  colorsButton: string[] = ["#7ED8F6", "#FF435B", "#FED843", "#FF7B4A"];
+  //colorsButton: string[] = ["#7ED8F6", "#FF435B", "#FED843", "#FF7B4A"];
 
   constructor(private previsionService: PrevisionService) {}
 
