@@ -1,13 +1,28 @@
 <div class="card-body rounded">
-    <h4 id="date" class="card-title">{{ date | date: 'EEEE dd MMMM y':'+0100':'fr-FR'}}</h4>
+  <h4 id="date" class="card-title">
+    {{ date | date: "EEEE dd MMMM y":"+0100":"fr-FR" }}
+  </h4>
+  <div id="informations">
     <div id="weather">
-        <img id="sun" src="https://image.flaticon.com/icons/svg/439/439842.svg" alt="sun">
-        <p>{{ weather }} °C</p>
+      <img alt="image temps" [src]="iconTemp" />
+      <p>{{ weather }}</p>
+      <p>{{ temperature }} °C</p>
+      <p>Ressenti : {{ feeling }}°C</p>
+      <p>Entre {{ tempMin }}°C et {{ tempMax }}°C dans la journée</p>
     </div>
     <div id="wind">
-
+      <img alt="image vent" [src]="iconWind" />
+      <p>Etat : {{ windSpeedName }}</p>
+      <p>Vitesse : {{ windSpeed }}</p>
+      <p>Direction : {{ windDirectionName }} ({{ windCode }})</p>
     </div>
-    <div id="uv">
-        
+    <div id="humidity">
+      <img alt="image humidité" [src]="iconHumidity" />
+      <p>Humidity : {{ humidity }}</p>
     </div>
+    <div id="pressure">
+      <img alt="image pression" [src]="iconPressure" />
+      <p>Pression : {{ pressure }}</p>
+    </div>
+  </div>
 </div>

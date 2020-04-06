@@ -1,0 +1,73 @@
+<div id="followingDays">
+  <!-- Follow day one -->
+  <div class="card-body rounded">
+    <h4 id="date" class="card-title">
+      {{ followOne.date | date: "EEEE dd MMMM y":"+0100":"fr-FR" }}
+    </h4>
+    <div id="informations">
+      <div id="weather">
+        <img alt="image temps" [src]="followOne.iconTemp" />
+        <p>{{ followOne.weather }}</p>
+        <p>{{ followOne.temperature }} °C</p>
+      </div>
+      <div id="humidity">
+        <img alt="image humidité" [src]="followOne.iconHumidity" />
+        <p>Humidity : {{ followOne.humidity }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Follow day two -->
+  <div class="card-body rounded">
+    <h4 id="date" class="card-title">
+      {{ followTwo.date | date: "EEEE dd MMMM y":"+0100":"fr-FR" }}
+    </h4>
+    <div id="informations">
+      <div id="weather">
+        <img alt="image temps" [src]="followTwo.iconTemp" />
+        <p>{{ followTwo.weather }}</p>
+        <p>{{ followTwo.temperature }} °C</p>
+      </div>
+      <div id="humidity">
+        <img alt="image humidité" [src]="followTwo.iconHumidity" />
+        <p>Humidity : {{ followTwo.humidity }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Follow day three -->
+  <div class="card-body rounded">
+    <h4 id="date" class="card-title">
+      {{ followThree.date | date: "EEEE dd MMMM y":"+0100":"fr-FR" }}
+    </h4>
+    <div id="informations">
+      <div id="weather">
+        <img alt="image temps" [src]="followThree.iconTemp" />
+        <p>{{ followThree.weather }}</p>
+        <p>{{ followThree.temperature }} °C</p>
+      </div>
+      <div id="humidity">
+        <img alt="image humidité" [src]="followThree.iconHumidity" />
+        <p>Humidity : {{ followThree.humidity }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Follow day four -->
+  <div class="card-body rounded">
+    <h4 id="date" class="card-title">
+      {{ followFour.date | date: "EEEE dd MMMM y":"+0100":"fr-FR" }}
+    </h4>
+    <div id="informations">
+      <div id="weather">
+        <img alt="image temps" [src]="followFour.iconTemp" />
+        <p>{{ followFour.weather }}</p>
+        <p>{{ followFour.temperature }} °C</p>
+      </div>
+      <div id="humidity">
+        <img alt="image humidité" [src]="followFour.iconHumidity" />
+        <p>Humidity : {{ followFour.humidity }}</p>
+      </div>
+    </div>
+  </div>
+</div>

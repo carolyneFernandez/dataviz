@@ -17,6 +17,14 @@ module.exports = {
             weather: {
                 type: Sequelize.STRING
             },
+            dateObj: {
+                type: Sequelize.DATE,
+                allowNull: false
+            },
+            icon: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
             temperatureId: {
                 type: Sequelize.INTEGER,
                 references: {

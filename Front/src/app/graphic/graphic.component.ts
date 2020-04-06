@@ -20,7 +20,7 @@ export class GraphicComponent implements OnInit {
   chartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi','Vendredi','Samedi','Dimanche'];
 
   onChartClick(event) {
-    console.log(event);
+    //console.log(event);
   }
   constructor(private url:PrevisionService) { 
    // console.log(url.get_articles())
