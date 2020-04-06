@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-meteo',
-  templateUrl: './meteo.component.html',
-  styleUrls: ['./meteo.component.scss']
+  selector: "app-meteo",
+  templateUrl: "./meteo.component.html",
+  styleUrls: ["./meteo.component.scss"],
 })
 export class MeteoComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

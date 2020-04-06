@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { PrevisionService } from "../services/prevision.service";
+import { IconService } from "../services/icon.service";
 
 @Component({
   selector: "current-weather",
@@ -10,7 +11,8 @@ import { PrevisionService } from "../services/prevision.service";
 export class CurrentWeatherComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private prevService: PrevisionService
+    private prevService: PrevisionService,
+    private iconService: IconService
   ) {}
 
   city: string;
@@ -35,7 +37,8 @@ export class CurrentWeatherComponent implements OnInit {
   ngOnInit() {
     this.city = this.route.snapshot.paramMap.get("idcity");
     this.prevService.getTemperatureForOneCity(this.city).subscribe((data) => {
-      this.weather = data[0].weather;
+      this.weather =
+        data[0].weather[0].toUpperCase() + data[0].weather.slice(1);
       this.date = data[0].dateObj;
       this.temperature = data[0]["Temperature"].value;
       this.feeling = data[0]["Temperature"].feeling;
@@ -45,46 +48,14 @@ export class CurrentWeatherComponent implements OnInit {
       this.humidity = data[0].humidity;
       this.pressure = data[0].pression;
 
+      this.iconHumidity = this.iconService.getIconHumidity(this.humidity);
+
       this.prevService.getWindForOneCity(this.city).subscribe((data) => {
         this.windSpeedName = data[0]["Wind"].speed_name;
         this.windSpeed = data[0]["Wind"].speed;
         this.windCode = data[0]["Wind"].direction_code;
         this.windDirectionName = data[0]["Wind"].direction_name;
-
-        this.getIcon();
       });
     });
-  }
-
-  getIcon() {
-    // Humidity
-    if (this.humidity > 75) {
-      this.iconHumidity = "../assets/images/drop.svg";
-    } else if (this.humidity > 50) {
-      this.iconHumidity = "../assets/images/drop.svg";
-    } else {
-      this.iconHumidity = "../assets/images/transparent_drops.svg";
-    }
-    //Wind
-    switch (this.windSpeedName) {
-      case "Gentle Breeze":
-        this.iconWind = "../assets/images/wind.svg";
-        break;
-      case "Moderate breeze":
-        this.iconWind = "../assets/images/wind.svg";
-        break;
-      case "Fresh Breeze":
-        this.iconWind = "../assets/images/wind.svg";
-        break;
-      case "Light breeze":
-        this.iconWind = "../assets/images/wind.svg";
-        break;
-      case "Calm":
-        this.iconWind = "../assets/images/wind.svg";
-        break;
-      default:
-        console.log("nope");
-        break;
-    }
   }
 }

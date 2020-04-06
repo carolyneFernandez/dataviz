@@ -4,11 +4,17 @@
 }
 
 .card-body {
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #fff;
   border-radius: 10px;
+}
+
+#followingDays {
+  display: flex;
+  flex-direction: row;
 }
 
 #informations {
@@ -17,9 +23,7 @@
 }
 
 #weather,
-#wind,
-#humidity,
-#pressure {
+#humidity {
   align-self: flex-start;
   display: flex;
   flex-flow: column;
