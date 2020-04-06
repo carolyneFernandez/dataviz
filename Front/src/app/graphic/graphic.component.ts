@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { WeatherService } from '../services/weather.service';
+import { PrevisionService } from '../services/prevision.service';
 
 @Component({
   selector: 'app-graphic',
@@ -14,16 +15,20 @@ export class GraphicComponent implements OnInit {
   public dataVille:Object[]; //el array de objetos
 
 
+// constructor(private url: WeatherService) { 
 
-  constructor(private url: WeatherService) { 
-
+  onChartClick(event) {
+    //console.log(event);
+  }
+  constructor(private url:PrevisionService) { 
+   // console.log(url.get_articles())
   }
 
   ngOnInit() {
    
-    this.url.searchWeatherInfo("Paris").subscribe(data =>{
+   /* this.url.searchWeatherInfo("Paris").subscribe(data =>{
       this.AssignData(data["Temperature"]);
-    });
+    });*/
 
   }
 
