@@ -1,48 +1,55 @@
 var express = require('express');
 const { Sequelize } = require('sequelize');
 var router = express.Router();
-const models = require("../models");
+const models = require('../models');
 const Op = Sequelize.Op;
 const City = models.City;
 const Data = models.Data;
 const Wind = models.Wind;
 
-// GET : Donnée du vent pour une ville en particulier
+/* GET wind for five following days for one city */
 router.get('/forecast/:city', (req, res) => {
-    var cityName = req.params.city;
-    if (cityName === undefined || cityName === '') {
-        return res
-            .status(400)
-            .send('Mauvaise requête. Veuillez préciser une ville.');
-    }
+  var cityName = req.params.city;
+  if (cityName === undefined || cityName === '') {
+    return res.status(400).send('Bad request. Please give city name.');
+  }
 
-    var date = new Date();
-    var todayDay = date.getDate();
-    var todayMonth = date.getMonth() + 1;
-    var todayYear = date.getFullYear();
-    var todayDate = `${todayYear}-${todayMonth}-${todayDay} 00:00:00.00`;
-    var fiveDayAfter = `${todayYear}-${todayMonth}-${todayDay + 5} 00:00:00.00`;
-    startDate = new Date(todayDate);
-    endDate = new Date(fiveDayAfter);
+  var date = new Date();
+  var todayDay = date.getDate();
+  var todayMonth = date.getMonth() + 1;
+  var todayYear = date.getFullYear();
+  var todayDate = `${todayYear}-${todayMonth}-${todayDay} 00:00:00.00`;
+  var fiveDayAfter = `${todayYear}-${todayMonth}-${todayDay + 5} 00:00:00.00`;
+  startDate = new Date(todayDate);
+  endDate = new Date(fiveDayAfter);
 
-    City.findOne({
+  City.findOne({
+    where: {
+      name: cityName,
+    },
+  })
+    .then((findedCity) => {
+      var findedCityId = findedCity.id;
+      Data.findAll({
         where: {
-            name: cityName
-        }
-    }).then(findedCity => {
-        var findedCityId = findedCity.id;
-        Data.findAll({
-                where: {
-                    cityId: findedCityId,
-                    dateObj: {
-                        [Op.between]: [startDate.toISOString(), endDate.toISOString()],
-                    },
-                },
-                include: [Wind]
-            }).then(findedData => {
-                return res.status(200).send(findedData);
-            }).catch(err => console.log("Erreur recherhe data pour : ", cityName))
-            // return res.send(findedCityId);
-    }).catch(err => console.log("Erreur de console : ", err))
-})
+          cityId: findedCityId,
+          dateObj: {
+            [Op.between]: [startDate.toISOString(), endDate.toISOString()],
+          },
+        },
+        include: [Wind],
+      })
+        .then((findedData) => {
+          return res.status(200).send(findedData);
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.status(204).send('Data not found.');
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(404).send('City not found.');
+    });
+});
 module.exports = router;
