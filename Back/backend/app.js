@@ -15,6 +15,8 @@ var temperatures = require('./routes/temperature');
 var precipitations = require('./routes/precipitation');
 var clouds = require('./routes/cloud');
 var winds = require('./routes/wind');
+var cities = require('./routes/city');
+
 
 const OpenWeatherToken = "06554607b71839e1b22e07e0fbd2e215";
 
@@ -48,6 +50,7 @@ app.use('/api/temperature', temperatures);
 app.use('/api/precipitation', precipitations);
 app.use('/api/cloud', clouds);
 app.use('/api/wind', winds);
+app.use('/api/city', cities);
 
 // variable pour toutes les information des villes dans le json
 var cityCode;
