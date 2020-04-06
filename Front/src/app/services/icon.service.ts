@@ -18,7 +18,7 @@ export class IconService {
   }
 
   //TODO make icon
-  getIconWind(windName) {
+  getIconWind(windName) { console.log(windName);
     switch (windName) {
       case "Gentle Breeze":
         return "../assets/images/wind.svg";
@@ -33,6 +33,17 @@ export class IconService {
       default:
         console.log("ERROR : Fail get icon wind");
         break;
+    }
+  }
+
+  //TODO make icon /* Select icon for the pressure */
+  getIconPressure(pressure) {
+    if (pressure > 75) {
+      return "../assets/images/drop.svg";
+    } else if (pressure >= 50) {
+      return "../assets/images/drop.svg";
+    } else {
+      return "../assets/images/transparent_drops.svg";
     }
   }
 }

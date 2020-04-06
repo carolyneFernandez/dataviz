@@ -3,26 +3,36 @@
     {{ date | date: "EEEE dd MMMM y":"+0100":"fr-FR" }}
   </h4>
   <div id="informations">
-    <div id="weather">
-      <img alt="image temps" [src]="iconTemp" />
+    <div id="weather" class="weather-item">
+      <div class="icon-weather">
+        <img alt="image temps" [src]="iconTemp"/>
+        <p class="unity">{{ temperature }} °C</p>
+      </div>
       <p>{{ weather }}</p>
-      <p>{{ temperature }} °C</p>
       <p>Ressenti : {{ feeling }}°C</p>
       <p>Entre {{ tempMin }}°C et {{ tempMax }}°C dans la journée</p>
     </div>
-    <div id="wind">
-      <img alt="image vent" [src]="iconWind" />
-      <p>Etat : {{ windSpeedName }}</p>
-      <p>Vitesse : {{ windSpeed }}</p>
-      <p>Direction : {{ windDirectionName }} ({{ windCode }})</p>
+    <div id="wind" class="weather-item">
+      <div class="icon-weather">
+        <img alt="image vent" [src]="iconWind"/>
+        <p class="unity">{{ windSpeed }} km/h</p>
+      </div>
+      <p>{{ windSpeedName }}</p>
+      <p>{{ windDirectionName }} ({{ windCode }})</p>
     </div>
-    <div id="humidity">
-      <img alt="image humidité" [src]="iconHumidity" />
-      <p>Humidity : {{ humidity }}</p>
+    <div id="humidity" class="weather-item">
+      <div class="icon-weather">
+        <img alt="image humidité" [src]="iconHumidity"/>
+        <p class="unity">{{ humidity }}%</p>
+      </div>
+      <p>Humidity</p>
     </div>
-    <div id="pressure">
-      <img alt="image pression" [src]="iconPressure" />
-      <p>Pression : {{ pressure }}</p>
+    <div id="pressure" class="weather-item">
+      <div class="icon-weather">
+        <img alt="image pression" [src]="iconPressure"/>
+        <p class="unity">{{ pressure }} Pa</p>
+      </div>
+      <p>Pression</p>
     </div>
   </div>
 </div>

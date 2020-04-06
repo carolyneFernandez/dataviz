@@ -2,24 +2,49 @@
   font-family: "ubuntu";
   font-weight: bold;
 }
+.card-title {
+  margin: 0 0 20px 0;
+  padding: 0;
+}
 
 .card-body {
-  width: 50%;
+  width: calc(25% - 10px);
+  height: 229px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #fff;
   border-radius: 10px;
+  padding: 20px;
+  p {
+    font-weight: normal;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.icon-weather {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.unity {
+  font-size: 14px;
+  font-weight: bold !important;
+}
+
+.card-title {
+  font-weight: normal;
+  font-size: 15px;
 }
 
 #followingDays {
   display: flex;
   flex-direction: row;
-}
-
-#informations {
-  display: flex;
-  flex-flow: row;
+  justify-content: space-between;
 }
 
 #weather,
@@ -27,9 +52,11 @@
   align-self: flex-start;
   display: flex;
   flex-flow: column;
-  margin-left: 15px;
   font-size: 15px;
-  margin-bottom: 15px;
+}
+
+#weather {
+  margin-bottom: 10px;
 }
 
 img {

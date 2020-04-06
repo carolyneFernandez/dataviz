@@ -27,10 +27,4 @@ export class PrevisionService {
   getWindForOneCity(city) {
     return this.http.get(`${basicUrl}/api/wind/${city}`);
   }
-
-  getWindForOneCity(city){
-    return this
-             .http
-             .get(`http://localhost:3000/api/wind/Lyon`);
-  }
 }

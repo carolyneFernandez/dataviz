@@ -1,5 +1,19 @@
-#previsionWeather {
+.prevision {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+}
+
+.container {
+  width: 90%;
+  margin: 20px auto 0 auto;
+}
+
+.fifty-container {
+  width: calc(50% - 10px);
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 20px;
 }
