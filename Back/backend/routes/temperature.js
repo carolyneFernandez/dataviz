@@ -21,8 +21,8 @@ router.get('/forecast/:city', (req, res) => {
     var todayDay = date.getDate();
     var todayMonth = date.getMonth() + 1;
     var todayYear = date.getFullYear();
-    var todayDate = `${todayYear}-${todayMonth}-${todayDay} 11:00:00.00`;
-    var fiveDayAfter = `${todayYear}-${todayMonth}-${todayDay + 5} 11:00:00.00`;
+    var todayDate = `${todayYear}-${todayMonth}-${todayDay} 00:00:00.00`;
+    var fiveDayAfter = `${todayYear}-${todayMonth}-${todayDay + 5} 00:00:00.00`;
     startDate = new Date(todayDate);
     endDate = new Date(fiveDayAfter);
     City.findOne({
@@ -56,10 +56,8 @@ router.get('/forecast/:city', (req, res) => {
         });
 });
 
-
-
 //GET temperature for all cities
-router.get('/', function (req, res, next) {
+router.get('/', function(req, res, next) {
     let finded = [];
     let toSend = [];
     City.findAll().then(allcities => {
@@ -96,7 +94,7 @@ router.get('/', function (req, res, next) {
 });
 
 // GET temperature of a city
-router.get('/:city', function (req, res, next) {
+router.get('/:city', function(req, res, next) {
     var city = req.params.city;
 
     City.findOne({
