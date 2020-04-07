@@ -12,12 +12,11 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var datas = require('./routes/Data');
 var temperatures = require('./routes/temperature');
+var precipitations = require('./routes/precipitation');
+var clouds = require('./routes/cloud');
 var winds = require('./routes/wind');
-/**
- * TOKEN LIST
- * OpenWeather Data : 06554607b71839e1b22e07e0fbd2e215
- */
-const OpenWeatherToken = '06554607b71839e1b22e07e0fbd2e215';
+
+const OpenWeatherToken = "06554607b71839e1b22e07e0fbd2e215";
 
 //On déclare les models
 const models = require('./models');
@@ -46,6 +45,8 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/api/data', datas);
 app.use('/api/temperature', temperatures);
+app.use('/api/precipitation', precipitations);
+app.use('/api/cloud', clouds);
 app.use('/api/wind', winds);
 
 // variable pour toutes les information des villes dans le json
