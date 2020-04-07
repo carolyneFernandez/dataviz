@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HomeComponent } from "./home.component";
@@ -12,20 +11,6 @@ import { ChartsModule } from "ng2-charts";
   declarations: [HomeComponent, ButtonCityComponent],
 
 
-=======
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
-import { HomeRoutingModule } from './home-routing.module';
-import { ButtonCityComponent } from 'src/app/button-city/button-city.component';
-import { ChartsModule } from 'ng2-charts';
-
-@NgModule({
-  declarations: [
-    HomeComponent,
-    ButtonCityComponent,
-  ],
->>>>>>> update DAT-3
   imports: [
     CommonModule,
     HomeRoutingModule,
