@@ -47,14 +47,18 @@ export class CurrentWeatherComponent implements OnInit {
       this.iconTemp = `http://openweathermap.org/img/wn/${data[0].icon}@2x.png`;
       this.humidity = data[0].humidity;
       this.pressure = data[0].pression;
-this.iconPressure = this.iconService.getIconPressure(this.pressure);
+
       this.iconHumidity = this.iconService.getIconHumidity(this.humidity);
+      this.iconPressure = this.iconService.getIconPressure(this.pressure);
+
       this.prevService.getWindForOneCity(this.city).subscribe((data) => {
         this.windSpeedName = data[0]["Wind"].speed_name;
         this.windSpeed = data[0]["Wind"].speed;
         this.windCode = data[0]["Wind"].direction_code;
         this.windDirectionName = data[0]["Wind"].direction_name;
-        this.iconWind = this.iconService.getIconWind(this.windSpeedName);
+        this.iconWind = this.iconService.getIconWind(
+          data[0]["Wind"].speed_name
+        );
       });
     });
   }
