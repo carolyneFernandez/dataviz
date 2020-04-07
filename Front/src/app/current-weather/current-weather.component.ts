@@ -25,7 +25,6 @@ export class CurrentWeatherComponent implements OnInit {
   tempMax: number;
   windSpeedName: string;
   windSpeed: number;
-  windCode: string;
   windDirectionName: string;
   humidity: number;
   pressure: number;
@@ -52,14 +51,92 @@ export class CurrentWeatherComponent implements OnInit {
       this.iconPressure = this.iconService.getIconPressure(this.pressure);
 
       this.prevService.getWindForOneCity(this.city).subscribe((data) => {
-        this.windSpeedName = data[0]["Wind"].speed_name;
+        this.windSpeedName = this.setWindNameInFrench(
+          data[0]["Wind"].speed_name
+        );
         this.windSpeed = data[0]["Wind"].speed;
-        this.windCode = data[0]["Wind"].direction_code;
-        this.windDirectionName = data[0]["Wind"].direction_name;
+        this.windDirectionName = this.setWindDirectionInFrench(
+          data[0]["Wind"].direction_name
+        );
         this.iconWind = this.iconService.getIconWind(
           data[0]["Wind"].speed_name
         );
       });
     });
+  }
+
+  setWindNameInFrench(engName) {
+    switch (engName) {
+      case "Gentle Breeze":
+        return "Petite brise";
+      case "Calm":
+        return "Calme";
+      case "Moderate breeze":
+        return "Brise légère";
+      case "Fresh Breeze":
+        return "Brise fraîche";
+      case "Light breeze":
+        return "Brise légère";
+
+      default:
+        console.log("ERROR : name are not in switch case");
+        return "Brise";
+    }
+  }
+
+  setWindDirectionInFrench(engName) {
+    switch (engName) {
+      //South
+      case "South":
+        return "Sud";
+      case "Southwest":
+        return "Sud Ouest";
+      case "Southeast":
+        return "Sud Est";
+      case "South-southeast":
+        return "Sud - Sud Ouest";
+      case "South-southwest":
+        return "Sud - Sud Est";
+
+      //North
+      case "North":
+        return "Nord";
+      case "Northwest":
+        return "Nord Ouest";
+      case "Northeast":
+        return "Nord Est";
+      case "North-northeast":
+        return "Nord - Nord Ouest";
+      case "North-northwest":
+        return "Nord - Nord Est";
+
+      //West
+      case "West":
+        return "Ouest";
+      case "Southwest":
+        return "Ouest Sud";
+      case "northwest":
+        return "Ouest Nord";
+      case "West-southwest":
+        return "Ouest - Sud Ouest";
+      case "West-northwest":
+        return "Ouest - Nord Ouest";
+
+      //East
+      case "East":
+        return "Est";
+      case "Southeast":
+        return "Est Sud";
+      case "northeast":
+        return "Est Nord";
+      case "East-southeast":
+        return "Est - Sud Est";
+      case "East-northeast":
+        return "Est - Nord Est";
+
+      default:
+        console.log("ERROR : name are not in switch case");
+        return "NA";
+    }
   }
 }
