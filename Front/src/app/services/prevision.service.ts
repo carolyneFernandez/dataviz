@@ -39,6 +39,13 @@ export class PrevisionService {
     return this.http.get('http://localhost:3000/api/waters/'+city).toPromise();
   }
 
+  /**
+   * Récupère  les infos de la qualité de l'eau pour une station de prélèvement
+   */
+  getWaterInfos(city, stationCode): Promise<any> {
+    return this.http.get('http://localhost:3000/api/waters/'+city+'/'+stationCode).toPromise();
+  }
+
   getTemperatureForOneCity(city){
       return this
              .http
