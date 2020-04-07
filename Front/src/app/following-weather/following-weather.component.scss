@@ -7,6 +7,12 @@
   padding: 0;
 }
 
+.followingDays {
+  @media only screen and (max-width: 500px) {
+    flex-wrap: wrap;
+  }
+}
+
 .card-body {
   width: calc(25% - 10px);
   height: 229px;
@@ -16,6 +22,15 @@
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
+
+  @media only screen and (max-width: 932px) {
+    height: auto;
+  }
+  @media only screen and (max-width: 500px) {
+    width: calc(50% - 10px);
+    margin-bottom: 20px;
+  }
+
   p {
     font-weight: normal;
     font-size: 12px;

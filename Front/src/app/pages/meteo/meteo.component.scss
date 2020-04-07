@@ -2,6 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media only screen and (max-width: 932px) {
+    flex-wrap: wrap;
+  }
 }
 
 .container {
@@ -11,6 +14,10 @@
 
 .fifty-container {
   width: calc(50% - 10px);
+  margin-bottom: 20px;
+  @media only screen and (max-width: 932px) {
+    width: 100%;
+  }
 }
 
 .title {
