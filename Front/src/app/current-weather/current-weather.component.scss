@@ -1,0 +1,74 @@
+* {
+  font-family: "ubuntu";
+  font-weight: bold;
+}
+
+.card-body {
+  height: 229px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+
+  @media only screen and (max-width: 932px) {
+    height: auto;
+  }
+
+  p {
+    font-weight: normal;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 15px;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+.weather-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: flex-start;
+  width: 25%;
+  @media only screen and (max-width: 500px) {
+    width: 48%;
+  }
+}
+
+.icon-weather {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.unity {
+  font-size: 14px;
+  font-weight: bold !important;
+}
+
+.informations {
+  display: flex;
+  flex-flow: row;
+  @media only screen and (max-width: 932px) {
+    flex-wrap: wrap;
+  }
+}
+
+img {
+  width: 50%;
+  height: auto;
+}
+
+.img-item {
+  max-height: 75px;
+  margin-right: 10px;
+}

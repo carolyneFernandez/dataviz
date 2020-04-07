@@ -1,11 +1,10 @@
 var express = require('express');
-const { Sequelize } = require('sequelize');
 var router = express.Router();
 const models = require('../models');
 const Op = Sequelize.Op;
 const City = models.City;
-const Data = models.Data;
 const Wind = models.Wind;
+const Data = models.Data;
 
 /* GET wind for five following days for one city */
 router.get('/forecast/:city', (req, res) => {

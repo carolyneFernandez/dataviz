@@ -12,15 +12,17 @@ router.get('/forecast/:city', (req, res) => {
   var city = req.params.city;
 
   if (city === undefined || city === '') {
-    return res.status(400).send('Bad request. Please give city name.');
+    return res
+      .status(400)
+      .send('Mauvaise requête. Veuillez préciser une ville.');
   }
 
   var date = new Date();
   var todayDay = date.getDate();
   var todayMonth = date.getMonth() + 1;
   var todayYear = date.getFullYear();
-  var todayDate = `${todayYear}-${todayMonth}-${todayDay} 00:00:00.00`;
-  var fiveDayAfter = `${todayYear}-${todayMonth}-${todayDay + 5} 00:00:00.00`;
+  var todayDate = `${todayYear}-${todayMonth}-${todayDay} 11:00:00.00`;
+  var fiveDayAfter = `${todayYear}-${todayMonth}-${todayDay + 5} 11:00:00.00`;
   startDate = new Date(todayDate);
   endDate = new Date(fiveDayAfter);
   City.findOne({
