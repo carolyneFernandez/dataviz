@@ -155,4 +155,8 @@ export class GraphicComponent implements OnInit {
       ];
     });
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> DAT-6 : Getting infos on 'meteo' page.

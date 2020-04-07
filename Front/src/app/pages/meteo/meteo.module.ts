@@ -5,12 +5,15 @@ import { MeteoComponent } from "./meteo.component";
 import { MeteoRoutingModule } from "./meteo-routing.module";
 import { CurrentWeatherComponent } from "../../current-weather/current-weather.component";
 import { FollowingWeatherComponent } from "src/app/following-weather/following-weather.component";
+import { WaterInfoComponent } from "src/app/water-info/water-info.component";
+
 
 @NgModule({
   declarations: [
     MeteoComponent,
     CurrentWeatherComponent,
     FollowingWeatherComponent,
+    WaterInfoComponent
   ],
   imports: [CommonModule, MeteoRoutingModule],
 })

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { PrevisionService } from 'src/app/services/prevision.service';
 
 @Component({
-  selector: 'app-water-info',
+  selector: 'water-info',
   templateUrl: './water-info.component.html',
   styleUrls: ['./water-info.component.scss']
 })

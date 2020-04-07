@@ -36,14 +36,14 @@ export class PrevisionService {
    * Récupère  la liste des cours d'eau étudié pour une ville.
    */
   getWatersList(city): Promise<any> {
-    return this.http.get('http://localhost:3000/api/waters/'+city).toPromise();
+    return this.http.get('http://localhost:3000/api/water/'+city).toPromise();
   }
 
   /**
    * Récupère  les infos de la qualité de l'eau pour une station de prélèvement
    */
   getWaterInfos(city, stationCode): Promise<any> {
-    return this.http.get('http://localhost:3000/api/waters/'+city+'/'+stationCode).toPromise();
+    return this.http.get('http://localhost:3000/api/water/'+city+'/'+stationCode).toPromise();
   }
 
   getTemperatureForOneCity(city){
