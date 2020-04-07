@@ -29,7 +29,9 @@ const Cloud = models.Cloud;
 const Precipitation = models.Precipitation;
 const Wind = models.Wind;
 var cors = require('cors');
+
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
