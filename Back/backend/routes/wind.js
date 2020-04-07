@@ -5,6 +5,7 @@ const Op = Sequelize.Op;
 const City = models.City;
 const Wind = models.Wind;
 const Data = models.Data;
+const { Sequelize } = require('sequelize');
 
 /* GET wind for five following days for one city */
 router.get('/forecast/:city', (req, res) => {
