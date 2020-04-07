@@ -5,7 +5,7 @@
   <div id="informations" class="informations">
     <div id="weather" class="weather-item">
       <div class="icon-weather">
-        <img alt="image temps" [src]="iconTemp"/>
+        <img alt="image temps" class="img-item" [src]="iconTemp"/>
         <p class="unity">{{ temperature }} °C</p>
       </div>
       <p>{{ weather }}</p>
@@ -14,7 +14,7 @@
     </div>
     <div id="wind" class="weather-item">
       <div class="icon-weather">
-        <img alt="image vent" [src]="iconWind"/>
+        <img alt="image vent" class="img-item" [src]="iconWind"/>
         <p class="unity">{{ windSpeed }} km/h</p>
       </div>
       <p>{{ windSpeedName }}</p>
@@ -22,14 +22,14 @@
     </div>
     <div id="humidity" class="weather-item">
       <div class="icon-weather">
-        <img alt="image humidité" [src]="iconHumidity"/>
+        <img alt="image humidité" class="img-item" [src]="iconHumidity"/>
         <p class="unity">{{ humidity }}%</p>
       </div>
       <p>Humidity</p>
     </div>
     <div id="pressure" class="weather-item">
       <div class="icon-weather">
-        <img alt="image pression" [src]="iconPressure"/>
+        <img alt="image pression" class="img-item" [src]="iconPressure"/>
         <p class="unity">{{ pressure }} Pa</p>
       </div>
       <p>Pression</p>
@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<!-- 
+<!--
 Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
