@@ -73,25 +73,6 @@ router.get('/', function(req, res, next) {
                     include: [City, Temperature]
                 }));
         });
-        Promise.all(promises).then((data) => {
-            data.forEach((datum) => finded.push(datum));
-            //Parser
-            for (i in finded) {
-                if (finded[i][0]['City'] != [] && finded[i][0]['City'] != null) {
-                    toSend.push({
-                        name: finded[i][0]['City']['dataValues'].name,
-                        temp: finded[i][0]['Temperature']['dataValues'].value,
-                        icon: `http://openweathermap.org/img/wn/${finded[i][0]['dataValues'].icon}@2x.png`
-                    });
-                } else {
-                    console.log("error on : " + finded[i]);
-                }
-            }
-            console.log(toSend);
-            res.status(200).send(toSend);
-        })
-      });
-    });
     Promise.all(promises).then((data) => {
       data.forEach((datum) => finded.push(datum));
       //Parser
