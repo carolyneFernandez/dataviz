@@ -1,0 +1,105 @@
+<div id="followingDays" class="followingDays">
+  <!-- Follow day one -->
+  <div class="card-body rounded">
+    <h4 id="date" class="card-title">
+      {{ followOne.date | date: "dd MMMM":"+0100":"fr-FR" }}
+    </h4>
+    <div id="informations">
+      <div id="weather">
+        <div class="icon-weather">
+          <img alt="image temps" [src]="followOne.iconTemp" />
+          <p class="unity">{{ followOne.temperature }} °C</p>
+        </div>
+        <p>{{ followOne.weather }}</p>
+      </div>
+      <div id="humidity">
+        <div class="icon-weather">
+          <img
+            alt="image humidité"
+            class="img-item"
+            [src]="followOne.iconHumidity"
+          />
+          <p class="unity">{{ followOne.humidity }}%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Follow day two -->
+  <div class="card-body rounded">
+    <h4 id="date" class="card-title">
+      {{ followTwo.date | date: "dd MMMM":"+0100":"fr-FR" }}
+    </h4>
+    <div id="informations">
+      <div id="weather">
+        <div class="icon-weather">
+          <img alt="image temps" [src]="followTwo.iconTemp" />
+          <p class="unity">{{ followTwo.temperature }} °C</p>
+        </div>
+        <p>{{ followTwo.weather }}</p>
+      </div>
+      <div id="humidity">
+        <div class="icon-weather">
+          <img
+            alt="image humidité"
+            class="img-item"
+            [src]="followTwo.iconHumidity"
+          />
+          <p class="unity">{{ followTwo.humidity }}%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Follow day three -->
+  <div class="card-body rounded">
+    <h4 id="date" class="card-title">
+      {{ followThree.date | date: "dd MMMM":"+0100":"fr-FR" }}
+    </h4>
+    <div id="informations">
+      <div id="weather">
+        <div class="icon-weather">
+          <img alt="image temps" [src]="followThree.iconTemp" />
+          <p class="unity">{{ followThree.temperature }} °C</p>
+        </div>
+        <p>{{ followThree.weather }}</p>
+      </div>
+      <div id="humidity">
+        <div class="icon-weather">
+          <img
+            alt="image humidité"
+            class="img-item"
+            [src]="followThree.iconHumidity"
+          />
+          <p class="unity">{{ followThree.humidity }}%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Follow day four -->
+  <div class="card-body rounded">
+    <h4 id="date" class="card-title">
+      {{ followFour.date | date: "dd MMMM":"+0100":"fr-FR" }}
+    </h4>
+    <div id="informations">
+      <div id="weather">
+        <div class="icon-weather">
+          <img alt="image temps" [src]="followFour.iconTemp" />
+          <p class="unity">{{ followFour.temperature }} °C</p>
+        </div>
+        <p>{{ followFour.weather }}</p>
+      </div>
+      <div id="humidity">
+        <div class="icon-weather">
+          <img
+            alt="image humidité"
+            class="img-item"
+            [src]="followFour.iconHumidity"
+          />
+          <p class="unity">{{ followFour.humidity }}%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

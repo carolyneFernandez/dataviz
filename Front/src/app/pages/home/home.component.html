@@ -1,3 +1,15 @@
+<div style="width: 30%; margin: auto;">
+  <input
+    type="search"
+    class="form-control"
+    placeholder="Rechercher votre ville ici"
+    [(ngModel)]="searchText"
+  />
+</div>
+
 <div id="list-button" class="container">
-    <button-city [city]="cities" *ngFor="let cities of cities"></button-city>
+  <button-city
+    [city]="cities"
+    *ngFor="let cities of cities | filter: searchText"
+  ></button-city>
 </div>

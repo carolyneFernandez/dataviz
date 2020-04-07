@@ -1,0 +1,31 @@
+.prevision {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media only screen and (max-width: 932px) {
+    flex-wrap: wrap;
+  }
+}
+
+.container {
+  width: 90%;
+  margin: 20px auto 0 auto;
+}
+
+.fifty-container {
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+  @media only screen and (max-width: 932px) {
+    width: 100%;
+  }
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.sub-title {
+  font-size: 16px;
+  margin-bottom: 20px;
+}

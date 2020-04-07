@@ -1,13 +1,10 @@
-
-  <div>
-    <canvas
-        baseChart
-        [chartType]="'line'"
-        [datasets]="chartData"
-        [labels]="chartLabels"
-        [options]="chartOptions"
-        [title]="s"
-        [legend]="true"
-        (chartClick)="onChartClick($event)">
-    </canvas>
+<div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="card p-4"  *ngIf="datasets">
+          <canvas baseChart [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="type">
+          </canvas>
+        </div>
+      </div>
+    </div>
   </div>
