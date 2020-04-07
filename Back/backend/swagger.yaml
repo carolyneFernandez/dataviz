@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  title: 'API of dataviz'
+  description: 'API to obtain informations for weather in France.'
+  version: '1.0'
+
+servers:
+  - url: 'http://localhost:3000/'
+
+paths:
+  #Cloud
+  /api/cloud/forecast/{city}:
+    get:
+      tags:
+        - 'cloud'
+      summary: 'Get cloud for one city on 5 following days'
+      parameters:
+        - in: path
+          name: city
+          description: City name.
+          schema:
+            type: string
+          example: Paris
+      responses:
+        '200':
+          description: Result found.
+          content:
+            application/json:
+              schema:
+                type: object
+        '204':
+          description: Data not found.
+        '400':
+          description: City name is missing.
+        '404':
+          description: This city name are not in database.
+
+  #Precipitation
+  /api/precipitation/forecast/{city}:
+    get:
+      tags:
+        - 'precipitation'
+      summary: 'Get precipitation for one city on 5 following days'
+      parameters:
+        - in: path
+          name: city
+          description: City name.
+          schema:
+            type: string
+          example: Paris
+      responses:
+        '200':
+          description: Result found.
+          content:
+            application/json:
+              schema:
+                type: object
+        '204':
+          description: Data not found.
+        '400':
+          description: City name is missing.
+        '404':
+          description: This city name are not in database.
+
+  #Temperature
+  /api/temperature/forecast/{city}:
+    get:
+      tags:
+        - 'temperature'
+      summary: 'Get temperature for one city on 5 following days'
+      parameters:
+        - in: path
+          name: city
+          description: City name.
+          schema:
+            type: string
+          example: Paris
+      responses:
+        '200':
+          description: Result found.
+          content:
+            application/json:
+              schema:
+                type: object
+        '204':
+          description: Data not found.
+        '400':
+          description: City name is missing.
+        '404':
+          description: This city name are not in database.
+
+  /api/temperature:
+    get:
+      tags:
+        - 'temperature'
+      summary: 'Get current temperature for each principal city of department'
+      responses:
+        '200':
+          description: Result found.
+          content:
+            application/json:
+              schema:
+                type: object
+        '204':
+          description: Data not found.
+        '400':
+          description: City name is missing.
+
+  /api/temperature/{city}:
+    get:
+      tags:
+        - 'temperature'
+      summary: 'Get current temperature for one city'
+      parameters:
+        - in: path
+          name: city
+          description: City name.
+          schema:
+            type: string
+          example: Paris
+      responses:
+        '200':
+          description: Result found.
+          content:
+            application/json:
+              schema:
+                type: object
+        '204':
+          description: Data not found.
+        '400':
+          description: City name is missing.
+        '404':
+          description: This city name are not in database.
+
+  #Wind
+  /api/wind/forecast/{city}:
+    get:
+      tags:
+        - 'wind'
+      summary: 'Get precipitation for one city on 5 following days'
+      parameters:
+        - in: path
+          name: city
+          description: City name.
+          schema:
+            type: string
+          example: Paris
+      responses:
+        '200':
+          description: Result found.
+          content:
+            application/json:
+              schema:
+                type: object
+        '204':
+          description: Data not found.
+        '400':
+          description: City name is missing.
+        '404':
+          description: This city name are not in database.

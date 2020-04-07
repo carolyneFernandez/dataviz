@@ -7,7 +7,7 @@ const City = models.City;
 const Temperature = models.Temperature;
 const Data = models.Data;
 
-//GET Temperature de la ville sur 5 jours
+/* GET temperature for five following days for one city */
 router.get('/forecast/:city', (req, res) => {
   var city = req.params.city;
 
@@ -32,7 +32,7 @@ router.get('/forecast/:city', (req, res) => {
   })
     .then((cityfinded) => {
       if (cityfinded === undefined) {
-        return res.send('City not found.');
+        return res.status(404).send('City not found.');
       } else {
         var cityfindedId = cityfinded.get('id');
         Data.findAll({
@@ -47,32 +47,36 @@ router.get('/forecast/:city', (req, res) => {
           .then((findedData) => {
             return res.status(200).send(findedData);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err);
+            return res.status(204).send('Data not found.');
+          });
       }
     })
     .catch((err) => {
       console.log(err);
-      return res.status(404).send("Votre ville n'a pas été trouvé.");
+      return res.status(404).send('City not found.');
     });
 });
 
-//GET temperature for all cities
-router.get('/', function(req, res, next) {
-    let finded = [];
-    let toSend = [];
-    City.findAll().then(allcities => {
-        const promises = [];
-        allcities.forEach(cities => {
-            cityid = cities.id;
-            cityName = cities.name;
-            promises.push(
-                Data.findAll({
-                    where: {
-                        cityId: cityid
-                    },
-                    include: [City, Temperature]
-                }));
-        });
+/* GET temperature for all cities */
+router.get('/', function (req, res, next) {
+  let finded = [];
+  let toSend = [];
+  City.findAll().then((allcities) => {
+    const promises = [];
+    allcities.forEach((cities) => {
+      cityid = cities.id;
+      cityName = cities.name;
+      promises.push(
+        Data.findAll({
+          where: {
+            cityId: cityid,
+          },
+          include: [City, Temperature],
+        })
+      );
+    });
     Promise.all(promises).then((data) => {
       data.forEach((datum) => finded.push(datum));
       //Parser
@@ -85,6 +89,7 @@ router.get('/', function(req, res, next) {
           });
         } else {
           console.log('error on : ' + finded[i]);
+          return res.status(204).send('Data not found.');
         }
       }
       console.log(toSend);
@@ -93,9 +98,13 @@ router.get('/', function(req, res, next) {
   });
 });
 
-// GET temperature of a city
-router.get('/:city', function(req, res, next) {
-    var city = req.params.city;
+/* GET temperature for one city */
+router.get('/:city', function (req, res, next) {
+  var city = req.params.city;
+
+  if (city === undefined || city === '') {
+    return res.status(400).send('Bad request. Please give city name.');
+  }
 
   City.findOne({
     where: {
@@ -113,9 +122,15 @@ router.get('/:city', function(req, res, next) {
         .then((datafinded) => {
           return res.status(200).send(datafinded);
         })
-        .catch((err) => console.log('err : ', err));
+        .catch((err) => {
+          console.log('err : ', err);
+          return res.status(204).send('Data not found.');
+        });
     })
-    .catch((err) => console.log('err : ', err));
+    .catch((err) => {
+      console.log('err : ', err);
+      return res.status(404).send('City not found.');
+    });
 });
 
 module.exports = router;

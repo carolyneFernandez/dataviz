@@ -4,21 +4,23 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-const { Sequelize } = require('sequelize');
 const request_rp = require('request-promise');
 const fs = require('fs');
 const parseString = require('xml2js').parseString;
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var datas = require('./routes/Data');
 var temperatures = require('./routes/temperature');
 var precipitations = require('./routes/precipitation');
 var clouds = require('./routes/cloud');
 var winds = require('./routes/wind');
 
-const OpenWeatherToken = "06554607b71839e1b22e07e0fbd2e215";
+/* For swagger */
+const jsyaml = require('js-yaml');
+const createSwaggerUiMiddleware = require('@coorpacademy/swagger-ui-express');
 
-//On déclare les models
+const OpenWeatherToken = '06554607b71839e1b22e07e0fbd2e215';
+
+//Models declaration
 const models = require('./models');
 const Data = models.Data;
 const City = models.City;
@@ -41,8 +43,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
+const spec = fs.readFileSync(path.resolve(__dirname, 'swagger.yaml'), 'utf8');
+const swaggerDoc = jsyaml.safeLoad(spec);
+
+app.use(
+  createSwaggerUiMiddleware({
+    swaggerDoc,
+    swaggerUi: '/explorer',
+  })
+);
+
 app.use('/', routes);
-app.use('/users', users);
 app.use('/api/data', datas);
 app.use('/api/temperature', temperatures);
 app.use('/api/precipitation', precipitations);
