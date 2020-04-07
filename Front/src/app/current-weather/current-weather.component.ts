@@ -49,12 +49,16 @@ export class CurrentWeatherComponent implements OnInit {
       this.pressure = data[0].pression;
 
       this.iconHumidity = this.iconService.getIconHumidity(this.humidity);
+      this.iconPressure = this.iconService.getIconPressure(this.pressure);
 
       this.prevService.getWindForOneCity(this.city).subscribe((data) => {
         this.windSpeedName = data[0]["Wind"].speed_name;
         this.windSpeed = data[0]["Wind"].speed;
         this.windCode = data[0]["Wind"].direction_code;
         this.windDirectionName = data[0]["Wind"].direction_name;
+        this.iconWind = this.iconService.getIconWind(
+          data[0]["Wind"].speed_name
+        );
       });
     });
   }
