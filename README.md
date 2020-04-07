@@ -1,26 +1,48 @@
 # DATAVIZ
 
-## Installation du front
+## Projet
 
-Il s'agit du dossier Front. Après avoir cloné le git, il faut exécuter la commande suivante :  
-`npm install` (cette commande va installer tous les modules).  
-Pour lancer le serveur Angular, exécutez la commande suivante : `ng serve -o` (le `-o` va ouvrir automatiquement une fenêtre avec le front).  
+Dataviz est un projet sur la visualisation de données concernant la météo et la qualité des cours d'eau en France.
+Le back a été construit avec NodeJS et ExpressJS, et le front avec Angular 8. Sequelize est requis au préalable.
+Docker est également utilisée pour notre base de données.
 
-## Installation du back
 
-Il s'agit du dossier Back. Il faut faire la même commande que celle du front pour installer :  
-`npm install`
 
-## Utilisation de sequelize poour créer la base de donnée:
-`sequelize db:migrate` (je vous invite à vous documenter [dessus](https://sequelize.org/v5/))
+## Lancement du Docker
 
-## Lancement du docker-bdd et création de la base de donnée
-
-Il faut se rendre dans le dossier Docker-Bdd. Une fois dans le dossier, exécutez la commande suivante pour créer le réseau interne du docker :  
+Rendez-vous dans le dossier Docker-Bdd. Une fois dans ce dossier, exécutez la commande suivante pour créer le réseau interne du docker :  
 `docker network create --internal reseau_interne_base`  
-Ensuite, lancer le docker en exécutant la commande suivante :  
+Ensuite, lancer le docker avec la commande suivante :
 `docker-compose up -d`  
 Une fois lancé, allez sur [localhost:8888](localhost:8888). Vous arriverez sur la page de connexion de PhpMyAdmin.  
 L'identifiant est **root** et le mot de passe est **root**.  
-Ensuite, dans les onglets en haut, sélectionnez **Importer**. Il faudra alors importer le fichier **bdd.sql**. Une fois importé, cliquez sur **Exécuter**.  
-Normalement, la base apparaîtra sur la liste à gauche, ce qui veut dire qu'elle est entièrement opérationnelle.
+Créez une nouvelle base de données nommée **dataviz**.
+
+## Installation du back
+A présent, rendez-vous dans le dossier Back/backend.
+Installez les modules nécessaires :
+`npm install`
+Pour créer le schéma de la base de données, exécutez la commande suivante :
+`sequelize db:migrate`
+Pour plus d'informations sur Sequelize, je vous invite à vous documenter [dessus](https://sequelize.org/v5/)).
+Dans le fichier Back/backend/app.js, retirez les commentaires de la ligne "readCities()", et exécutez la commande suivante :
+`sequelize db:migrate`
+Puis :
+`npm start`
+La ligne 'readCities()' permet de remplir la base de données. Une fois le npm start arrivé au cinquième jour, remettez en commentaire la ligne 'readCities()'.
+Le back est prêt et à l'écoute.
+
+
+## Installation du front
+
+Il s'agit du dossier Front, exécutez la commande suivante pour installer les modules nécessaires :  
+`npm install`
+Pour lancer le serveur Angular, exécutez la commande suivante : 
+`ng serve -o` (le `-o` va ouvrir automatiquement une fenêtre sur le site).  
+
+
+Rendez-vous sur la page [localhost:4200](localhost:4200) pour profitez du site Dataviz.
+
+## Swagger
+
+Un swagger est disponible à l'adresse [localhost:3000/explorer](localhost:3000/explorer).
