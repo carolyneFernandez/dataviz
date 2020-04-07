@@ -4,6 +4,7 @@ import { Chart, ChartOptions, ChartType } from 'chart.js';
 import { ChartDataSets } from "chart.js";
 import { Color, Label } from "ng2-charts";
 import { PrevisionService } from "../services/prevision.service";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-graphic",
@@ -23,7 +24,8 @@ export class GraphicComponent implements OnInit {
   public labels: Label[] =[];
 
   public datasets: ChartDataSets[] ;
-  
+  private city:String;
+
 
   public options: ChartOptions = {
     scales: {
@@ -46,10 +48,12 @@ export class GraphicComponent implements OnInit {
     }
   };
 
-  constructor(private servicePrevesion: PrevisionService) {}
+  constructor(private servicePrevesion: PrevisionService,private route: ActivatedRoute) {
+    this.city = this.route.snapshot.paramMap.get('idcity');
+  }
 
   ngOnInit() {
-    this.servicePrevesion.getTemperaturePrevesion("Paris").subscribe((data) => {
+    this.servicePrevesion.getTemperaturePrevesion(this.city).subscribe((data) => {
       for (let i in data) {
         this.dataCitieTime.push(data[i]["Temperature"].value);
         this.dataCitieTimeMin.push(data[i]["Temperature"].value_min);
