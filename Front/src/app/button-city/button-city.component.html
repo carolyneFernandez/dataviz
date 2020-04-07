@@ -1,7 +1,11 @@
 <a (click)="onClick(city.name)" class="btn">
-    <p>{{city.name}}</p>
+  <div class="wrapper">
+    <p class="city-name">{{city.name}}</p>
     <div id="weather">
-        <img [src]="city.icon" alt="icon">
-        <p>{{city.temp}}°C</p>
+      <img [src]="city.icon" alt="icon">
+      <p class="temp">{{city.temp}}°C</p>
     </div>
+  </div>
+
 </a>
+
