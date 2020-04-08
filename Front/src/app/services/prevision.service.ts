@@ -29,9 +29,8 @@ export class PrevisionService {
     return this.http.get(`${basicUrl}/api/precipitation/forecast/${city}`);
   //metodo para obtener los datos del api en rails
  /* public get_articles(){
-    return this.http.get(this.baseUrl.map(reponse => {reponse.json(); console.log(reponse)}));*/
-  }
-  get_articles(ville){
+    return this.http.get(this.baseUrl.map(reponse => {reponse.json(); console.log(reponse)}));
+  }*/
   //  return this.http.get( this.baseUrl.map(Response =>json())
     //)
   }
@@ -55,7 +54,7 @@ export class PrevisionService {
              .http
              .get(`http://localhost:3000/api/temperature/Lyon`);
   }
- 
+
   /* Return table of temperature find cities */
  getTemperaturePrevesion(city){
   return this.http.get(`${basicUrl}/api/temperature/forecast/${city}`);

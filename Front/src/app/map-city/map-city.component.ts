@@ -36,7 +36,9 @@ export class MapCityComponent implements OnInit {
       accessToken: 'your.mapbox.access.token'
     });
 
-    mainLayer.addTo(this.map);
-  }
+    const marker = L.marker([50.6365654, 3.0635282]).bindPopup('Lille, FR');
 
+    mainLayer.addTo(this.map);
+    marker.addTo(this.map);
+  }
 }

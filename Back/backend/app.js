@@ -15,7 +15,6 @@ var clouds = require('./routes/cloud');
 var winds = require('./routes/wind');
 var cities = require('./routes/city');
 
-
 /* For swagger */
 const jsyaml = require('js-yaml');
 const createSwaggerUiMiddleware = require('@coorpacademy/swagger-ui-express');
@@ -945,7 +944,7 @@ async function readCities() {
     });
 }
 
-//  readCities();
+ // readCities();
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
