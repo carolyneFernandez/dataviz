@@ -1,12 +1,25 @@
-#list-button{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    align-items: flex-start;
+#list-button {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
-button-city{
-    margin-left: 1px;
-    margin-top: 20px;
-    width: 17%;
+button-city {
+  width: calc(25% - 20px);
+  margin-bottom: 20px;
+  @media screen and (max-width: 1024px) {
+    width: calc(50% - 20px);
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+  &::before {
+    display: none;
+  }
 }

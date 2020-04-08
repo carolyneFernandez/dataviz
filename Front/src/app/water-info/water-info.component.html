@@ -1,0 +1,14 @@
+<p>Stations de prélèvements d'eau à {{ cityName }} : </p>
+
+<button *ngFor="let item of cityWatersList" (click)="initChart(item.code_station, item.libelle_station)">
+    {{ item.libelle_station }}</button>
+
+<p>Station courrante : {{ currentStation }}</p>
+
+<div *ngIf="stationInfos">
+    <em>Teneur en Nitrate :</em>
+    <ul>
+        <li>Résultat : {{ stationInfos.resultat }}</li>
+        <li>Qualification : {{ stationInfos.libelle_qualification }}</li>
+    </ul>
+</div>

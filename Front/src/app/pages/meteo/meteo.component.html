@@ -1,1 +1,26 @@
-<p>meteo works!</p>
+<div id="previsionWeather" class="container">
+  <a (click)="onClick()" class="btn">retour</a>
+  <h2 class="title">Bienvenue à {{ city }}</h2>
+  <h3 class="sub-title">Temps</h3>
+  <div class="prevision">
+    <div class="fifty-container">
+      <current-weather></current-weather>
+    </div>
+    <div class="fifty-container">
+      <following-weather></following-weather>
+    </div>
+  </div>
+  <div class="fifty-container">
+    <wind-graph></wind-graph>
+  </div>
+</div>
+<div>
+  
+  <!-- Liste des Stations d'eau de la ville -->
+  <water-info></water-info>
+
+</div>
+
+<app-graphic></app-graphic>
+
+<app-graphic-pie></app-graphic-pie>
