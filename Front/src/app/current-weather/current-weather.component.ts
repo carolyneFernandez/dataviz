@@ -91,7 +91,7 @@ export class CurrentWeatherComponent implements OnInit {
         return "Sud";
       case "Southwest":
         return "Sud Ouest";
-      case "Southeast":
+      case "SouthEast":
         return "Sud Est";
       case "South-southeast":
         return "Sud - Sud Ouest";
@@ -125,9 +125,9 @@ export class CurrentWeatherComponent implements OnInit {
       //East
       case "East":
         return "Est";
-      case "Southeast":
+      case "SouthEast":
         return "Est Sud";
-      case "northeast":
+      case "NorthEast":
         return "Est Nord";
       case "East-southeast":
         return "Est - Sud Est";

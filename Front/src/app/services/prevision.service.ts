@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-const basicUrl = 'http://localhost:3000';
+const basicUrl = "http://localhost:3000";
 
 @Injectable({
   providedIn: "root",
@@ -25,7 +25,7 @@ export class PrevisionService {
 
   /* Return wind for one city */
   getWindForOneCity(city) {
-    return this.http.get(`${basicUrl}/api/wind/${city}`);
+    return this.http.get(`${basicUrl}/api/wind/forecast/${city}`);
   }
  
   /* Return table of temperature find cities */
