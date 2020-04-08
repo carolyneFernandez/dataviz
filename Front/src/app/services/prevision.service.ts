@@ -25,6 +25,11 @@ export class PrevisionService {
 
   /* Return wind for one city */
   getWindForOneCity(city) {
-    return this.http.get(`${basicUrl}/api/wind/${city}`);
+    return this.http.get(`${basicUrl}/api/wind/forecast/${city}`);
+  }
+
+  /* Return name and precipitations for unique city */
+  getPrecipitationsForOneCity(city) {
+    return this.http.get(`${basicUrl}/api/precipitation/forecast/${city}`);
   }
 }

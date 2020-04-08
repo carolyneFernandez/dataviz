@@ -16,38 +16,10 @@ export class MeteoComponent implements OnInit {
 
   ngOnInit(): void {
     this.city = this.route.snapshot.paramMap.get("idcity");
-    this.initChart(this.city);
   }
 
   onClick() {
     this.router.navigate([`/`]);
-  }
-
-  initChart(city) {
-    console.log(city);
-    let htmlRef = this.elementRef.nativeElement.querySelector(`#myChart`);
-    var myBarChart = new Chart(htmlRef, {
-      type: 'bar',
-      data: {
-        labels: ["Vent violent", "Vent tempétueux", "Pluie", "Canicule", "Neige"],
-        datasets: [
-          {
-            label: "Nombre de jours",
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-            data: [2, 1, 0, 5, 2]
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: { display: false },
-        title: {
-          display: true,
-          text: 'Nombre de jours par type de vents'
-        }
-      }
-    });
   }
 
 }

@@ -15,6 +15,6 @@ export class ButtonCityComponent implements OnInit {
   }
 
   onClick(navCity) {
-    this.router.navigate([`meteo/${navCity.name}`], { state: { myCity: navCity } });
+    this.router.navigate([`meteo/${navCity}`], { state: { myCity: navCity } });
   }
 }
