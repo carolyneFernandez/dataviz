@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from "@angular/core";
 import { Chart, ChartOptions, ChartType } from "chart.js";
 
@@ -32,7 +33,7 @@ export class GraphicComponent implements OnInit {
           scaleLabel: {
             display: true,
             labelString: "Temperature",
-          },	
+          },
           ticks: {
             beginAtZero: true,
           },
