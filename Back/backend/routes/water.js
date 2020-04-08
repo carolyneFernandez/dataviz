@@ -10,14 +10,37 @@ const request = require('request');
 router.get('/:city', function (req, res) {
     var cityName = req.params.city;
 
-    request(`http://hubeau.eaufrance.fr/api/v1/qualite_rivieres/station_pc?libelle_commune=${cityName}&pretty`,
+    String.prototype.allReplace = function (obj) {
+        var retStr = this;
+        for (var x in obj) {
+            retStr = retStr.replace(new RegExp(x, 'g'), obj[x]);
+        }
+        return retStr;
+    };
+
+    //Problème d'utilisation des accents par l'API
+    if (cityName == "Saint-Lô") {
+        cityName = "St-L%C3%B4";
+    }
+    cityName = cityName.allReplace({
+        'é': 'e',
+        'è': 'e',
+        'ê': 'e',
+        'à': 'a',
+        'É': 'E',
+        'È': 'E',
+        'ö': 'o',
+        'â': 'a',
+        'ç': 'c'
+    });
+
+    request(`https://hubeau.eaufrance.fr/api/v1/qualite_rivieres/station_pc?libelle_commune=${cityName}&pretty`,
         function (error, response, body) {
-            if(body !== undefined) {
-                var responseBody = JSON.parse(body); 
+            try {
+                var responseBody = JSON.parse(body);
                 return res.status(200).send(responseBody.data);
-            } else {
-                var responseBody = undefined; 
-                return res.status(200).send(responseBody);
+            } catch (error) {
+                console.log('Erreur : ', error);
             }
         })
 })
@@ -27,8 +50,13 @@ router.get('/:city/:stationCode', function (req, res) {
 
     request(`http://hubeau.eaufrance.fr/api/v1/qualite_rivieres/analyse_pc?code_station=${stationCode}&libelle_parametre=Nitrates&date_debut_prelevement=2013-01-01&code_qualification=0&pretty`,
         function (error, response, body) {
-            var responseBody = JSON.parse(body);
-            return res.status(200).send(responseBody.data);
+            try {
+                var responseBody = JSON.parse(body);
+                return res.status(200).send(responseBody.data);
+            } catch(error) {
+                var responseBody = undefined;
+                return res.status(404).send(responseBody);
+            }
         })
 })
 

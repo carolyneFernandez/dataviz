@@ -10,12 +10,14 @@ import { GraphicPieComponent } from 'src/app/graphic-pie/graphic-pie.component';
 import { GraphicComponent } from 'src/app/graphic/graphic.component';
 import { ChartsModule } from 'ng2-charts';
 import { GraphicLineMultiComponent } from 'src/app/graphic-line-multi/graphic-line-multi.component';
+import { WindGraphComponent } from 'src/app/wind-graph/wind-graph.component';
 
 @NgModule({
   declarations: [
     MeteoComponent,
     CurrentWeatherComponent,
     FollowingWeatherComponent,
+    WindGraphComponent,
     WaterInfoComponent,
     GraphicPieComponent,
     GraphicComponent,
