@@ -32,7 +32,7 @@ export class GraphicComponent implements OnInit {
         {
           scaleLabel: {
             display: true,
-            labelString: "Temperature",
+            labelString: "Température",
           },
           ticks: {
             beginAtZero: true,
@@ -43,7 +43,7 @@ export class GraphicComponent implements OnInit {
         {
           scaleLabel: {
             display: true,
-            labelString: "Journé",
+            labelString: "Journée",
           },
         },
       ],
@@ -71,7 +71,7 @@ export class GraphicComponent implements OnInit {
       }
       this.datasets = [
         {
-          label: "Temperature Minimum",
+          label: "Température Minimum",
           data: [
             this.dataCitieTimeMin[0],
             this.dataCitieTimeMin[1],
@@ -96,7 +96,7 @@ export class GraphicComponent implements OnInit {
           borderWidth: 1,
         },
         {
-          label: "Prevision",
+          label: "Prévisions",
           data: [
             this.dataCitieTime[0],
             this.dataCitieTime[1],
@@ -121,7 +121,7 @@ export class GraphicComponent implements OnInit {
           borderWidth: 1,
         },
         {
-          label: "Temperature Maxime",
+          label: "Température Maximum",
           data: [
             this.dataCitieTimeMax[0],
             this.dataCitieTimeMax[1],

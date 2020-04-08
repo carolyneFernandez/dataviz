@@ -62,4 +62,9 @@ export class PrevisionService {
   getCouvertureNuageuse(city){
     return this.http.get(`${basicUrl}/api/cloud/forecast/${city}`);
    }
+
+    /* Return table of following data  for one city */
+  getAllDataDays(city) {
+    return this.http.get(`${basicUrl}/api/data/forecast/${city}`);
+  }
 }

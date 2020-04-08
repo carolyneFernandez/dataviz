@@ -9,15 +9,17 @@ import { WaterInfoComponent } from "src/app/water-info/water-info.component";
 import { GraphicPieComponent } from 'src/app/graphic-pie/graphic-pie.component';
 import { GraphicComponent } from 'src/app/graphic/graphic.component';
 import { ChartsModule } from 'ng2-charts';
+import { GraphicLineMultiComponent } from 'src/app/graphic-line-multi/graphic-line-multi.component';
 
 @NgModule({
   declarations: [
     MeteoComponent,
     CurrentWeatherComponent,
     FollowingWeatherComponent,
-    WaterInfoComponent
+    WaterInfoComponent,
     GraphicPieComponent,
-    GraphicComponent
+    GraphicComponent,
+    GraphicLineMultiComponent
     ],
   imports: [CommonModule, MeteoRoutingModule,ChartsModule],
 })
