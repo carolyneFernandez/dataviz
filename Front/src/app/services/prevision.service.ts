@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const basicUrl = 'http://localhost:3000';
+const basicUrl = "http://localhost:3000";
 
 @Injectable({
   providedIn: "root",
@@ -21,7 +21,7 @@ export class PrevisionService {
 
   /* Return wind for one city */
   getWindForOneCity(city) {
-    return this.http.get(`${basicUrl}/api/wind/${city}`);
+    return this.http.get(`${basicUrl}/api/wind/forecast/${city}`);
   }
   //metodo para obtener los datos del api en rails
  /* public get_articles(){
@@ -51,4 +51,15 @@ export class PrevisionService {
              .http
              .get(`http://localhost:3000/api/temperature/Lyon`);
   }
+ 
+  /* Return table of temperature find cities */
+ getTemperaturePrevesion(city){
+  return this.http.get(`${basicUrl}/api/temperature/forecast/${city}`);
+
+ }
+
+  /* Return table of cloud cover cities */
+  getCouvertureNuageuse(city){
+    return this.http.get(`${basicUrl}/api/cloud/forecast/${city}`);
+   }
 }
