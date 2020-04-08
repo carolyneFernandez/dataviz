@@ -23,6 +23,10 @@ export class PrevisionService {
   getWindForOneCity(city) {
     return this.http.get(`${basicUrl}/api/wind/forecast/${city}`);
   }
+
+  /* Return name and precipitations for unique city */
+  getPrecipitationsForOneCity(city) {
+    return this.http.get(`${basicUrl}/api/precipitation/forecast/${city}`);
   //metodo para obtener los datos del api en rails
  /* public get_articles(){
     return this.http.get(this.baseUrl.map(reponse => {reponse.json(); console.log(reponse)}));
