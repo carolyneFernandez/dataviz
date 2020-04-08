@@ -157,4 +157,3 @@ export class GraphicComponent implements OnInit {
     });
   }
 }
-

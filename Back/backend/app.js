@@ -28,6 +28,7 @@ const Temperature = models.Temperature;
 const Cloud = models.Cloud;
 const Precipitation = models.Precipitation;
 const Wind = models.Wind;
+var waters = require('./routes/water');
 var cors = require('cors');
 
 var app = express();
@@ -61,6 +62,7 @@ app.use('/api/temperature', temperatures);
 app.use('/api/precipitation', precipitations);
 app.use('/api/cloud', clouds);
 app.use('/api/wind', winds);
+app.use('/api/water', waters);
 
 // variable pour toutes les information des villes dans le json
 var cityCode;
