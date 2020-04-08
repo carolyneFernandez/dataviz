@@ -29,8 +29,8 @@ export class PrevisionService {
     return this.http.get(`${basicUrl}/api/precipitation/forecast/${city}`);
   //metodo para obtener los datos del api en rails
  /* public get_articles(){
-    return this.http.get(this.baseUrl.map(reponse => {reponse.json(); console.log(reponse)}));
-  }*/
+    return this.http.get(this.baseUrl.map(reponse => {reponse.json(); console.log(reponse)}));*/
+  }
   get_articles(ville){
   //  return this.http.get( this.baseUrl.map(Response =>json())
     //)
