@@ -27,4 +27,18 @@ export class PrevisionService {
   getWindForOneCity(city) {
     return this.http.get(`${basicUrl}/api/wind/forecast/${city}`);
   }
+ 
+  /* Return table of temperature find cities */
+ getTemperaturePrevesion(city){
+  return this.http.get(`${basicUrl}/api/temperature/forecast/${city}`);
+
+ }
+
+  /* Return table of cloud cover cities */
+  getCouvertureNuageuse(city){
+    return this.http.get(`${basicUrl}/api/cloud/forecast/${city}`);
+   }
+
+
+
 }
