@@ -8,6 +8,8 @@ import { PrevisionService } from "src/app/services/prevision.service";
 })
 export class HomeComponent implements OnInit {
   cities: any = [];
+  show1: boolean = true;
+  show2: boolean = false;
 
   constructor(private previsionService: PrevisionService) {}
 
@@ -24,5 +26,16 @@ export class HomeComponent implements OnInit {
       });
       this.cities = byName;
     });
+  }
+
+  onChange(evt){
+    console.log(evt);
+    if(evt === true){
+      this.show1 = false;
+      this.show2 = true;
+    } else if (evt === false) {
+      this.show1 = true;
+      this.show2 = false;
+    }
   }
 }

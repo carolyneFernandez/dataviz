@@ -6,15 +6,18 @@ import { ButtonCityComponent } from "src/app/button-city/button-city.component";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { FormsModule } from "@angular/forms";
 import { ChartsModule } from "ng2-charts";
+import { MapCityComponent } from "../../map-city/map-city.component";
+import { UiSwitchModule } from "ngx-toggle-switch";
 
 @NgModule({
-  declarations: [HomeComponent, ButtonCityComponent],
+  declarations: [HomeComponent, ButtonCityComponent, MapCityComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
     Ng2SearchPipeModule,
     FormsModule,
     ChartsModule,
+    UiSwitchModule,
   ],
 })
 export class HomeModule {}
