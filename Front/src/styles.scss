@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "ubuntu";
+  src: url("../src/assets/fonts/ubuntu-bold-webfont.woff2") format("woff2"),
+    url("../src/assets/fonts/ubuntu-bold-webfont.woff") format("woff");
+  font-weight: bold;
+  font-size: normal;
+}
+@font-face {
+  font-family: "ubuntu";
+  src: url("../src/assets/fonts/ubuntu-bolditalic-webfont.woff2")
+      format("woff2"),
+    url("../src/assets/fonts/ubuntu-bolditalic-webfont.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "ubuntu";
+  src: url("../src/assets/fonts/ubuntu-regular-webfont.woff2") format("woff2"),
+    url("../src/assets/fonts/ubuntu-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-size: normal;
+}
+@font-face {
+  font-family: "ubuntu";
+  src: url("../src/assets/fonts/ubuntu-italic-webfont.woff2") format("woff2"),
+    url("../src/assets/fonts/ubuntu-italic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+body {
+  background-color: #e5e5e5;
+  width: 100vw;
+  font-family: "ubuntu";
+}
+
+.container {
+  width: 90%;
+  margin: 20px auto 0 auto;
+}
+
+.title-home {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  box-shadow: 0 4px 4px 0 rgba(211,211,211,0.3);
+  background-color: white;
+  margin: 0 0 20px 0;
+  padding: 0.8rem 0;
+}
+
+.fake-footer {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 20px;
+}

@@ -1,0 +1,77 @@
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+
+const basicUrl = "http://localhost:3000";
+
+@Injectable({
+  providedIn: "root",
+})
+export class PrevisionService {
+  constructor(private http: HttpClient) {}
+
+  /* Return table of following days with weather and temperature for one city */
+  getFollowingDays(city) {
+    return this.http.get(`${basicUrl}/api/temperature/forecast/${city}`);
+  }
+  /* Return table of cities and its temperature */
+  getCitiesAndTemperatures() {
+    return this.http.get(`${basicUrl}/api/temperature/`);
+  }
+
+  /* Return wind for one city */
+  getWindForOneCity(city) {
+    return this.http.get(`${basicUrl}/api/wind/forecast/${city}`);
+  }
+
+  /* Return name and precipitations for unique city */
+  getPrecipitationsForOneCity(city) {
+    return this.http.get(`${basicUrl}/api/precipitation/forecast/${city}`);
+    //metodo para obtener los datos del api en rails
+    /* public get_articles(){
+    return this.http.get(this.baseUrl.map(reponse => {reponse.json(); console.log(reponse)}));
+  }*/
+    //  return this.http.get( this.baseUrl.map(Response =>json())
+    //)
+  }
+
+  /**
+   * Récupère  la liste des cours d'eau étudié pour une ville.
+   */
+  getWatersList(city): Promise<any> {
+    return this.http.get("http://localhost:3000/api/water/" + city).toPromise();
+  }
+
+  /**
+   * Récupère  les infos de la qualité de l'eau pour une station de prélèvement
+   */
+  getWaterInfos(city, stationCode): Promise<any> {
+    return this.http
+      .get("http://localhost:3000/api/water/" + city + "/" + stationCode)
+      .toPromise();
+  }
+
+  getTemperatureForOneCity(city) {
+    return this.http.get(`http://localhost:3000/api/temperature/Lyon`);
+  }
+
+  /* Return table of temperature find cities */
+  getTemperaturePrevesion(city) {
+    return this.http.get(`${basicUrl}/api/temperature/forecast/${city}`);
+  }
+
+  /* Return table of cloud cover cities */
+  getCouvertureNuageuse(city) {
+    return this.http.get(`${basicUrl}/api/cloud/forecast/${city}`);
+   }
+
+    /* Return table of following data  for one city */
+  getAllDataDays(city) {
+    return this.http.get(`${basicUrl}/api/data/forecast/${city}`);
+  }
+
+  /* Return cities */
+  getCities() {
+    return this.http.get(`${basicUrl}/api/city`);
+  }
+}
