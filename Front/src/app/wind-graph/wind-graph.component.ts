@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as Chart from 'chart.js';
 import { PrevisionService } from '../services/prevision.service';
 
@@ -14,9 +14,10 @@ export class WindGraphComponent implements OnInit {
   public temp: any;
   public precipitation: any;
 
-  constructor(private router: Router, private elementRef: ElementRef, private pService: PrevisionService) {
+  constructor(private route: ActivatedRoute, private elementRef: ElementRef, private pService: PrevisionService) {
 
-    this.city = this.router.getCurrentNavigation().extras.state.myCity;
+    this.city = this.route.snapshot.paramMap.get("idcity");
+    console.log(this.city);
   }
 
   ngOnInit(): void {
