@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         cover: DataTypes.INTEGER,
         name: DataTypes.STRING
     }, {});
-    Cloud.associate = function(models) {
+    Cloud.associate = function (models) {
         // associations can be defined here
         Cloud.hasMany(models.Data, {
             foreignKey: "cloudId"

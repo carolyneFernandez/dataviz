@@ -1,22 +1,22 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('static-favicon');
-var CronJob = require("cron").CronJob;
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+let express = require('express');
+let path = require('path');
+let favicon = require('static-favicon');
+let CronJob = require('cron').CronJob;
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
 const request_rp = require('request-promise');
 const fs = require('fs');
 const parseString = require('xml2js').parseString;
-var routes = require('./routes/index');
-var datas = require('./routes/data');
-var temperatures = require('./routes/temperature');
-var precipitations = require('./routes/precipitation');
-var clouds = require('./routes/cloud');
-var winds = require('./routes/wind');
-var cities = require('./routes/city');
+let routes = require('./routes/index');
+let datas = require('./routes/data');
+let temperatures = require('./routes/temperature');
+let precipitations = require('./routes/precipitation');
+let clouds = require('./routes/cloud');
+let winds = require('./routes/wind');
+let cities = require('./routes/city');
 
-/* For swagger */
+// For swagger
 const jsyaml = require('js-yaml');
 const createSwaggerUiMiddleware = require('@coorpacademy/swagger-ui-express');
 
@@ -30,11 +30,10 @@ const Temperature = models.Temperature;
 const Cloud = models.Cloud;
 const Precipitation = models.Precipitation;
 const Wind = models.Wind;
-var waters = require('./routes/water');
-var cors = require('cors');
+let waters = require('./routes/water');
 
-var app = express();
-
+let cors = require('cors');
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -67,87 +66,79 @@ app.use('/api/wind', winds);
 app.use('/api/water', waters);
 app.use('/api/city', cities);
 
-// variable pour toutes les information des villes dans le json
-var cityCode;
-var cityName;
-var cityDepartement;
-var cityLong;
-var cityLat;
-// Variable pour découper la réponse de l'API
-var dateRetrive;
-var cityPression;
-var cityHumidity;
-var cityWeather;
-var cityIcon;
-var cityPrecipitationValue;
-var cityPrecipitationMode;
-var windDegree;
-var windCode;
-var windName;
-var windSpeed;
-var windSpeedName;
-var cityTemperature;
-var cityTemperatureMin;
-var cityTemperatureMax;
-var cityTempFeelLike;
-var cityCloudValue;
-var cityCloudPercent;
-// variable pour les données des modèles lors de l'enregistrement
-var cityModelData;
-var cloudModelData;
-var windModelData;
-var precipitationModelData;
+// Variable for all the information of the cities in the json
+let cityCode;
+let cityName;
+let cityDepartement;
+let cityLong;
+let cityLat;
+// Variables containing the information received from the API
+let dateRetrieve;
+let cityPressure;
+let cityHumidity;
+let cityWeather;
+let cityIcon;
+let cityPrecipitationValue;
+let cityPrecipitationMode;
+let windDegree;
+let windCode;
+let windName;
+let windSpeed;
+let windSpeedName;
+let cityTemperature;
+let cityTemperatureMin;
+let cityTemperatureMax;
+let cityTempFeelLike;
+let cityCloudValue;
+let cityCloudPercent;
+// variable for model data when saving
+let cityModelData;
+let cloudModelData;
+let windModelData;
+let precipitationModelData;
 
-var options = {};
+let options = {};
 
-function dbRemplissageJour1(
+function fillingDatabaseDay1(
     cityModelData,
     temperatureModelData,
     cloudModelData,
     windModelData,
     precipitationModelData,
     cityName,
-    cityPression,
+    cityPressure,
     cityHumidity,
     cityWeather,
-    dateRetrive,
+    dateRetrieve,
     cityIcon
 ) {
-
-    return new Promise(async(resolve) => {
-        var date = new Date();
-        var todayDay = date.getDate();
-        var todayMonth = date.getMonth() + 1;
-        var todayYear = date.getFullYear();
-        var todayHour = date.getHours();
-        var todayDate = `${todayYear}-${todayMonth}-${todayDay} ${todayHour}:00:00.00`;
-        var todayDateObj = new Date(todayDate);
+    return new Promise(async (resolve) => {
         City.findOne({
             where: {
                 name: cityName
             }
         }).then(async cityfinded => {
-            if (cityfinded === undefined || cityfinded === "" || cityfinded === null) {
-                var newCity = await City.create(cityModelData);
-                var newCityID = newCity.id;
+            if (cityfinded === undefined || cityfinded === '' || cityfinded === null) {
+                let newCity = await City.create(cityModelData);
+                let newCityID = newCity.id;
 
-                var newTemp = await Temperature.create(temperatureModelData);
-                var newTempID = newTemp.id;
+                let newTemp = await Temperature.create(temperatureModelData);
+                let newTempID = newTemp.id;
 
-                var newWind = await Wind.create(windModelData);
-                var newWindID = newWind.id;
+                let newWind = await Wind.create(windModelData);
+                let newWindID = newWind.id;
 
-                var newCloud = await Cloud.create(cloudModelData);
-                var newCloudID = newCloud.id;
+                let newCloud = await Cloud.create(cloudModelData);
+                let newCloudID = newCloud.id;
 
-                var newPrecipitation = await Precipitation.create(precipitationModelData);
-                var newPrecipitationID = newPrecipitation.id;
+                let newPrecipitation = await Precipitation.create(precipitationModelData);
+                let newPrecipitationID = newPrecipitation.id;
 
-                var newData = await Data.create({
-                    pression: cityPression,
+                let newData = await Data.create({
+                    pression: cityPressure,
                     humidity: cityHumidity,
                     weather: cityWeather,
-                    dateObj: dateRetrive,
+                    dateObj: dateRetrieve,
                     icon: cityIcon,
                     temperatureId: newTempID,
                     windId: newWindID,
@@ -161,23 +152,35 @@ function dbRemplissageJour1(
                         name: cityName
                     }
                 }).then(async findedCity => {
-                    var findedCityId = findedCity.id;
-                    var datafinded = await Data.findOne({ where: { cityId: findedCityId } });
-                    var dateRetrieveAPI = new Date(dateRetrive);
+                    let findedCityId = findedCity.id;
+                    let datafinded = await Data.findOne({
+                        where: {
+                            cityId: findedCityId
+                        }
+                    });
+                    let dateRetrieveAPI = new Date(dateRetrieve);
                     if (datafinded.dateObj.toISOString() == dateRetrieveAPI.toISOString()) {
-                        var dataLinkTempId = datafinded.temperatureId;
-                        var dataLinkWindId = datafinded.windId;
-                        var dataLinkPrecipitationId = datafinded.precipitationId;
-                        var dataLinkCloudId = datafinded.cloudId;
+                        let dataLinkTempId = datafinded.temperatureId;
+                        let dataLinkWindId = datafinded.windId;
+                        let dataLinkPrecipitationId = datafinded.precipitationId;
+                        let dataLinkCloudId = datafinded.cloudId;
 
-                        var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                        let updateTemp = await Temperature.findOne({
+                            where: {
+                                id: dataLinkTempId
+                            }
+                        });
                         updateTemp.value = temperatureModelData.value;
                         updateTemp.value_max = temperatureModelData.value_max;
                         updateTemp.value_min = temperatureModelData.value_min;
                         updateTemp.feeling = temperatureModelData.feeling;
                         updateTemp.save();
 
-                        var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                        let updateWind = await Wind.findOne({
+                            where: {
+                                id: dataLinkWindId
+                            }
+                        });
                         updateWind.direction_degree = windModelData.direction_degree;
                         updateWind.direction_code = windModelData.direction_code;
                         updateWind.direction_name = windModelData.direction_name;
@@ -185,41 +188,49 @@ function dbRemplissageJour1(
                         updateWind.speed_name = windModelData.speed_name;
                         updateWind.save();
 
-                        var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                        let updatePrecipitation = await Precipitation.findOne({
+                            where: {
+                                id: dataLinkPrecipitationId
+                            }
+                        });
                         updatePrecipitation.value = precipitationModelData.value;
                         updatePrecipitation.mode = precipitationModelData.mode;
                         updatePrecipitation.save();
 
-                        var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                        let updateCloud = await Cloud.findOne({
+                            where: {
+                                id: dataLinkCloudId
+                            }
+                        });
                         updateCloud.cover = cloudModelData.cover;
                         updateCloud.name = cloudModelData.name;
                         updateCloud.save();
 
-                        datafinded.pression = cityPression;
+                        datafinded.pression = cityPressure;
                         datafinded.humidity = cityHumidity;
                         datafinded.weather = cityWeather;
-                        datafinded.dateObj = dateRetrive;
+                        datafinded.dateObj = dateRetrieve;
                         datafinded.icon = cityIcon;
                         datafinded.save();
                         console.log(`DAY 1, ${cityName} (OK): UPDATED.`);
                     } else {
-                        var newTemp = await Temperature.create(temperatureModelData);
-                        var newTempID = newTemp.id;
+                        let newTemp = await Temperature.create(temperatureModelData);
+                        let newTempID = newTemp.id;
 
-                        var newWind = await Wind.create(windModelData);
-                        var newWindID = newWind.id;
+                        let newWind = await Wind.create(windModelData);
+                        let newWindID = newWind.id;
 
-                        var newCloud = await Cloud.create(cloudModelData);
-                        var newCloudID = newCloud.id;
+                        let newCloud = await Cloud.create(cloudModelData);
+                        let newCloudID = newCloud.id;
 
-                        var newPrecipitation = await Precipitation.create(precipitationModelData);
-                        var newPrecipitationID = newPrecipitation.id;
+                        let newPrecipitation = await Precipitation.create(precipitationModelData);
+                        let newPrecipitationID = newPrecipitation.id;
 
-                        var newData = await Data.create({
-                            pression: cityPression,
+                        let newData = await Data.create({
+                            pression: cityPressure,
                             humidity: cityHumidity,
                             weather: cityWeather,
-                            dateObj: dateRetrive,
+                            dateObj: dateRetrieve,
                             icon: cityIcon,
                             temperatureId: newTempID,
                             windId: newWindID,
@@ -229,17 +240,14 @@ function dbRemplissageJour1(
                         });
                         console.log(`DAY 1, ${cityName} (OK): CREATED.`);
                     }
-
-
-                }).catch(err => console.log("err day 1 : ", err))
+                }).catch(err => console.log('err day 1 : ', err))
             }
-        }).catch(err => console.log("err day 1 : ", err))
+        }).catch(err => console.log('err day 1 : ', err))
         resolve('resolved!');
     });
 }
 
-function dbRemplissageJour2(
-    cityModelData2,
+function fillingDatabaseDay2(
     temperatureModelData2,
     cloudModelData2,
     windModelData2,
@@ -248,37 +256,42 @@ function dbRemplissageJour2(
     cityPression2,
     cityHumidity2,
     cityWeather2,
-    dateRetrive2,
+    dateRetrieve2,
     cityIcon2
 ) {
-    return new Promise(async(resolve) => {
+    return new Promise(async (resolve) => {
         City.findOne({
             where: {
                 name: cityName
             }
         }).then(async findedCity => {
-            var findedCityId = findedCity.id;
-            var dateRetrieveAPI = new Date(dateRetrive2);
-            var datafinded = await Data.findOne({ where: { cityId: findedCityId, dateObj: dateRetrieveAPI.toISOString() } });
+            let findedCityId = findedCity.id;
+            let dateRetrieveAPI = new Date(dateRetrieve2);
+            let datafinded = await Data.findOne({
+                where: {
+                    cityId: findedCityId,
+                    dateObj: dateRetrieveAPI.toISOString()
+                }
+            });
 
             if (datafinded === null) {
-                var newTemp = await Temperature.create(temperatureModelData2);
-                var newTempID = newTemp.id;
+                let newTemp = await Temperature.create(temperatureModelData2);
+                let newTempID = newTemp.id;
 
-                var newWind = await Wind.create(windModelData2);
-                var newWindID = newWind.id;
+                let newWind = await Wind.create(windModelData2);
+                let newWindID = newWind.id;
 
-                var newCloud = await Cloud.create(cloudModelData2);
-                var newCloudID = newCloud.id;
+                let newCloud = await Cloud.create(cloudModelData2);
+                let newCloudID = newCloud.id;
 
-                var newPrecipitation = await Precipitation.create(precipitationModelData2);
-                var newPrecipitationID = newPrecipitation.id;
+                let newPrecipitation = await Precipitation.create(precipitationModelData2);
+                let newPrecipitationID = newPrecipitation.id;
 
-                var newData = await Data.create({
+                let newData = await Data.create({
                     pression: cityPression2,
                     humidity: cityHumidity2,
                     weather: cityWeather2,
-                    dateObj: dateRetrive2,
+                    dateObj: dateRetrieve2,
                     icon: cityIcon2,
                     temperatureId: newTempID,
                     windId: newWindID,
@@ -288,19 +301,27 @@ function dbRemplissageJour2(
                 });
                 console.log(`DAY 2, ${cityName} (OK): CREATED.`);
             } else {
-                var dataLinkTempId = datafinded.temperatureId;
-                var dataLinkWindId = datafinded.windId;
-                var dataLinkPrecipitationId = datafinded.precipitationId;
-                var dataLinkCloudId = datafinded.cloudId;
+                let dataLinkTempId = datafinded.temperatureId;
+                let dataLinkWindId = datafinded.windId;
+                let dataLinkPrecipitationId = datafinded.precipitationId;
+                let dataLinkCloudId = datafinded.cloudId;
 
-                var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                let updateTemp = await Temperature.findOne({
+                    where: {
+                        id: dataLinkTempId
+                    }
+                });
                 updateTemp.value = temperatureModelData2.value;
                 updateTemp.value_max = temperatureModelData2.value_max;
                 updateTemp.value_min = temperatureModelData2.value_min;
                 updateTemp.feeling = temperatureModelData2.feeling;
                 updateTemp.save();
 
-                var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                let updateWind = await Wind.findOne({
+                    where: {
+                        id: dataLinkWindId
+                    }
+                });
                 updateWind.direction_degree = windModelData2.direction_degree;
                 updateWind.direction_code = windModelData2.direction_code;
                 updateWind.direction_name = windModelData2.direction_name;
@@ -308,12 +329,20 @@ function dbRemplissageJour2(
                 updateWind.speed_name = windModelData2.speed_name;
                 updateWind.save();
 
-                var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                let updatePrecipitation = await Precipitation.findOne({
+                    where: {
+                        id: dataLinkPrecipitationId
+                    }
+                });
                 updatePrecipitation.value = precipitationModelData2.value;
                 updatePrecipitation.mode = precipitationModelData2.mode;
                 updatePrecipitation.save();
 
-                var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                let updateCloud = await Cloud.findOne({
+                    where: {
+                        id: dataLinkCloudId
+                    }
+                });
                 updateCloud.cover = cloudModelData2.cover;
                 updateCloud.name = cloudModelData2.name;
                 updateCloud.save();
@@ -321,18 +350,17 @@ function dbRemplissageJour2(
                 datafinded.pression = cityPression2;
                 datafinded.humidity = cityHumidity2;
                 datafinded.weather = cityWeather2;
-                datafinded.dateObj = dateRetrive2;
+                datafinded.dateObj = dateRetrieve2;
                 datafinded.icon = cityIcon2;
                 datafinded.save();
                 console.log(`DAY 2, ${cityName} (OK): UPDATED.`);
             }
-        }).catch(err => console.log("err day 2 : ", err))
+        }).catch(err => console.log('err day 2 : ', err))
         resolve('resolved!');
     });
 }
 
-function dbRemplissageJour3(
-    cityModelData3,
+function fillingDatabaseDay3(
     temperatureModelData3,
     cloudModelData3,
     windModelData3,
@@ -341,37 +369,42 @@ function dbRemplissageJour3(
     cityPression3,
     cityHumidity3,
     cityWeather3,
-    dateRetrive3,
+    dateRetrieve3,
     cityIcon3
 ) {
-    return new Promise(async(resolve) => {
+    return new Promise(async (resolve) => {
         City.findOne({
             where: {
                 name: cityName
             }
         }).then(async findedCity => {
-            var findedCityId = findedCity.id;
-            var dateRetrieveAPI = new Date(dateRetrive3);
-            var datafinded = await Data.findOne({ where: { cityId: findedCityId, dateObj: dateRetrieveAPI.toISOString() } });
+            let findedCityId = findedCity.id;
+            let dateRetrieveAPI = new Date(dateRetrieve3);
+            let datafinded = await Data.findOne({
+                where: {
+                    cityId: findedCityId,
+                    dateObj: dateRetrieveAPI.toISOString()
+                }
+            });
 
             if (datafinded === null) {
-                var newTemp = await Temperature.create(temperatureModelData3);
-                var newTempID = newTemp.id;
+                let newTemp = await Temperature.create(temperatureModelData3);
+                let newTempID = newTemp.id;
 
-                var newWind = await Wind.create(windModelData3);
-                var newWindID = newWind.id;
+                let newWind = await Wind.create(windModelData3);
+                let newWindID = newWind.id;
 
-                var newCloud = await Cloud.create(cloudModelData3);
-                var newCloudID = newCloud.id;
+                let newCloud = await Cloud.create(cloudModelData3);
+                let newCloudID = newCloud.id;
 
-                var newPrecipitation = await Precipitation.create(precipitationModelData3);
-                var newPrecipitationID = newPrecipitation.id;
+                let newPrecipitation = await Precipitation.create(precipitationModelData3);
+                let newPrecipitationID = newPrecipitation.id;
 
-                var newData = await Data.create({
+                let newData = await Data.create({
                     pression: cityPression3,
                     humidity: cityHumidity3,
                     weather: cityWeather3,
-                    dateObj: dateRetrive3,
+                    dateObj: dateRetrieve3,
                     icon: cityIcon3,
                     temperatureId: newTempID,
                     windId: newWindID,
@@ -381,19 +414,27 @@ function dbRemplissageJour3(
                 });
                 console.log(`DAY 3, ${cityName} (OK): CREATED.`);
             } else {
-                var dataLinkTempId = datafinded.temperatureId;
-                var dataLinkWindId = datafinded.windId;
-                var dataLinkPrecipitationId = datafinded.precipitationId;
-                var dataLinkCloudId = datafinded.cloudId;
+                let dataLinkTempId = datafinded.temperatureId;
+                let dataLinkWindId = datafinded.windId;
+                let dataLinkPrecipitationId = datafinded.precipitationId;
+                let dataLinkCloudId = datafinded.cloudId;
 
-                var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                let updateTemp = await Temperature.findOne({
+                    where: {
+                        id: dataLinkTempId
+                    }
+                });
                 updateTemp.value = temperatureModelData3.value;
                 updateTemp.value_max = temperatureModelData3.value_max;
                 updateTemp.value_min = temperatureModelData3.value_min;
                 updateTemp.feeling = temperatureModelData3.feeling;
                 updateTemp.save();
 
-                var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                let updateWind = await Wind.findOne({
+                    where: {
+                        id: dataLinkWindId
+                    }
+                });
                 updateWind.direction_degree = windModelData3.direction_degree;
                 updateWind.direction_code = windModelData3.direction_code;
                 updateWind.direction_name = windModelData3.direction_name;
@@ -401,12 +442,20 @@ function dbRemplissageJour3(
                 updateWind.speed_name = windModelData3.speed_name;
                 updateWind.save();
 
-                var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                let updatePrecipitation = await Precipitation.findOne({
+                    where: {
+                        id: dataLinkPrecipitationId
+                    }
+                });
                 updatePrecipitation.value = precipitationModelData3.value;
                 updatePrecipitation.mode = precipitationModelData3.mode;
                 updatePrecipitation.save();
 
-                var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                let updateCloud = await Cloud.findOne({
+                    where: {
+                        id: dataLinkCloudId
+                    }
+                });
                 updateCloud.cover = cloudModelData3.cover;
                 updateCloud.name = cloudModelData3.name;
                 updateCloud.save();
@@ -414,18 +463,17 @@ function dbRemplissageJour3(
                 datafinded.pression = cityPression3;
                 datafinded.humidity = cityHumidity3;
                 datafinded.weather = cityWeather3;
-                datafinded.dateObj = dateRetrive3;
+                datafinded.dateObj = dateRetrieve3;
                 datafinded.icon = cityIcon3;
                 datafinded.save();
                 console.log(`DAY 3, ${cityName} (OK): UPDATED.`);
             }
-        }).catch(err => console.log("err day 3 : ", err))
+        }).catch(err => console.log('err day 3 : ', err))
         resolve('resolved!');
     });
 }
 
-function dbRemplissageJour4(
-    cityModelData4,
+function fillingDatabaseDay4(
     temperatureModelData4,
     cloudModelData4,
     windModelData4,
@@ -434,37 +482,42 @@ function dbRemplissageJour4(
     cityPression4,
     cityHumidity4,
     cityWeather4,
-    dateRetrive4,
+    dateRetrieve4,
     cityIcon4
 ) {
-    return new Promise(async(resolve) => {
+    return new Promise(async (resolve) => {
         City.findOne({
             where: {
                 name: cityName
             }
         }).then(async findedCity => {
-            var findedCityId = findedCity.id;
-            var dateRetrieveAPI = new Date(dateRetrive4);
-            var datafinded = await Data.findOne({ where: { cityId: findedCityId, dateObj: dateRetrieveAPI.toISOString() } });
+            let findedCityId = findedCity.id;
+            let dateRetrieveAPI = new Date(dateRetrieve4);
+            let datafinded = await Data.findOne({
+                where: {
+                    cityId: findedCityId,
+                    dateObj: dateRetrieveAPI.toISOString()
+                }
+            });
 
             if (datafinded === null) {
-                var newTemp = await Temperature.create(temperatureModelData4);
-                var newTempID = newTemp.id;
+                let newTemp = await Temperature.create(temperatureModelData4);
+                let newTempID = newTemp.id;
 
-                var newWind = await Wind.create(windModelData4);
-                var newWindID = newWind.id;
+                let newWind = await Wind.create(windModelData4);
+                let newWindID = newWind.id;
 
-                var newCloud = await Cloud.create(cloudModelData4);
-                var newCloudID = newCloud.id;
+                let newCloud = await Cloud.create(cloudModelData4);
+                let newCloudID = newCloud.id;
 
-                var newPrecipitation = await Precipitation.create(precipitationModelData4);
-                var newPrecipitationID = newPrecipitation.id;
+                let newPrecipitation = await Precipitation.create(precipitationModelData4);
+                let newPrecipitationID = newPrecipitation.id;
 
-                var newData = await Data.create({
+                let newData = await Data.create({
                     pression: cityPression4,
                     humidity: cityHumidity4,
                     weather: cityWeather4,
-                    dateObj: dateRetrive4,
+                    dateObj: dateRetrieve4,
                     icon: cityIcon4,
                     temperatureId: newTempID,
                     windId: newWindID,
@@ -474,19 +527,27 @@ function dbRemplissageJour4(
                 });
                 console.log(`DAY 4, ${cityName} (OK): CREATED.`);
             } else {
-                var dataLinkTempId = datafinded.temperatureId;
-                var dataLinkWindId = datafinded.windId;
-                var dataLinkPrecipitationId = datafinded.precipitationId;
-                var dataLinkCloudId = datafinded.cloudId;
+                let dataLinkTempId = datafinded.temperatureId;
+                let dataLinkWindId = datafinded.windId;
+                let dataLinkPrecipitationId = datafinded.precipitationId;
+                let dataLinkCloudId = datafinded.cloudId;
 
-                var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                let updateTemp = await Temperature.findOne({
+                    where: {
+                        id: dataLinkTempId
+                    }
+                });
                 updateTemp.value = temperatureModelData4.value;
                 updateTemp.value_max = temperatureModelData4.value_max;
                 updateTemp.value_min = temperatureModelData4.value_min;
                 updateTemp.feeling = temperatureModelData4.feeling;
                 updateTemp.save();
 
-                var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                let updateWind = await Wind.findOne({
+                    where: {
+                        id: dataLinkWindId
+                    }
+                });
                 updateWind.direction_degree = windModelData4.direction_degree;
                 updateWind.direction_code = windModelData4.direction_code;
                 updateWind.direction_name = windModelData4.direction_name;
@@ -494,12 +555,20 @@ function dbRemplissageJour4(
                 updateWind.speed_name = windModelData4.speed_name;
                 updateWind.save();
 
-                var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                let updatePrecipitation = await Precipitation.findOne({
+                    where: {
+                        id: dataLinkPrecipitationId
+                    }
+                });
                 updatePrecipitation.value = precipitationModelData4.value;
                 updatePrecipitation.mode = precipitationModelData4.mode;
                 updatePrecipitation.save();
 
-                var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                let updateCloud = await Cloud.findOne({
+                    where: {
+                        id: dataLinkCloudId
+                    }
+                });
                 updateCloud.cover = cloudModelData4.cover;
                 updateCloud.name = cloudModelData4.name;
                 updateCloud.save();
@@ -507,18 +576,17 @@ function dbRemplissageJour4(
                 datafinded.pression = cityPression4;
                 datafinded.humidity = cityHumidity4;
                 datafinded.weather = cityWeather4;
-                datafinded.dateObj = dateRetrive4;
+                datafinded.dateObj = dateRetrieve4;
                 datafinded.icon = cityIcon4;
                 datafinded.save();
                 console.log(`DAY 4, ${cityName} (OK): UPDATED.`);
             }
-        }).catch(err => console.log("err day 4 : ", err))
+        }).catch(err => console.log('err day 4 : ', err))
         resolve('resolved!');
     });
 }
 
-function dbRemplissageJour5(
-    cityModelData5,
+function fillingDatabaseDay5(
     temperatureModelData5,
     cloudModelData5,
     windModelData5,
@@ -527,37 +595,42 @@ function dbRemplissageJour5(
     cityPression5,
     cityHumidity5,
     cityWeather5,
-    dateRetrive5,
+    dateRetrieve5,
     cityIcon5
 ) {
-    return new Promise(async(resolve) => {
+    return new Promise(async (resolve) => {
         City.findOne({
             where: {
                 name: cityName
             }
         }).then(async findedCity => {
-            var findedCityId = findedCity.id;
-            var dateRetrieveAPI = new Date(dateRetrive5);
-            var datafinded = await Data.findOne({ where: { cityId: findedCityId, dateObj: dateRetrieveAPI.toISOString() } });
+            let findedCityId = findedCity.id;
+            let dateRetrieveAPI = new Date(dateRetrieve5);
+            let datafinded = await Data.findOne({
+                where: {
+                    cityId: findedCityId,
+                    dateObj: dateRetrieveAPI.toISOString()
+                }
+            });
 
             if (datafinded === null) {
-                var newTemp = await Temperature.create(temperatureModelData5);
-                var newTempID = newTemp.id;
+                let newTemp = await Temperature.create(temperatureModelData5);
+                let newTempID = newTemp.id;
 
-                var newWind = await Wind.create(windModelData5);
-                var newWindID = newWind.id;
+                let newWind = await Wind.create(windModelData5);
+                let newWindID = newWind.id;
 
-                var newCloud = await Cloud.create(cloudModelData5);
-                var newCloudID = newCloud.id;
+                let newCloud = await Cloud.create(cloudModelData5);
+                let newCloudID = newCloud.id;
 
-                var newPrecipitation = await Precipitation.create(precipitationModelData5);
-                var newPrecipitationID = newPrecipitation.id;
+                let newPrecipitation = await Precipitation.create(precipitationModelData5);
+                let newPrecipitationID = newPrecipitation.id;
 
-                var newData = await Data.create({
+                let newData = await Data.create({
                     pression: cityPression5,
                     humidity: cityHumidity5,
                     weather: cityWeather5,
-                    dateObj: dateRetrive5,
+                    dateObj: dateRetrieve5,
                     icon: cityIcon5,
                     temperatureId: newTempID,
                     windId: newWindID,
@@ -567,19 +640,27 @@ function dbRemplissageJour5(
                 });
                 console.log(`DAY 5, ${cityName} (OK): CREATED.`);
             } else {
-                var dataLinkTempId = datafinded.temperatureId;
-                var dataLinkWindId = datafinded.windId;
-                var dataLinkPrecipitationId = datafinded.precipitationId;
-                var dataLinkCloudId = datafinded.cloudId;
+                let dataLinkTempId = datafinded.temperatureId;
+                let dataLinkWindId = datafinded.windId;
+                let dataLinkPrecipitationId = datafinded.precipitationId;
+                let dataLinkCloudId = datafinded.cloudId;
 
-                var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                let updateTemp = await Temperature.findOne({
+                    where: {
+                        id: dataLinkTempId
+                    }
+                });
                 updateTemp.value = temperatureModelData5.value;
                 updateTemp.value_max = temperatureModelData5.value_max;
                 updateTemp.value_min = temperatureModelData5.value_min;
                 updateTemp.feeling = temperatureModelData5.feeling;
                 updateTemp.save();
 
-                var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                let updateWind = await Wind.findOne({
+                    where: {
+                        id: dataLinkWindId
+                    }
+                });
                 updateWind.direction_degree = windModelData5.direction_degree;
                 updateWind.direction_code = windModelData5.direction_code;
                 updateWind.direction_name = windModelData5.direction_name;
@@ -587,12 +668,20 @@ function dbRemplissageJour5(
                 updateWind.speed_name = windModelData5.speed_name;
                 updateWind.save();
 
-                var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                let updatePrecipitation = await Precipitation.findOne({
+                    where: {
+                        id: dataLinkPrecipitationId
+                    }
+                });
                 updatePrecipitation.value = precipitationModelData5.value;
                 updatePrecipitation.mode = precipitationModelData5.mode;
                 updatePrecipitation.save();
 
-                var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                let updateCloud = await Cloud.findOne({
+                    where: {
+                        id: dataLinkCloudId
+                    }
+                });
                 updateCloud.cover = cloudModelData5.cover;
                 updateCloud.name = cloudModelData5.name;
                 updateCloud.save();
@@ -600,16 +689,16 @@ function dbRemplissageJour5(
                 datafinded.pression = cityPression5;
                 datafinded.humidity = cityHumidity5;
                 datafinded.weather = cityWeather5;
-                datafinded.dateObj = dateRetrive5;
+                datafinded.dateObj = dateRetrieve5;
                 datafinded.icon = cityIcon5;
                 datafinded.save();
                 console.log(`DAY 5, ${cityName} (OK): UPDATED.`);
             }
-        }).catch(err => console.log("err day 5 : ", err))
+        }).catch(err => console.log('err day 5 : ', err))
         resolve('resolved!');
     });
 }
-// fonction qui va êetre appelé asynchonement
+// Asynchrone function for request API and put in database
 async function requestAndDb(
     cityName,
     cityCode,
@@ -617,8 +706,7 @@ async function requestAndDb(
     cityLong,
     cityLat
 ) {
-    //return new Promise(resolve => {
-    // OPTION POUR APPELLEZ L'API
+    // OPTION TO CALL API
     options = {
         uri: 'http://api.openweathermap.org/data/2.5/forecast',
         qs: {
@@ -635,12 +723,12 @@ async function requestAndDb(
     };
 
     request_rp(options).then((responseBody) => {
-        parseString(responseBody, async function(err, result) {
+        parseString(responseBody, async function (err, result) {
             /******
-             * PREMIER JOUR
+             * DAY 1
              ******/
-            dateRetrive = result.weatherdata.forecast[0].time[0].$.to;
-            cityPression = result.weatherdata.forecast[0].time[0].pressure[0].$.value;
+            dateRetrieve = result.weatherdata.forecast[0].time[0].$.to;
+            cityPressure = result.weatherdata.forecast[0].time[0].pressure[0].$.value;
             cityHumidity = result.weatherdata.forecast[0].time[0].humidity[0].$.value;
             cityWeather = result.weatherdata.forecast[0].time[0].symbol[0].$.name;
             cityIcon = result.weatherdata.forecast[0].time[0].symbol[0].$.var;
@@ -709,33 +797,35 @@ async function requestAndDb(
                 mode: cityPrecipitationMode,
                 value: cityPrecipitationValue,
             };
-            await dbRemplissageJour1(
+
+            await fillingDatabaseDay1(
                 cityModelData,
                 temperatureModelData,
                 cloudModelData,
                 windModelData,
                 precipitationModelData,
                 cityName,
-                cityPression,
+                cityPressure,
                 cityHumidity,
                 cityWeather,
-                dateRetrive,
+                dateRetrieve,
                 cityIcon
             );
-            /******
-             * DEUXIEME JOUR
-             ******/
-            var dateRetrive2 = result.weatherdata.forecast[0].time[8].$.to;
-            var cityPression2 =
-                result.weatherdata.forecast[0].time[8].pressure[0].$.value;
-            var cityHumidity2 =
-                result.weatherdata.forecast[0].time[8].humidity[0].$.value;
-            var cityWeather2 =
-                result.weatherdata.forecast[0].time[8].symbol[0].$.name;
-            var cityIcon2 = result.weatherdata.forecast[0].time[8].symbol[0].$.var;
 
-            var cityPrecipitationValue2;
-            var cityPrecipitationMode2;
+            /******
+             * DAY 2
+             ******/
+            let dateRetrieve2 = result.weatherdata.forecast[0].time[8].$.to;
+            let cityPression2 =
+                result.weatherdata.forecast[0].time[8].pressure[0].$.value;
+            let cityHumidity2 =
+                result.weatherdata.forecast[0].time[8].humidity[0].$.value;
+            let cityWeather2 =
+                result.weatherdata.forecast[0].time[8].symbol[0].$.name;
+            let cityIcon2 = result.weatherdata.forecast[0].time[8].symbol[0].$.var;
+
+            let cityPrecipitationValue2;
+            let cityPrecipitationMode2;
 
             if (
                 result.weatherdata.forecast[0].time[8].precipitation[0].$ === undefined
@@ -749,38 +839,30 @@ async function requestAndDb(
                     result.weatherdata.forecast[0].time[8].precipitation[0].$.type;
             }
 
-            var windDegree2 =
+            let windDegree2 =
                 result.weatherdata.forecast[0].time[8].windDirection[0].$.deg;
-            var windCode2 =
+            let windCode2 =
                 result.weatherdata.forecast[0].time[8].windDirection[0].$.code;
-            var windName2 =
+            let windName2 =
                 result.weatherdata.forecast[0].time[8].windDirection[0].$.name;
-            var windSpeed2 =
+            let windSpeed2 =
                 result.weatherdata.forecast[0].time[8].windSpeed[0].$.mps;
-            var windSpeedName2 =
+            let windSpeedName2 =
                 result.weatherdata.forecast[0].time[8].windSpeed[0].$.name;
 
-            var cityTemperature2 =
+            let cityTemperature2 =
                 result.weatherdata.forecast[0].time[8].temperature[0].$.value;
-            var cityTemperatureMin2 =
+            let cityTemperatureMin2 =
                 result.weatherdata.forecast[0].time[8].temperature[0].$.min;
-            var cityTemperatureMax2 =
+            let cityTemperatureMax2 =
                 result.weatherdata.forecast[0].time[8].temperature[0].$.max;
-            var cityTempFeelLike2 =
+            let cityTempFeelLike2 =
                 result.weatherdata.forecast[0].time[8].feels_like[0].$.value;
 
-            var cityCloudValue2 =
+            let cityCloudValue2 =
                 result.weatherdata.forecast[0].time[8].clouds[0].$.value;
-            var cityCloudPercent2 =
+            let cityCloudPercent2 =
                 result.weatherdata.forecast[0].time[8].clouds[0].$.all;
-
-            cityModelData2 = {
-                code_city: cityCode,
-                name: cityName,
-                department: cityDepartement,
-                lon: cityLong,
-                lat: cityLat,
-            };
 
             temperatureModelData2 = {
                 value: cityTemperature2,
@@ -808,9 +890,8 @@ async function requestAndDb(
             };
 
             setTimeout(
-                dbRemplissageJour2,
+                fillingDatabaseDay2,
                 60000,
-                cityModelData2,
                 temperatureModelData2,
                 cloudModelData2,
                 windModelData2,
@@ -819,21 +900,25 @@ async function requestAndDb(
                 cityPression2,
                 cityHumidity2,
                 cityWeather2,
-                dateRetrive2,
+                dateRetrieve2,
                 cityIcon2
             );
 
-            var dateRetrive3 = result.weatherdata.forecast[0].time[16].$.to;
-            var cityPression3 =
-                result.weatherdata.forecast[0].time[16].pressure[0].$.value;
-            var cityHumidity3 =
-                result.weatherdata.forecast[0].time[16].humidity[0].$.value;
-            var cityWeather3 =
-                result.weatherdata.forecast[0].time[16].symbol[0].$.name;
-            var cityIcon3 = result.weatherdata.forecast[0].time[16].symbol[0].$.var;
 
-            var cityPrecipitationValue3;
-            var cityPrecipitationMode3;
+            /***
+             * DAY 3
+             */
+            let dateRetrieve3 = result.weatherdata.forecast[0].time[16].$.to;
+            let cityPression3 =
+                result.weatherdata.forecast[0].time[16].pressure[0].$.value;
+            let cityHumidity3 =
+                result.weatherdata.forecast[0].time[16].humidity[0].$.value;
+            let cityWeather3 =
+                result.weatherdata.forecast[0].time[16].symbol[0].$.name;
+            let cityIcon3 = result.weatherdata.forecast[0].time[16].symbol[0].$.var;
+
+            let cityPrecipitationValue3;
+            let cityPrecipitationMode3;
 
             if (
                 result.weatherdata.forecast[0].time[16].precipitation[0].$ === undefined
@@ -847,52 +932,44 @@ async function requestAndDb(
                     result.weatherdata.forecast[0].time[16].precipitation[0].$.type;
             }
 
-            var windDegree3 =
+            let windDegree3 =
                 result.weatherdata.forecast[0].time[16].windDirection[0].$.deg;
-            var windCode3 =
+            let windCode3 =
                 result.weatherdata.forecast[0].time[16].windDirection[0].$.code;
-            var windName3 =
+            let windName3 =
                 result.weatherdata.forecast[0].time[16].windDirection[0].$.name;
-            var windSpeed3 =
+            let windSpeed3 =
                 result.weatherdata.forecast[0].time[16].windSpeed[0].$.mps;
-            var windSpeedName3 =
+            let windSpeedName3 =
                 result.weatherdata.forecast[0].time[16].windSpeed[0].$.name;
 
-            var cityTemperature3 =
+            let cityTemperature3 =
                 result.weatherdata.forecast[0].time[16].temperature[0].$.value;
-            var cityTemperatureMin3 =
+            let cityTemperatureMin3 =
                 result.weatherdata.forecast[0].time[16].temperature[0].$.min;
-            var cityTemperatureMax3 =
+            let cityTemperatureMax3 =
                 result.weatherdata.forecast[0].time[16].temperature[0].$.max;
-            var cityTempFeelLike3 =
+            let cityTempFeelLike3 =
                 result.weatherdata.forecast[0].time[16].feels_like[0].$.value;
 
-            var cityCloudValue3 =
+            let cityCloudValue3 =
                 result.weatherdata.forecast[0].time[16].clouds[0].$.value;
-            var cityCloudPercent3 =
+            let cityCloudPercent3 =
                 result.weatherdata.forecast[0].time[16].clouds[0].$.all;
 
-            var cityModelData3 = {
-                code_city: cityCode,
-                name: cityName,
-                department: cityDepartement,
-                lon: cityLong,
-                lat: cityLat,
-            };
-
-            var temperatureModelData3 = {
+            let temperatureModelData3 = {
                 value: cityTemperature3,
                 value_max: cityTemperatureMax3,
                 value_min: cityTemperatureMin3,
                 feeling: cityTempFeelLike3,
             };
 
-            var cloudModelData3 = {
+            let cloudModelData3 = {
                 cover: cityCloudPercent3,
                 name: cityCloudValue3,
             };
 
-            var windModelData3 = {
+            let windModelData3 = {
                 direction_degree: windDegree3,
                 direction_code: windCode3,
                 direction_name: windName3,
@@ -900,15 +977,14 @@ async function requestAndDb(
                 speed_name: windSpeedName3,
             };
 
-            var precipitationModelData3 = {
+            let precipitationModelData3 = {
                 mode: cityPrecipitationMode3,
                 value: cityPrecipitationValue3,
             };
 
             setTimeout(
-                dbRemplissageJour3,
+                fillingDatabaseDay3,
                 120000,
-                cityModelData3,
                 temperatureModelData3,
                 cloudModelData3,
                 windModelData3,
@@ -917,25 +993,24 @@ async function requestAndDb(
                 cityPression3,
                 cityHumidity3,
                 cityWeather3,
-                dateRetrive3,
+                dateRetrieve3,
                 cityIcon3
             );
 
             /***
              * QUATRIEME JOUR
              */
-
-            var dateRetrive4 = result.weatherdata.forecast[0].time[24].$.to;
-            var cityPression4 =
+            let dateRetrieve4 = result.weatherdata.forecast[0].time[24].$.to;
+            let cityPression4 =
                 result.weatherdata.forecast[0].time[24].pressure[0].$.value;
-            var cityHumidity4 =
+            let cityHumidity4 =
                 result.weatherdata.forecast[0].time[24].humidity[0].$.value;
-            var cityWeather4 =
+            let cityWeather4 =
                 result.weatherdata.forecast[0].time[24].symbol[0].$.name;
-            var cityIcon4 = result.weatherdata.forecast[0].time[24].symbol[0].$.var;
+            let cityIcon4 = result.weatherdata.forecast[0].time[24].symbol[0].$.var;
 
-            var cityPrecipitationValue4;
-            var cityPrecipitationMode4;
+            let cityPrecipitationValue4;
+            let cityPrecipitationMode4;
 
             if (
                 result.weatherdata.forecast[0].time[24].precipitation[0].$ === undefined
@@ -949,52 +1024,44 @@ async function requestAndDb(
                     result.weatherdata.forecast[0].time[24].precipitation[0].$.type;
             }
 
-            var windDegree4 =
+            let windDegree4 =
                 result.weatherdata.forecast[0].time[24].windDirection[0].$.deg;
-            var windCode4 =
+            let windCode4 =
                 result.weatherdata.forecast[0].time[24].windDirection[0].$.code;
-            var windName4 =
+            let windName4 =
                 result.weatherdata.forecast[0].time[24].windDirection[0].$.name;
-            var windSpeed4 =
+            let windSpeed4 =
                 result.weatherdata.forecast[0].time[24].windSpeed[0].$.mps;
-            var windSpeedName4 =
+            let windSpeedName4 =
                 result.weatherdata.forecast[0].time[24].windSpeed[0].$.name;
 
-            var cityTemperature4 =
+            let cityTemperature4 =
                 result.weatherdata.forecast[0].time[24].temperature[0].$.value;
-            var cityTemperatureMin4 =
+            let cityTemperatureMin4 =
                 result.weatherdata.forecast[0].time[24].temperature[0].$.min;
-            var cityTemperatureMax4 =
+            let cityTemperatureMax4 =
                 result.weatherdata.forecast[0].time[24].temperature[0].$.max;
-            var cityTempFeelLike4 =
+            let cityTempFeelLike4 =
                 result.weatherdata.forecast[0].time[24].feels_like[0].$.value;
 
-            var cityCloudValue4 =
+            let cityCloudValue4 =
                 result.weatherdata.forecast[0].time[24].clouds[0].$.value;
-            var cityCloudPercent4 =
+            let cityCloudPercent4 =
                 result.weatherdata.forecast[0].time[24].clouds[0].$.all;
 
-            var cityModelData4 = {
-                code_city: cityCode,
-                name: cityName,
-                department: cityDepartement,
-                lon: cityLong,
-                lat: cityLat,
-            };
-
-            var temperatureModelData4 = {
+            let temperatureModelData4 = {
                 value: cityTemperature4,
                 value_max: cityTemperatureMax4,
                 value_min: cityTemperatureMin4,
                 feeling: cityTempFeelLike4,
             };
 
-            var cloudModelData4 = {
+            let cloudModelData4 = {
                 cover: cityCloudPercent4,
                 name: cityCloudValue4,
             };
 
-            var windModelData4 = {
+            let windModelData4 = {
                 direction_degree: windDegree4,
                 direction_code: windCode4,
                 direction_name: windName4,
@@ -1002,15 +1069,14 @@ async function requestAndDb(
                 speed_name: windSpeedName4,
             };
 
-            var precipitationModelData4 = {
+            let precipitationModelData4 = {
                 mode: cityPrecipitationMode4,
                 value: cityPrecipitationValue4,
             };
 
             setTimeout(
-                dbRemplissageJour4,
+                fillingDatabaseDay4,
                 180000,
-                cityModelData4,
                 temperatureModelData4,
                 cloudModelData4,
                 windModelData4,
@@ -1019,23 +1085,24 @@ async function requestAndDb(
                 cityPression4,
                 cityHumidity4,
                 cityWeather4,
-                dateRetrive4,
+                dateRetrieve4,
                 cityIcon4
             );
-            /**
-             * CINQUIEME JOUR
-             */
-            var dateRetrive5 = result.weatherdata.forecast[0].time[32].$.to;
-            var cityPression5 =
-                result.weatherdata.forecast[0].time[32].pressure[0].$.value;
-            var cityHumidity5 =
-                result.weatherdata.forecast[0].time[32].humidity[0].$.value;
-            var cityWeather5 =
-                result.weatherdata.forecast[0].time[32].symbol[0].$.name;
-            var cityIcon5 = result.weatherdata.forecast[0].time[32].symbol[0].$.var;
 
-            var cityPrecipitationValue5;
-            var cityPrecipitationMode5;
+            /**
+             * DAY 5
+             */
+            let dateRetrieve5 = result.weatherdata.forecast[0].time[32].$.to;
+            let cityPression5 =
+                result.weatherdata.forecast[0].time[32].pressure[0].$.value;
+            let cityHumidity5 =
+                result.weatherdata.forecast[0].time[32].humidity[0].$.value;
+            let cityWeather5 =
+                result.weatherdata.forecast[0].time[32].symbol[0].$.name;
+            let cityIcon5 = result.weatherdata.forecast[0].time[32].symbol[0].$.var;
+
+            let cityPrecipitationValue5;
+            let cityPrecipitationMode5;
 
             if (
                 result.weatherdata.forecast[0].time[32].precipitation[0].$ === undefined
@@ -1049,52 +1116,44 @@ async function requestAndDb(
                     result.weatherdata.forecast[0].time[32].precipitation[0].$.type;
             }
 
-            var windDegree5 =
+            let windDegree5 =
                 result.weatherdata.forecast[0].time[32].windDirection[0].$.deg;
-            var windCode5 =
+            let windCode5 =
                 result.weatherdata.forecast[0].time[32].windDirection[0].$.code;
-            var windName5 =
+            let windName5 =
                 result.weatherdata.forecast[0].time[32].windDirection[0].$.name;
-            var windSpeed5 =
+            let windSpeed5 =
                 result.weatherdata.forecast[0].time[32].windSpeed[0].$.mps;
-            var windSpeedName5 =
+            let windSpeedName5 =
                 result.weatherdata.forecast[0].time[32].windSpeed[0].$.name;
 
-            var cityTemperature5 =
+            let cityTemperature5 =
                 result.weatherdata.forecast[0].time[32].temperature[0].$.value;
-            var cityTemperatureMin5 =
+            let cityTemperatureMin5 =
                 result.weatherdata.forecast[0].time[32].temperature[0].$.min;
-            var cityTemperatureMax5 =
+            let cityTemperatureMax5 =
                 result.weatherdata.forecast[0].time[32].temperature[0].$.max;
-            var cityTempFeelLike5 =
+            let cityTempFeelLike5 =
                 result.weatherdata.forecast[0].time[32].feels_like[0].$.value;
 
-            var cityCloudValue5 =
+            let cityCloudValue5 =
                 result.weatherdata.forecast[0].time[32].clouds[0].$.value;
-            var cityCloudPercent5 =
+            let cityCloudPercent5 =
                 result.weatherdata.forecast[0].time[32].clouds[0].$.all;
 
-            var cityModelData5 = {
-                code_city: cityCode,
-                name: cityName,
-                department: cityDepartement,
-                lon: cityLong,
-                lat: cityLat,
-            };
-
-            var temperatureModelData5 = {
+            let temperatureModelData5 = {
                 value: cityTemperature5,
                 value_max: cityTemperatureMax5,
                 value_min: cityTemperatureMin5,
                 feeling: cityTempFeelLike5,
             };
 
-            var cloudModelData5 = {
+            let cloudModelData5 = {
                 cover: cityCloudPercent5,
                 name: cityCloudValue5,
             };
 
-            var windModelData5 = {
+            let windModelData5 = {
                 direction_degree: windDegree5,
                 direction_code: windCode5,
                 direction_name: windName5,
@@ -1102,15 +1161,14 @@ async function requestAndDb(
                 speed_name: windSpeedName5,
             };
 
-            var precipitationModelData5 = {
+            let precipitationModelData5 = {
                 mode: cityPrecipitationMode5,
                 value: cityPrecipitationValue5,
             };
 
             setTimeout(
-                dbRemplissageJour5,
+                fillingDatabaseDay5,
                 240000,
-                cityModelData5,
                 temperatureModelData5,
                 cloudModelData5,
                 windModelData5,
@@ -1119,23 +1177,23 @@ async function requestAndDb(
                 cityPression5,
                 cityHumidity5,
                 cityWeather5,
-                dateRetrive5,
+                dateRetrieve5,
                 cityIcon5
             );
         });
     });
 }
 
-async function readCities() {
-    fs.readFile('./jsonfile/cities.json', async function(err, allCities) {
+async function fillDatabase() {
+    fs.readFile('./jsonfile/cities.json', async function (err, allCities) {
         if (err) {
-            console.log("Erreur à l'ouverture de la base : ", err);
+            console.log('Error to open file : ', err);
         }
         if (allCities === undefined) {
-            console.log('Aucune ville ou fichier trouvé.');
+            console.log('Error : no city or file was found.');
         }
-        var allCitiesInfo = JSON.parse(allCities);
-        for (var i = 0; i < allCitiesInfo.length; i++) {
+        let allCitiesInfo = JSON.parse(allCities);
+        for (let i = 0; i < allCitiesInfo.length; i++) {
             cityCode = allCitiesInfo[i].code_city;
             cityName = allCitiesInfo[i].name;
             cityDepartement = allCitiesInfo[i].departement;
@@ -1153,13 +1211,13 @@ async function readCities() {
 }
 
 /**
- * Update la base de donnée tous les jours à 12h
+ * Update database every 12am
  */
-var updateDatabase = new CronJob({
+let updateDatabase = new CronJob({
     cronTime: '0 0 12 1-31 * *',
-    onTick: function() {
-        console.log('MàJ de la base en cours....');
-        readCities();
+    onTick: function () {
+        console.log('Updating database...');
+        fillDatabase();
     },
     start: false,
     timeZone: 'Europe/Paris'
@@ -1167,13 +1225,13 @@ var updateDatabase = new CronJob({
 updateDatabase.start();
 
 /**
- * Rempli la base de donnée dès le lancement du serveur, soit : npm start
+ * Fill database when the server start (=== npm start), ONLY FOR DEMO
  */
-readCities();
+fillDatabase();
 
 /// catch 404 and forwarding to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+app.use(function (req, res, next) {
+    let err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
@@ -1183,7 +1241,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -1194,7 +1252,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,

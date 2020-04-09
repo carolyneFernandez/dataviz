@@ -1,13 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const models = require('../models');
-const { Sequelize } = require('sequelize');
+const {
+  Sequelize
+} = require('sequelize');
 const Op = Sequelize.Op;
 const City = models.City;
 const Wind = models.Wind;
 const Data = models.Data;
 
-/* GET wind for five following days for one city */
+/**
+ * GET wind for five following days for one city
+ */
 router.get('/forecast/:city', (req, res) => {
   var cityName = req.params.city;
   if (cityName === undefined || cityName === '') {
@@ -24,21 +28,21 @@ router.get('/forecast/:city', (req, res) => {
   endDate = new Date(fiveDayAfter);
 
   City.findOne({
-    where: {
-      name: cityName,
-    },
-  })
+      where: {
+        name: cityName,
+      },
+    })
     .then((findedCity) => {
       var findedCityId = findedCity.id;
       Data.findAll({
-        where: {
-          cityId: findedCityId,
-          dateObj: {
-            [Op.between]: [startDate.toISOString(), endDate.toISOString()],
+          where: {
+            cityId: findedCityId,
+            dateObj: {
+              [Op.between]: [startDate.toISOString(), endDate.toISOString()],
+            },
           },
-        },
-        include: [Wind],
-      })
+          include: [Wind],
+        })
         .then((findedData) => {
           return res.status(200).send(findedData);
         })
@@ -52,4 +56,5 @@ router.get('/forecast/:city', (req, res) => {
       return res.status(404).send('City not found.');
     });
 });
+
 module.exports = router;

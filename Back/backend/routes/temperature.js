@@ -1,5 +1,7 @@
 var express = require('express');
-const { Sequelize } = require('sequelize');
+const {
+    Sequelize
+} = require('sequelize');
 var router = express.Router();
 const models = require('../models');
 const Op = Sequelize.Op;
@@ -7,7 +9,9 @@ const City = models.City;
 const Temperature = models.Temperature;
 const Data = models.Data;
 
-/* GET temperature for five following days for one city */
+/**
+ *  GET temperature for five following days for one city 
+ */
 router.get('/forecast/:city', (req, res) => {
     var city = req.params.city;
 
@@ -59,8 +63,10 @@ router.get('/forecast/:city', (req, res) => {
         });
 });
 
-/* GET temperature for all cities */
-router.get('/', function(req, res, next) {
+/**
+ * GET temperature for all cities
+ */
+router.get('/', function (req, res, next) {
     let finded = [];
     let toSend = [];
     City.findAll().then((allcities) => {
@@ -81,7 +87,7 @@ router.get('/', function(req, res, next) {
             data.forEach((datum) => finded.push(datum));
             //Parser
             for (i in finded) {
-                if (finded[i][0]['City'] != [] && finded[i][0]['City'] != null) {
+                if (finded[i][0]['City'] !== [] && finded[i][0]['City'] !== null) {
                     toSend.push({
                         name: finded[i][0]['City']['dataValues'].name,
                         temp: finded[i][0]['Temperature']['dataValues'].value,
@@ -98,8 +104,10 @@ router.get('/', function(req, res, next) {
     });
 });
 
-/*   GET temperature for one city */
-router.get('/:city', function(req, res, next) {
+/**
+ * GET temperature for one city 
+ */
+router.get('/:city', function (req, res, next) {
     var city = req.params.city;
 
     if (city === undefined || city === '') {

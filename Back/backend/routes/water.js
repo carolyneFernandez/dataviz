@@ -3,10 +3,9 @@ var router = express.Router();
 const request = require('request');
 
 /**
- * POUR EAUFRANCE API
- * Qualité cours d'eau d'une ville
+ * FOR EAUFRANCE API
+ * GET city water quality
  */
-
 router.get('/:city', function (req, res) {
     var cityName = req.params.city;
 
@@ -18,9 +17,9 @@ router.get('/:city', function (req, res) {
         return retStr;
     };
 
-    //Problème d'utilisation des accents par l'API
-    if (cityName == "Saint-Lô") {
-        cityName = "St-L%C3%B4";
+    //API accents issue
+    if (cityName == 'Saint-Lô') {
+        cityName = 'St-L%C3%B4';
     }
     cityName = cityName.allReplace({
         'é': 'e',
@@ -53,7 +52,7 @@ router.get('/:city/:stationCode', function (req, res) {
             try {
                 var responseBody = JSON.parse(body);
                 return res.status(200).send(responseBody.data);
-            } catch(error) {
+            } catch (error) {
                 var responseBody = undefined;
                 return res.status(404).send(responseBody);
             }

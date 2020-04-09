@@ -1,5 +1,7 @@
 var express = require('express');
-const { Sequelize } = require('sequelize');
+const {
+  Sequelize
+} = require('sequelize');
 var router = express.Router();
 const models = require('../models');
 const Op = Sequelize.Op;
@@ -7,7 +9,9 @@ const City = models.City;
 const Data = models.Data;
 const Cloud = models.Cloud;
 
-/* GET cloud for five following days for one city */
+/**
+ * GET cloud for five following days for one city
+ */
 router.get('/forecast/:city', (req, res) => {
   var cityName = req.params.city;
   if (cityName === undefined || cityName === '') {
@@ -24,21 +28,21 @@ router.get('/forecast/:city', (req, res) => {
   endDate = new Date(fiveDayAfter);
 
   City.findOne({
-    where: {
-      name: cityName,
-    },
-  })
+      where: {
+        name: cityName,
+      },
+    })
     .then((findedCity) => {
       var findedCityId = findedCity.id;
       Data.findAll({
-        where: {
-          cityId: findedCityId,
-          dateObj: {
-            [Op.between]: [startDate.toISOString(), endDate.toISOString()],
+          where: {
+            cityId: findedCityId,
+            dateObj: {
+              [Op.between]: [startDate.toISOString(), endDate.toISOString()],
+            },
           },
-        },
-        include: [Cloud],
-      })
+          include: [Cloud],
+        })
         .then((findedData) => {
           return res.status(200).send(findedData);
         })

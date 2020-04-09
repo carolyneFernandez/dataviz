@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const request = require('request');
 const models = require('../models');
-const { Sequelize } = require('sequelize');
+const {
+    Sequelize
+} = require('sequelize');
 const Op = Sequelize.Op;
 const Data = models.Data;
 const City = models.City;
@@ -11,9 +12,10 @@ const Cloud = models.Cloud;
 const Wind = models.Wind;
 const Precipitation = models.Precipitation;
 
-
-/*GET all data for one city*/
-router.get('/forecast/:city', function(req, res, next) {
+/**
+ * GET all data for one city
+ */
+router.get('/forecast/:city', function (req, res, next) {
     var cityName = req.params.city;
 
     if (cityName === undefined || cityName === '') {
