@@ -60,7 +60,6 @@ export class GraphicLineMultiComponent implements OnInit {
 
     this.prevService.getAllDataDays(this.city).subscribe((data) => {
       for (let i in data) {
-        console.log(data);
         if(this.valuerAPi=="humydite"){
           this.dataCitieTime.push(data[i].humidity);
           this.color="red";
@@ -137,6 +136,8 @@ export class GraphicLineMultiComponent implements OnInit {
         this.dateTime[3],
         this.dateTime[4],
       ];
+
+      this.dateTime=[];
     });
 
   }
