@@ -7,10 +7,12 @@
   />
 </div>
 
+<ui-switch></ui-switch>
 <div id="list-button" class="container">
   <button-city
     [city]="cities"
     *ngFor="let cities of cities | filter: searchText"
   ></button-city>
 </div>
+
 <map-city></map-city>
