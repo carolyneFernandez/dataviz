@@ -15,4 +15,3 @@ registerLocaleData(localeFr, "fr-FR");
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-

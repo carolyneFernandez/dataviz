@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ButtonCityComponent } from './button-city.component';
+import { ButtonCityComponent } from "./button-city.component";
 
-describe('ButtonCityComponent', () => {
+describe("ButtonCityComponent", () => {
   let component: ButtonCityComponent;
   let fixture: ComponentFixture<ButtonCityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ButtonCityComponent ]
-    })
-    .compileComponents();
+      declarations: [ButtonCityComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('ButtonCityComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

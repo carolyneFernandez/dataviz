@@ -31,14 +31,27 @@
 
 body {
   background-color: #e5e5e5;
+  width: 100vw;
+  font-family: "ubuntu";
 }
 
-#title {
+.container {
+  width: 90%;
+  margin: 20px auto 0 auto;
+}
+
+.title-home {
   text-align: center;
-  font-weight: bold;
   font-size: 3rem;
-  box-shadow: 0px 1px 1px #777;
+  font-weight: bold;
+  box-shadow: 0 4px 4px 0 rgba(211, 211, 211, 0.3);
   background-color: white;
-  margin-top: 0;
+  margin: 0 0 20px 0;
   padding: 0.8rem 0;
+}
+
+.fake-footer {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 20px;
 }

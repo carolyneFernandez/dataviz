@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { WindGraphComponent } from "./wind-graph.component";
+import { GraphicLineMultiComponent } from "./graphic-line-multi.component";
 
-describe("WindGraphComponent", () => {
-  let component: WindGraphComponent;
-  let fixture: ComponentFixture<WindGraphComponent>;
+describe("GraphicLineMultiComponent", () => {
+  let component: GraphicLineMultiComponent;
+  let fixture: ComponentFixture<GraphicLineMultiComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [WindGraphComponent],
+      declarations: [GraphicLineMultiComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WindGraphComponent);
+    fixture = TestBed.createComponent(GraphicLineMultiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

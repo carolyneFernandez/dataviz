@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MapCityComponent } from './map-city.component';
+import { MapCityComponent } from "./map-city.component";
 
-describe('MapCityComponent', () => {
+describe("MapCityComponent", () => {
   let component: MapCityComponent;
   let fixture: ComponentFixture<MapCityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapCityComponent ]
-    })
-    .compileComponents();
+      declarations: [MapCityComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('MapCityComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

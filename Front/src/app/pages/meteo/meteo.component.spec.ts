@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MeteoComponent } from './meteo.component';
+import { MeteoComponent } from "./meteo.component";
 
-describe('MeteoComponent', () => {
+describe("MeteoComponent", () => {
   let component: MeteoComponent;
   let fixture: ComponentFixture<MeteoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MeteoComponent ]
-    })
-    .compileComponents();
+      declarations: [MeteoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('MeteoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

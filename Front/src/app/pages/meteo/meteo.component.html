@@ -1,26 +1,35 @@
 <div id="previsionWeather" class="container">
-  <a (click)="onClick()" class="btn">retour</a>
+  <a (click)="onClick()" class="btn">< Retour</a>
   <h2 class="title">Bienvenue à {{ city }}</h2>
-  <h3 class="sub-title">Temps</h3>
-  <div class="prevision">
+  <div class="wrapper">
     <div class="fifty-container">
+      <h3 class="sub-title">Temps</h3>
       <current-weather></current-weather>
     </div>
     <div class="fifty-container">
+      <h3 class="sub-title">Prévisions</h3>
       <following-weather></following-weather>
     </div>
   </div>
-  <div class="fifty-container">
-    <wind-graph></wind-graph>
+  <h3 class="sub-title">Graphiques</h3>
+  <div class="wrapper">
+    <div class="fifty-container">
+      <app-graphic></app-graphic>
+    </div>
+    <div class="fifty-container">
+      <app-graphic-pie></app-graphic-pie>
+    </div>
   </div>
-</div>
-<div>
-  
+
+  <div class="wrapper">
+    <div class="fifty-container">
+      <app-graphic-line-multi></app-graphic-line-multi>
+    </div>
+    <div class="fifty-container">
+      <wind-graph></wind-graph>
+    </div>
+  </div>
   <!-- Liste des Stations d'eau de la ville -->
   <water-info></water-info>
-
 </div>
-
-<app-graphic></app-graphic>
-
-<app-graphic-pie></app-graphic-pie>
+<div></div>

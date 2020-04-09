@@ -1,14 +1,36 @@
-<p>Stations de prélèvements d'eau à {{ cityName }} : </p>
+<div class="card-body">
+  <div class="card-title">
+    Liste des stations d'eau de la ville
+  </div>
 
-<button *ngFor="let item of cityWatersList" (click)="initChart(item.code_station, item.libelle_station)">
-    {{ item.libelle_station }}</button>
+  <div class="wrapper-vertical">
+    <p>Stations de prélèvements d'eau à {{ cityName }} :</p>
+    <div class="wrapper-btn">
+      <button
+        class="btn"
+        *ngFor="let item of cityWatersList"
+        (click)="initChart(item.code_station, item.libelle_station)"
+      >
+        {{ item.libelle_station }}
+      </button>
+    </div>
+  </div>
 
-<p>Station courrante : {{ currentStation }}</p>
-
-<div *ngIf="stationInfos">
-    <em>Teneur en Nitrate :</em>
-    <ul>
-        <li>Résultat : {{ stationInfos.resultat }}</li>
-        <li>Qualification : {{ stationInfos.libelle_qualification }}</li>
-    </ul>
+  <div class="wrapper-vertical">
+    <p>
+      Station courrante : <strong>{{ currentStation }}</strong>
+    </p>
+    <div *ngIf="stationInfos" class="result">
+      <h3 class="title">Teneur en Nitrate :</h3>
+      <ul>
+        <li>
+          Résultat : <strong>{{ stationInfos.resultat }}</strong>
+        </li>
+        <li>
+          Qualification :
+          <strong>{{ stationInfos.libelle_qualification }}</strong>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

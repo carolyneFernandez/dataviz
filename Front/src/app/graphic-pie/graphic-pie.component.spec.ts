@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { GraphicPieComponent } from './graphic-pie.component';
+import { GraphicPieComponent } from "./graphic-pie.component";
 
-describe('GraphicPieComponent', () => {
+describe("GraphicPieComponent", () => {
   let component: GraphicPieComponent;
   let fixture: ComponentFixture<GraphicPieComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GraphicPieComponent ]
-    })
-    .compileComponents();
+      declarations: [GraphicPieComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('GraphicPieComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

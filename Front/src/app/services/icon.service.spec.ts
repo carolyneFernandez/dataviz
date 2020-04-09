@@ -1,11 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { IconService } from './icon.service';
+import { IconService } from "./icon.service";
 
-describe('IconService', () => {
+describe("IconService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
+  it("should be created", () => {
     const service: IconService = TestBed.get(IconService);
     expect(service).toBeTruthy();
   });
