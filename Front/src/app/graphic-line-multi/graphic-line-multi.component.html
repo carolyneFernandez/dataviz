@@ -25,6 +25,17 @@
         <label for="cloud">Nuage</label>
 
       </div>
+
+      <div>
+        <input type="radio" (change)="toggleEditable($event)" name="type" id="precipitation" value="precipitation">
+        <label for="precipitation">Précipitation</label>
+
+      </div>
+      <div>
+        <input type="radio" (change)="toggleEditable($event)" name="type" id="vent" value="wind">
+        <label for="vent">Vent</label>
+
+      </div>
       
 </fieldset>
 <script>

@@ -60,6 +60,7 @@ export class GraphicLineMultiComponent implements OnInit {
 
     this.prevService.getAllDataDays(this.city).subscribe((data) => {
       for (let i in data) {
+        console.log(data);
         if(this.valuerAPi=="humydite"){
           this.dataCitieTime.push(data[i].humidity);
           this.color="red";
@@ -86,7 +87,21 @@ export class GraphicLineMultiComponent implements OnInit {
           this.backgroundLine="rgba(135, 211, 124,0.8)";
           this.labelType="Nuage";
           
+        }else if(this.valuerAPi=="precipitation"){
+          this.dataCitieTime.push(data[i]["Precipitation"].value);
+          this.color="rgba(118, 93, 105, 1)";
+          this.backgroundLine="rgba(118, 93, 105, 0.5)";
+          this.labelType="Précipitation";
+          
+        }else if(this.valuerAPi=="wind"){
+          this.dataCitieTime.push(data[i]["Wind"].speed);
+          this.color="rgb(255,165,0)";
+          this.backgroundLine="rgb(255,165,0,0.5)";
+          this.labelType="Vent";
+          
         }
+        
+        
 
         let dateTemp = data[i].dateObj.split("T")[0];
         let date = new Date(dateTemp);
