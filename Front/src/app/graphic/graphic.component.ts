@@ -71,7 +71,7 @@ export class GraphicComponent implements OnInit {
       }
       this.datasets = [
         {
-          label: "Température Minimum",
+          label: "Température minimale",
           data: [
             this.dataCitieTimeMin[0],
             this.dataCitieTimeMin[1],
@@ -121,7 +121,7 @@ export class GraphicComponent implements OnInit {
           borderWidth: 1,
         },
         {
-          label: "Température Maximum",
+          label: "Température maximale",
           data: [
             this.dataCitieTimeMax[0],
             this.dataCitieTimeMax[1],
