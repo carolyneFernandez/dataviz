@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { PrevisionService } from 'src/app/services/prevision.service';
+import { Component, OnInit, Input } from "@angular/core";
+import { PrevisionService } from "src/app/services/prevision.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-home',
@@ -10,13 +11,12 @@ export class HomeComponent implements OnInit {
   cities: any = [];
   showList = true;
   showMap = false;
-  loading = false;
 
-  constructor(private previsionService: PrevisionService) {
-    this.loading = true;
+  constructor(private previsionService: PrevisionService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.previsionService.getCitiesAndTemperatures().subscribe((data) => {
       for (const i in data) {
         this.cities.push(data[i]);
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
         return x < y ? -1 : x > y ? 1 : 0;
       });
       this.cities = byName;
-      this.loading = false;
+      this.spinner.hide();
     });
   }
 
