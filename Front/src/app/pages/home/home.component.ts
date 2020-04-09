@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
   }
 
   onChange(evt){
-    console.log(evt);
     if(evt === true){
       this.show1 = false;
       this.show2 = true;
