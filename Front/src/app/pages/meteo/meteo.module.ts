@@ -10,7 +10,6 @@ import { GraphicComponent } from 'src/app/components/graphic/graphic.component';
 import { ChartsModule } from 'ng2-charts';
 import { GraphicLineMultiComponent } from 'src/app/components/graphic-line-multi/graphic-line-multi.component';
 import { WindGraphComponent } from 'src/app/components/wind-graph/wind-graph.component';
-import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -21,13 +20,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     WaterInfoComponent,
     GraphicPieComponent,
     GraphicComponent,
-    GraphicLineMultiComponent,
-  ],
-  imports: [
-    CommonModule,
-    MeteoRoutingModule,
-    ChartsModule,
-    NgxLoadingModule.forRoot({}),
-  ],
-})
+    GraphicLineMultiComponent
+    ],
+  imports: [CommonModule, MeteoRoutingModule, ChartsModule]
+  })
 export class MeteoModule {}
