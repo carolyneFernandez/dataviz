@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { PrevisionService } from "../services/prevision.service";
-import { IconService } from "../services/icon.service";
+import { PrevisionService } from "../../services/prevision.service";
+import { IconService } from "../../services/icon.service";
 
 @Component({
   selector: "following-weather",
@@ -50,7 +50,7 @@ export class FollowingWeatherComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.city = this.route.snapshot.paramMap.get("idcity");
+    this.city = this.route.snapshot.paramMap.get("nameCity");
 
     this.prevService.getFollowingDays(this.city).subscribe((data) => {
       this.followOne.date = data[1].dateObj;

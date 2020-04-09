@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import * as L from "leaflet";
-import { PrevisionService } from "../services/prevision.service";
-declare var require: any;
+import { PrevisionService } from "../../services/prevision.service";
+
 @Component({
   selector: "map-city",
   templateUrl: "./map-city.component.html",
@@ -19,7 +19,7 @@ export class MapCityComponent implements OnInit {
   createMap() {
     this.prevService.getCities().subscribe((data) => {
       var citiesjson = data;
-      console.log(citiesjson);
+
       const zoomLevel = 7;
       this.map = L.map("mapid", {
         center: [48.8566969, 2.3514616],

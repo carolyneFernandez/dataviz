@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-
-const basicUrl = "http://localhost:3000";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -10,69 +8,72 @@ const basicUrl = "http://localhost:3000";
 export class PrevisionService {
   constructor(private http: HttpClient) {}
 
-  /* Return table of following days with weather and temperature for one city */
+  /**
+   * Returns table of following days with weather and temperature for the city
+   **/
   getFollowingDays(city) {
-    return this.http.get(`${basicUrl}/api/temperature/forecast/${city}`);
+    return this.http.get(
+      `${environment.basicUrl}/api/temperature/forecast/${city}`
+    );
   }
-  /* Return table of cities and its temperature */
+
+  /**
+   *Returns table of cities and its temperature
+   **/
   getCitiesAndTemperatures() {
-    return this.http.get(`${basicUrl}/api/temperature/`);
+    return this.http.get(`${environment.basicUrl}/api/temperature/`);
   }
-
-  /* Return wind for one city */
+  /**
+   *Returns wind for a city
+   **/
   getWindForOneCity(city) {
-    return this.http.get(`${basicUrl}/api/wind/forecast/${city}`);
+    return this.http.get(`${environment.basicUrl}/api/wind/forecast/${city}`);
   }
-
-  /* Return name and precipitations for unique city */
+  /**
+   *Returns precipitations for thae city
+   **/
   getPrecipitationsForOneCity(city) {
-    return this.http.get(`${basicUrl}/api/precipitation/forecast/${city}`);
-    //metodo para obtener los datos del api en rails
-    /* public get_articles(){
-    return this.http.get(this.baseUrl.map(reponse => {reponse.json(); console.log(reponse)}));
-  }*/
-    //  return this.http.get( this.baseUrl.map(Response =>json())
-    //  return this.http.get( this.baseUrl.map(Response =>json())
-    //)
+    return this.http.get(
+      `${environment.basicUrl}/api/precipitation/forecast/${city}`
+    );
   }
-
   /**
-   * Récupère  la liste des cours d'eau étudié pour une ville.
-   */
+   *Returns the list of studied rivers around a city
+   **/
   getWatersList(city): Promise<any> {
-    return this.http.get("http://localhost:3000/api/water/" + city).toPromise();
-  }
-
-  /**
-   * Récupère  les infos de la qualité de l'eau pour une station de prélèvement
-   */
-  getWaterInfos(city, stationCode): Promise<any> {
     return this.http
-      .get("http://localhost:3000/api/water/" + city + "/" + stationCode)
+      .get(`${environment.basicUrl}/api/water/` + city)
       .toPromise();
   }
 
-  getTemperatureForOneCity(city) {
-    return this.http.get(`http://localhost:3000/api/temperature/Lyon`);
+  /**
+   * Return water quality info for a sampling station
+   */
+  getWaterInfos(city, stationCode): Promise<any> {
+    return this.http
+      .get(`${environment.basicUrl}/api/water/` + city + "/" + stationCode)
+      .toPromise();
   }
-
-  /* Return table of temperature find cities */
-  getTemperaturePrevesion(city) {
-    return this.http.get(`${basicUrl}/api/temperature/forecast/${city}`);
+  /**
+   *
+   *Returns temperature for a city
+   **/
+  getTemperatureForOneCity(city) {
+    return this.http.get(`${environment.basicUrl}/api/temperature/${city}`);
   }
 
   /* Return table of cloud cover cities */
-  getCouvertureNuageuse(city) {
-    return this.http.get(`${basicUrl}/api/cloud/forecast/${city}`);
+  getCloudCover(city) {
+    return this.http.get(`${environment.basicUrl}/api/cloud/forecast/${city}`);
   }
 
-  /* Return table of following data  for one city */
+  /* Return table of following data for one city */
   getAllDataDays(city) {
-    return this.http.get(`${basicUrl}/api/data/forecast/${city}`);
+    return this.http.get(`${environment.basicUrl}/api/data/forecast/${city}`);
   }
 
   /* Return cities */
   getCities() {
-    return this.http.get(`${basicUrl}/api/city`);
+    return this.http.get(`${environment.basicUrl}/api/city`);
   }
 }

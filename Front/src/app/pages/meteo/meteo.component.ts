@@ -1,7 +1,5 @@
 import { ActivatedRoute, Router } from "@angular/router";
-import { Component, OnInit, ElementRef } from "@angular/core";
-import { ChartsModule } from "ng2-charts";
-import * as Chart from "chart.js";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-meteo",
@@ -11,14 +9,10 @@ import * as Chart from "chart.js";
 export class MeteoComponent implements OnInit {
   public city: any;
   loading = true;
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private elementRef: ElementRef
-  ) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.city = this.route.snapshot.paramMap.get("idcity");
+    this.city = this.route.snapshot.paramMap.get("nameCity");
   }
 
   onClick() {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import * as Chart from "chart.js";
-import { PrevisionService } from "../services/prevision.service";
+import { PrevisionService } from "../../services/prevision.service";
 
 @Component({
   selector: "wind-graph",
@@ -18,46 +18,43 @@ export class WindGraphComponent implements OnInit {
     private route: ActivatedRoute,
     private elementRef: ElementRef,
     private pService: PrevisionService
-  ) {
-    this.city = this.route.snapshot.paramMap.get("idcity");
-    console.log(this.city);
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.city = this.route.snapshot.paramMap.get("idcity");
+    this.city = this.route.snapshot.paramMap.get("nameCity");
     this.initChart(this.city);
   }
 
   initChart(city) {
-    let ventViolent = 0;
-    let ventTempetueux = 0;
-    let pluie = 0;
-    let canicule = 0;
-    let neige = 0;
+    let violentWind = 0;
+    let stormyWind = 0;
+    let rain = 0;
+    let heatWave = 0;
+    let snow = 0;
     this.pService.getWindForOneCity(city).subscribe((data) => {
       this.wind = data;
       this.wind.forEach((element) => {
         if (+element.Wind.speed > 40 && +element.Wind.speed < 60) {
-          ventViolent++;
+          violentWind++;
         }
         if (+element.Wind.speed > 60) {
-          ventTempetueux++;
+          stormyWind++;
         }
       });
       this.pService.getTemperatureForOneCity(city).subscribe((data) => {
         this.temp = data;
         this.temp.forEach((element) => {
           if (+element.Temperature.value_max > 30) {
-            canicule++;
+            heatWave++;
           }
         });
         this.pService.getPrecipitationsForOneCity(city).subscribe((data) => {
           this.precipitation = data;
           this.precipitation.forEach((element) => {
             if (element.Precipitation.mode == "rain") {
-              pluie++;
+              rain++;
             } else if (element.Precipitation.mode == "snow") {
-              neige++;
+              snow++;
             }
           });
           const htmlRef = this.elementRef.nativeElement.querySelector(
@@ -70,7 +67,7 @@ export class WindGraphComponent implements OnInit {
                 "Vent violent",
                 "Vent tempétueux",
                 "Pluie",
-                "Canicule",
+                "Forte chaleur",
                 "Neige",
               ],
               datasets: [
@@ -83,7 +80,7 @@ export class WindGraphComponent implements OnInit {
                     "#e8c3b9",
                     "#c45850",
                   ],
-                  data: [ventViolent, ventTempetueux, pluie, canicule, neige],
+                  data: [violentWind, stormyWind, rain, heatWave, snow],
                 },
               ],
             },

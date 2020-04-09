@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Chart, ChartOptions, ChartType } from "chart.js";
+import { ChartOptions, ChartType } from "chart.js";
 
 import { ChartDataSets } from "chart.js";
-import { Color, Label } from "ng2-charts";
-import { PrevisionService } from "../services/prevision.service";
+import { Label } from "ng2-charts";
+import { PrevisionService } from "../../services/prevision.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -12,9 +12,9 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./graphic.component.scss"],
 })
 export class GraphicComponent implements OnInit {
-  public dataCitieTime: any = [];
-  public dataCitieTimeMin: any = [];
-  public dataCitieTimeMax: any = [];
+  public dataCitiesTime: any = [];
+  public dataCitiesTimeMin: any = [];
+  public dataCitiesTimeMax: any = [];
 
   public dateTime: any = [];
 
@@ -53,15 +53,15 @@ export class GraphicComponent implements OnInit {
     private prevService: PrevisionService,
     private route: ActivatedRoute
   ) {
-    this.city = this.route.snapshot.paramMap.get("idcity");
+    this.city = this.route.snapshot.paramMap.get("nameCity");
   }
 
   ngOnInit() {
     this.prevService.getFollowingDays(this.city).subscribe((data) => {
       for (let i in data) {
-        this.dataCitieTime.push(data[i]["Temperature"].value);
-        this.dataCitieTimeMin.push(data[i]["Temperature"].value_min);
-        this.dataCitieTimeMax.push(data[i]["Temperature"].value_max);
+        this.dataCitiesTime.push(data[i]["Temperature"].value);
+        this.dataCitiesTimeMin.push(data[i]["Temperature"].value_min);
+        this.dataCitiesTimeMax.push(data[i]["Temperature"].value_max);
 
         let dateTemp = data[i].dateObj.split("T")[0];
         let date = new Date(dateTemp);
@@ -72,11 +72,11 @@ export class GraphicComponent implements OnInit {
         {
           label: "Température minimale",
           data: [
-            this.dataCitieTimeMin[0],
-            this.dataCitieTimeMin[1],
-            this.dataCitieTimeMin[2],
-            this.dataCitieTimeMin[3],
-            this.dataCitieTimeMin[4],
+            this.dataCitiesTimeMin[0],
+            this.dataCitiesTimeMin[1],
+            this.dataCitiesTimeMin[2],
+            this.dataCitiesTimeMin[3],
+            this.dataCitiesTimeMin[4],
           ],
           backgroundColor: [
             "rgba(219, 10, 91, 1)",
@@ -97,11 +97,11 @@ export class GraphicComponent implements OnInit {
         {
           label: "Prévisions",
           data: [
-            this.dataCitieTime[0],
-            this.dataCitieTime[1],
-            this.dataCitieTime[2],
-            this.dataCitieTime[3],
-            this.dataCitieTime[4],
+            this.dataCitiesTime[0],
+            this.dataCitiesTime[1],
+            this.dataCitiesTime[2],
+            this.dataCitiesTime[3],
+            this.dataCitiesTime[4],
           ],
           backgroundColor: [
             "rgba(34, 167, 240, 1)",
@@ -122,11 +122,11 @@ export class GraphicComponent implements OnInit {
         {
           label: "Température maximale",
           data: [
-            this.dataCitieTimeMax[0],
-            this.dataCitieTimeMax[1],
-            this.dataCitieTimeMax[2],
-            this.dataCitieTimeMax[3],
-            this.dataCitieTimeMax[4],
+            this.dataCitiesTimeMax[0],
+            this.dataCitiesTimeMax[1],
+            this.dataCitiesTimeMax[2],
+            this.dataCitiesTimeMax[3],
+            this.dataCitiesTimeMax[4],
           ],
           backgroundColor: [
             "rgba(247, 202, 24, 1)",

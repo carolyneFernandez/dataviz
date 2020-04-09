@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { PrevisionService } from "../services/prevision.service";
-import { IconService } from "../services/icon.service";
+import { PrevisionService } from "../../services/prevision.service";
+import { IconService } from "../../services/icon.service";
 
 @Component({
   selector: "current-weather",
@@ -34,7 +34,7 @@ export class CurrentWeatherComponent implements OnInit {
   iconPressure: string;
 
   ngOnInit() {
-    this.city = this.route.snapshot.paramMap.get("idcity");
+    this.city = this.route.snapshot.paramMap.get("nameCity");
     this.prevService.getTemperatureForOneCity(this.city).subscribe((data) => {
       this.weather =
         data[0].weather[0].toUpperCase() + data[0].weather.slice(1);

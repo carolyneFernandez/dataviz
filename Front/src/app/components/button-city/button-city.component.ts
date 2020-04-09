@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Router } from "@angular/router";
-import { PrevisionService } from "../services/prevision.service";
 
 @Component({
   selector: "button-city",
@@ -10,10 +9,7 @@ import { PrevisionService } from "../services/prevision.service";
 export class ButtonCityComponent implements OnInit {
   @Input() city: any;
 
-  constructor(
-    private router: Router,
-    private previsionService: PrevisionService
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 

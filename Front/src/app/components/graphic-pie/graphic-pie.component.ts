@@ -1,13 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ChartType, ChartOptions } from "chart.js";
-import {
-  SingleDataSet,
-  Label,
-  monkeyPatchChartJsLegend,
-  monkeyPatchChartJsTooltip,
-} from "ng2-charts";
 import * as Chart from "chart.js";
-import { PrevisionService } from "../services/prevision.service";
+import { PrevisionService } from "../../services/prevision.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -28,13 +21,13 @@ export class GraphicPieComponent implements OnInit {
   private covered = 0;
   private clearSky = 0;
 
-  public datos;
+  public data;
   private city;
   constructor(
     private previsionService: PrevisionService,
     private route: ActivatedRoute
   ) {
-    this.city = this.route.snapshot.paramMap.get("idcity");
+    this.city = this.route.snapshot.paramMap.get("nameCity");
   }
 
   ngOnInit(): void {
@@ -62,7 +55,7 @@ export class GraphicPieComponent implements OnInit {
           this.clearSky++;
         }
       }
-      this.datos = [
+      this.data = [
         this.rainModerate,
         this.cloudyPartly,
         this.cloudyPartly2,
@@ -87,13 +80,13 @@ export class GraphicPieComponent implements OnInit {
           datasets: [
             {
               data: [
-                this.datos[0],
-                this.datos[1],
-                this.datos[2],
-                this.datos[3],
-                this.datos[4],
-                this.datos[5],
-                this.datos[6],
+                this.data[0],
+                this.data[1],
+                this.data[2],
+                this.data[3],
+                this.data[4],
+                this.data[5],
+                this.data[6],
               ],
               backgroundColor: [
                 "rgba(255, 99, 132, 1)",

@@ -11,26 +11,26 @@
   >
   </canvas>
   <fieldset>
-    <label for="pression">
+    <label for="pressure">
       <input
         type="radio"
         (change)="toggleEditable($event)"
         name="type"
-        id="pression"
-        value="pression"
+        id="pressure"
+        value="pressure"
       />
-      Pression</label
-    >
-    <label for="humydite">
+      Pression
+    </label>
+    <label for="humidity">
       <input
         type="radio"
         (change)="toggleEditable($event)"
         name="type"
-        id="humydite"
-        value="humydite"
+        id="humidity"
+        value="humidity"
       />
-      Humidité</label
-    >
+      Humidité
+    </label>
     <label for="temperature">
       <input
         type="radio"
@@ -39,8 +39,8 @@
         id="temperature"
         value="temperature"
       />
-      Température</label
-    >
+      Température
+    </label>
     <label for="cloud">
       <input
         type="radio"
@@ -49,8 +49,8 @@
         id="cloud"
         value="cloud"
       />
-      Nuage</label
-    >
+      Nuage
+    </label>
     <label for="precipitation">
       <input
         type="radio"
@@ -59,8 +59,8 @@
         id="precipitation"
         value="precipitation"
       />
-      Précipitation</label
-    >
+      Précipitation
+    </label>
     <label for="vent">
       <input
         type="radio"
@@ -69,14 +69,13 @@
         id="vent"
         value="wind"
       />
-      Vent</label
-    >
+      Vent
+    </label>
   </fieldset>
 </div>
 
 <script>
   function adddata() {
-    //this.datasets.data.datasets[0].data[7] = 60;
     this.labels = "Newly Added";
     this.datasets.update();
   }

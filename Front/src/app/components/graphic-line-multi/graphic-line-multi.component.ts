@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Chart, ChartOptions, ChartType } from "chart.js";
+import { Component, OnInit } from "@angular/core";
+import { ChartOptions, ChartType } from "chart.js";
 
 import { ChartDataSets } from "chart.js";
-import { Color, Label } from "ng2-charts";
-import { PrevisionService } from "../services/prevision.service";
+import { Label } from "ng2-charts";
+import { PrevisionService } from "../../services/prevision.service";
 import { ActivatedRoute } from "@angular/router";
+
 @Component({
   selector: "app-graphic-line-multi",
   templateUrl: "./graphic-line-multi.component.html",
@@ -12,9 +13,9 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class GraphicLineMultiComponent implements OnInit {
   public contentEditable;
-  public valuerAPi;
+  public valueAPI;
 
-  public dataCitieTime: any = [];
+  public dataCitiesTime: any = [];
 
   public dateTime: any = [];
 
@@ -34,61 +35,59 @@ export class GraphicLineMultiComponent implements OnInit {
     private prevService: PrevisionService,
     private route: ActivatedRoute
   ) {
-    this.city = this.route.snapshot.paramMap.get("idcity");
+    this.city = this.route.snapshot.paramMap.get("nameCity");
     this.datasets = [
       {
         label: this.labelType,
         data: [],
-
         borderColor: this.color,
         backgroundColor: [this.backgroundLine],
       },
     ];
-
     this.labels = [];
   }
 
   toggleEditable(event) {
-    this.dataCitieTime = [];
+    this.dataCitiesTime = [];
 
     if (event.target.checked) {
       this.contentEditable = true;
-      this.valuerAPi = event.target.value;
+      this.valueAPI = event.target.value;
     }
 
     this.prevService.getAllDataDays(this.city).subscribe((data) => {
       for (let i in data) {
-        if (this.valuerAPi == "humydite") {
-          this.dataCitieTime.push(data[i].humidity);
+        if (this.valueAPI == "humidity") {
+          this.dataCitiesTime.push(data[i].humidity);
           this.color = "red";
           this.backgroundLine = "rgba(240, 52, 52, 0.5) ";
           this.labelType = "Humidité";
-        } else if (this.valuerAPi == "temperature") {
-          this.dataCitieTime.push(data[i]["Temperature"].value);
+        } else if (this.valueAPI == "temperature") {
+          this.dataCitiesTime.push(data[i]["Temperature"].value);
           this.color = "yellow";
           this.backgroundLine = "rgba(250, 216, 89, 0.5)";
           this.labelType = "Température";
-        } else if (this.valuerAPi == "pression") {
-          this.dataCitieTime.push(data[i].pression);
+        } else if (this.valueAPI == "pressure") {
+          this.dataCitiesTime.push(data[i].pression);
           this.color = "blue";
           this.backgroundLine = "rgba(31, 58, 147, 0.5) ";
           this.labelType = "Pression";
-        } else if (this.valuerAPi == "cloud") {
-          this.dataCitieTime.push(data[i]["Cloud"].cover);
+        } else if (this.valueAPI == "cloud") {
+          this.dataCitiesTime.push(data[i]["Cloud"].cover);
           this.color = "green";
           this.backgroundLine = "rgba(135, 211, 124,0.8)";
           this.labelType = "Nuage";
-        } else if (this.valuerAPi == "precipitation") {
+        } else if (this.valueAPI == "precipitation") {
           if (data[i]["Precipitation"].value !== null) {
-            this.dataCitieTime.push(data[i]["Precipitation"].value);
+            this.dataCitiesTime.push(data[i]["Precipitation"].value);
           } else {
-            this.dataCitieTime.push(0);
+            this.dataCitiesTime.push(0);
           }
           this.color = "rgba(118, 93, 105, 1)";
           this.backgroundLine = "rgba(118, 93, 105, 0.5)";
           this.labelType = "Précipitation";
-        } else if (this.valuerAPi == "wind") {
-          this.dataCitieTime.push(data[i]["Wind"].speed);
+        } else if (this.valueAPI == "wind") {
+          this.dataCitiesTime.push(data[i]["Wind"].speed);
           this.color = "rgb(255,165,0)";
           this.backgroundLine = "rgb(255,165,0,0.5)";
           this.labelType = "Vent";
@@ -104,13 +103,12 @@ export class GraphicLineMultiComponent implements OnInit {
         {
           label: this.labelType,
           data: [
-            this.dataCitieTime[0],
-            this.dataCitieTime[1],
-            this.dataCitieTime[2],
-            this.dataCitieTime[3],
-            this.dataCitieTime[4],
+            this.dataCitiesTime[0],
+            this.dataCitiesTime[1],
+            this.dataCitiesTime[2],
+            this.dataCitiesTime[3],
+            this.dataCitiesTime[4],
           ],
-
           borderColor: this.color,
           backgroundColor: [this.backgroundLine],
         },
