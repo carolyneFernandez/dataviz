@@ -1,4 +1,6 @@
-<div style="width: 30%; margin: auto;">
+<ui-switch (change)="onChange($event)" color="white" switchColor="white"></ui-switch>
+
+<div style="width: 30%; margin: auto;" *ngIf="show1">
   <input
     type="search"
     class="form-control"
@@ -7,12 +9,11 @@
   />
 </div>
 
-<ui-switch></ui-switch>
-<div id="list-button" class="container">
+<div id="list-button" class="container" *ngIf="show1">
   <button-city
     [city]="cities"
     *ngFor="let cities of cities | filter: searchText"
   ></button-city>
 </div>
 
-<map-city></map-city>
+<map-city *ngIf="show2"></map-city>
