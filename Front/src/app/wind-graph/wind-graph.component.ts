@@ -85,6 +85,6 @@ export class WindGraphComponent implements OnInit {
           }
         );
       });
-    })
+    }
   }
-}
+
