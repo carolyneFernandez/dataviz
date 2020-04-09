@@ -13,7 +13,7 @@ export class ButtonCityComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onClick(navCity) {
+  onClick(navCity: String) {
     this.router.navigate([`meteo/${navCity}`]);
   }
 }

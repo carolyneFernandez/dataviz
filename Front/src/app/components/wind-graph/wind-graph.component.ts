@@ -9,7 +9,7 @@ import { PrevisionService } from "../../services/prevision.service";
   styleUrls: ["./wind-graph.component.scss"],
 })
 export class WindGraphComponent implements OnInit {
-  public city: any;
+  public city: String;
   public wind: any;
   public temp: any;
   public precipitation: any;
@@ -25,7 +25,7 @@ export class WindGraphComponent implements OnInit {
     this.initChart(this.city);
   }
 
-  initChart(city) {
+  initChart(city: String) {
     let violentWind = 0;
     let stormyWind = 0;
     let rain = 0;
@@ -51,16 +51,16 @@ export class WindGraphComponent implements OnInit {
         this.pService.getPrecipitationsForOneCity(city).subscribe((data) => {
           this.precipitation = data;
           this.precipitation.forEach((element) => {
-            if (element.Precipitation.mode == "rain") {
+            if (element.Precipitation.mode === "rain") {
               rain++;
-            } else if (element.Precipitation.mode == "snow") {
+            } else if (element.Precipitation.mode === "snow") {
               snow++;
             }
           });
           const htmlRef = this.elementRef.nativeElement.querySelector(
             `#myChart`
           );
-          const myBarChart = new Chart(htmlRef, {
+          new Chart(htmlRef, {
             type: "bar",
             data: {
               labels: [

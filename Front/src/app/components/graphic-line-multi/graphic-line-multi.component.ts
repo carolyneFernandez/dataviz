@@ -12,8 +12,8 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./graphic-line-multi.component.scss"],
 })
 export class GraphicLineMultiComponent implements OnInit {
-  public contentEditable;
-  public valueAPI;
+  public contentEditable: boolean;
+  public valueAPI: String;
 
   public dataCitiesTime: any = [];
 
@@ -57,27 +57,27 @@ export class GraphicLineMultiComponent implements OnInit {
 
     this.prevService.getAllDataDays(this.city).subscribe((data) => {
       for (let i in data) {
-        if (this.valueAPI == "humidity") {
+        if (this.valueAPI === "humidity") {
           this.dataCitiesTime.push(data[i].humidity);
           this.color = "red";
           this.backgroundLine = "rgba(240, 52, 52, 0.5) ";
           this.labelType = "Humidité";
-        } else if (this.valueAPI == "temperature") {
+        } else if (this.valueAPI === "temperature") {
           this.dataCitiesTime.push(data[i]["Temperature"].value);
           this.color = "yellow";
           this.backgroundLine = "rgba(250, 216, 89, 0.5)";
           this.labelType = "Température";
-        } else if (this.valueAPI == "pressure") {
+        } else if (this.valueAPI === "pressure") {
           this.dataCitiesTime.push(data[i].pression);
           this.color = "blue";
           this.backgroundLine = "rgba(31, 58, 147, 0.5) ";
           this.labelType = "Pression";
-        } else if (this.valueAPI == "cloud") {
+        } else if (this.valueAPI === "cloud") {
           this.dataCitiesTime.push(data[i]["Cloud"].cover);
           this.color = "green";
           this.backgroundLine = "rgba(135, 211, 124,0.8)";
           this.labelType = "Nuage";
-        } else if (this.valueAPI == "precipitation") {
+        } else if (this.valueAPI === "precipitation") {
           if (data[i]["Precipitation"].value !== null) {
             this.dataCitiesTime.push(data[i]["Precipitation"].value);
           } else {
@@ -86,7 +86,7 @@ export class GraphicLineMultiComponent implements OnInit {
           this.color = "rgba(118, 93, 105, 1)";
           this.backgroundLine = "rgba(118, 93, 105, 0.5)";
           this.labelType = "Précipitation";
-        } else if (this.valueAPI == "wind") {
+        } else if (this.valueAPI === "wind") {
           this.dataCitiesTime.push(data[i]["Wind"].speed);
           this.color = "rgb(255,165,0)";
           this.backgroundLine = "rgb(255,165,0,0.5)";

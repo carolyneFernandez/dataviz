@@ -65,7 +65,7 @@ export class CurrentWeatherComponent implements OnInit {
     });
   }
 
-  setWindNameInFrench(engName) {
+  setWindNameInFrench(engName: String) {
     switch (engName) {
       case "Gentle Breeze":
         return "Petite brise";
@@ -84,7 +84,7 @@ export class CurrentWeatherComponent implements OnInit {
     }
   }
 
-  setWindDirectionInFrench(engName) {
+  setWindDirectionInFrench(engName: string) {
     switch (engName) {
       //South
       case "South":

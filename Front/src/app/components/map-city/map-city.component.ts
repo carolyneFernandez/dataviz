@@ -18,7 +18,7 @@ export class MapCityComponent implements OnInit {
 
   createMap() {
     this.prevService.getCities().subscribe((data) => {
-      var citiesjson = data;
+      let citiesjson = data;
 
       const zoomLevel = 7;
       this.map = L.map("mapid", {
@@ -40,8 +40,8 @@ export class MapCityComponent implements OnInit {
       );
       mainLayer.addTo(this.map);
 
-      var marker;
-      for (var i = 0; i < 98; i++) {
+      let marker;
+      for (let i = 0; i < 98; i++) {
         marker = L.marker([citiesjson[i].lat, citiesjson[i].lon]).bindPopup(
           `<a href='meteo/${citiesjson[i].name}'>${citiesjson[i].name} (département de ${citiesjson[i].department})</a>`
         );

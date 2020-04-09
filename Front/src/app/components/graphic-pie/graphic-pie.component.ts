@@ -21,8 +21,8 @@ export class GraphicPieComponent implements OnInit {
   private covered = 0;
   private clearSky = 0;
 
-  public data;
-  private city;
+  public dataGraphic = [];
+  private city: String;
   constructor(
     private previsionService: PrevisionService,
     private route: ActivatedRoute
@@ -33,29 +33,29 @@ export class GraphicPieComponent implements OnInit {
   ngOnInit(): void {
     this.previsionService.getFollowingDays(this.city).subscribe((data) => {
       for (let i in data) {
-        if (data[i].weather == "pluie modérée") {
+        if ((data[i].weather = "pluie modérée")) {
           this.rainModerate++;
         }
-        if (data[i].weather == "peu nuageux") {
+        if (data[i].weather === "peu nuageux") {
           this.cloudyPartly++;
         }
-        if (data[i].weather == "partiellement nuageux") {
+        if (data[i].weather === "partiellement nuageux") {
           this.cloudyPartly2++;
         }
-        if (data[i].weather == "nuageux") {
+        if (data[i].weather === "nuageux") {
           this.cloudy++;
         }
-        if (data[i].weather == "légère pluie") {
+        if (data[i].weather === "légère pluie") {
           this.lightRain++;
         }
-        if (data[i].weather == "couvert") {
+        if (data[i].weather === "couvert") {
           this.covered++;
         }
-        if (data[i].weather == "ciel dégagé") {
+        if (data[i].weather === "ciel dégagé") {
           this.clearSky++;
         }
       }
-      this.data = [
+      this.dataGraphic = [
         this.rainModerate,
         this.cloudyPartly,
         this.cloudyPartly2,
@@ -65,7 +65,7 @@ export class GraphicPieComponent implements OnInit {
         this.clearSky,
       ];
 
-      let myChart = new Chart(this.ctx, {
+      new Chart(this.ctx, {
         type: "pie",
         data: {
           labels: [
@@ -80,13 +80,13 @@ export class GraphicPieComponent implements OnInit {
           datasets: [
             {
               data: [
-                this.data[0],
-                this.data[1],
-                this.data[2],
-                this.data[3],
-                this.data[4],
-                this.data[5],
-                this.data[6],
+                this.dataGraphic[0],
+                this.dataGraphic[1],
+                this.dataGraphic[2],
+                this.dataGraphic[3],
+                this.dataGraphic[4],
+                this.dataGraphic[5],
+                this.dataGraphic[6],
               ],
               backgroundColor: [
                 "rgba(255, 99, 132, 1)",

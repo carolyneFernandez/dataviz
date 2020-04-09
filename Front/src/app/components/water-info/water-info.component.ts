@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { PrevisionService } from "src/app/services/prevision.service";
 
 @Component({
@@ -28,8 +28,7 @@ export class WaterInfoComponent implements OnInit {
     this.currentStation = wording;
     this.previsionService
       .getWaterInfos(this.cityName, code_station)
-      .then((result) => (this.stationInfos = result[result.length - 1]))
-      .then(() => console.log(this.stationInfos));
+      .then((result) => (this.stationInfos = result[result.length - 1]));
   }
 
   ngOnInit() {}
