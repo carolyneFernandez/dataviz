@@ -70,7 +70,7 @@ export class GraphicPieComponent implements OnInit {
         let myChart = new Chart(this.ctx, {
           type: 'pie',
           data: {
-              labels: ["pluie modérée", "peu nuageux", "partiellement nuageux","nuageux", "légère pluie", "couvert","ciel dégagé"],
+              labels: ["Pluie Modérée", "Peu Nuageux", "Partiellement Nuageux","Nuageux", "Légère Pluie", "Couvert","Ciel Dégagé"],
               datasets: [{
                   data: [this.datos[0],this.datos[1],this.datos[2],this.datos[3],this.datos[4],this.datos[5],this.datos[6]],
                   backgroundColor: [

@@ -1,0 +1,48 @@
+
+<div class="card p-4"  *ngIf="datasets">
+    <canvas baseChart [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="type">
+    </canvas>
+
+  
+</div>
+<fieldset>
+      <div>
+        <input type="radio" (change)="toggleEditable($event)" name="type" id="pression" value="pression">
+        <label for="pression">Pression</label>
+      </div>
+      <div>
+        <input type="radio" (change)="toggleEditable($event)" name="type" id="humydite" value="humydite">
+        <label for="humydite">Humidité</label>
+
+      </div>
+      <div>
+        <input type="radio" (change)="toggleEditable($event)" name="type" id="temperature" value="temperature">
+        <label for="temperature">Température</label>
+
+      </div>
+      <div>
+        <input type="radio" (change)="toggleEditable($event)" name="type" id="cloud" value="cloud">
+        <label for="cloud">Nuage</label>
+
+      </div>
+
+      <div>
+        <input type="radio" (change)="toggleEditable($event)" name="type" id="precipitation" value="precipitation">
+        <label for="precipitation">Précipitation</label>
+
+      </div>
+      <div>
+        <input type="radio" (change)="toggleEditable($event)" name="type" id="vent" value="wind">
+        <label for="vent">Vent</label>
+
+      </div>
+      
+</fieldset>
+<script>
+
+function adddata(){
+	//this.datasets.data.datasets[0].data[7] = 60;
+  this.labels  = "Newly Added";
+  this.datasets.update();
+}
+</script>
