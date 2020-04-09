@@ -1,19 +1,12 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <ui-switch (change)="onChange($event)" color="white" switchColor="white"></ui-switch>
 
-<div style="width: 30%; margin: auto;" *ngIf="show1">
-  <input
-    type="search"
-    class="form-control"
-    placeholder="Rechercher votre ville ici"
-    [(ngModel)]="searchText"
-  />
+<div style="width: 30%; margin: auto;" *ngIf="showList">
+  <input type="search" class="form-control" placeholder="Rechercher votre ville ici" [(ngModel)]="searchText" />
 </div>
 
-<div id="list-button" class="container" *ngIf="show1">
-  <button-city
-    [city]="cities"
-    *ngFor="let cities of cities | filter: searchText"
-  ></button-city>
+<div id="list-button" class="container" *ngIf="showList">
+  <button-city [city]="cities" *ngFor="let cities of cities | filter: searchText"></button-city>
 </div>
 
-<map-city *ngIf="show2"></map-city>
+<map-city *ngIf="showMap"></map-city>
