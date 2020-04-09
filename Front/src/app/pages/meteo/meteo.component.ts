@@ -10,6 +10,7 @@ import * as Chart from "chart.js";
 })
 export class MeteoComponent implements OnInit {
   public city: any;
+  loading = true;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
