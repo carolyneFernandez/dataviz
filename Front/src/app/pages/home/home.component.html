@@ -1,15 +1,18 @@
-<div style="width: 30%; margin: auto;">
-  <input
-    type="search"
-    class="form-control"
-    placeholder="Rechercher votre ville ici"
-    [(ngModel)]="searchText"
-  />
-</div>
+<ngx-loading [show]="loading"></ngx-loading>
+<div class="container">
+  <div class="ui-wrapper">
+    <img alt="image pression" class="img-item" src="../assets/images/list.svg" />
+    <ui-switch (change)="onChange($event)" color="white" switchColor="white"></ui-switch>
+    <img alt="image pression" class="img-item" src="../assets/images/map.svg" />
+  </div>
 
-<div id="list-button" class="container">
-  <button-city
-    [city]="cities"
-    *ngFor="let cities of cities | filter: searchText"
-  ></button-city>
+  <div style="width: 30%; margin: auto;" *ngIf="showList">
+    <input type="search" class="form-control" placeholder="Rechercher votre ville ici" [(ngModel)]="searchText" />
+  </div>
+
+  <div id="list-button" class="container" *ngIf="showList">
+    <button-city [city]="cities" *ngFor="let cities of cities | filter: searchText"></button-city>
+  </div>
+  
+  <map-city *ngIf="showMap"></map-city>
 </div>
