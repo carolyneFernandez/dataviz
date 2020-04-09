@@ -18,8 +18,11 @@ export class WaterInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private previsionService: PrevisionService
   ) {
-    this.cityWatersList = this.router.getCurrentNavigation().extras.state.myCityInfos;
+    // this.cityWatersList = this.router.getCurrentNavigation().extras.state.myCityInfos;
     this.cityName = this.route.snapshot.paramMap.get("idcity");
+    this.previsionService.getWatersList(this.cityName).then(data => {
+      this.cityWatersList = data;
+    });
   }
 
   initChart(code_station: String, libelle: String) {

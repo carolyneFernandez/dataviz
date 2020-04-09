@@ -17,8 +17,6 @@ export class ButtonCityComponent implements OnInit {
   }
 
   onClick(navCity) {
-    //Utilisé pour le TEST
-    this.previsionService.getWatersList(navCity)
-      .then(result => this.router.navigate([`meteo/${navCity}`], { state: { myCityInfos: result, cityName:navCity } }));
+    this.router.navigate([`meteo/${navCity}`]);
   }
 }
