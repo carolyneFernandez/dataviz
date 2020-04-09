@@ -13,6 +13,7 @@ var temperatures = require('./routes/temperature');
 var precipitations = require('./routes/precipitation');
 var clouds = require('./routes/cloud');
 var winds = require('./routes/wind');
+var cities = require('./routes/city');
 
 /* For swagger */
 const jsyaml = require('js-yaml');
@@ -63,6 +64,7 @@ app.use('/api/precipitation', precipitations);
 app.use('/api/cloud', clouds);
 app.use('/api/wind', winds);
 app.use('/api/water', waters);
+app.use('/api/city', cities);
 
 // variable pour toutes les information des villes dans le json
 var cityCode;
@@ -942,7 +944,7 @@ async function readCities() {
     });
 }
 
-//  readCities();
+ // readCities();
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
