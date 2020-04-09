@@ -1,15 +1,10 @@
-.prevision {
+.wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   @media only screen and (max-width: 932px) {
     flex-wrap: wrap;
   }
-}
-
-.container {
-  width: 90%;
-  margin: 20px auto 0 auto;
 }
 
 .fifty-container {
@@ -20,9 +15,23 @@
   }
 }
 
-.title {
-  font-size: 20px;
+.btn {
+  color: #000000;
+  padding: 0;
   margin-bottom: 20px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.title {
+  font-size: 25px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+}
+
+.sub-title {
+  margin: 0 0 20px 0;
 }
 
 .sub-title {

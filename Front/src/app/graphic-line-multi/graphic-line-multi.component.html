@@ -1,48 +1,37 @@
+<div class="card-body p-4" *ngIf="datasets">
+  <div class="card-title">
+    Evolution des données météorologiques sur 5 jours
+  </div>
+  <canvas baseChart [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="type">
+  </canvas>
+  <fieldset>
+    <label for="pression">
+      <input type="radio" (change)="toggleEditable($event)" name="type" id="pression" value="pression">
+      Pression</label>
+    <label for="humydite">
+      <input type="radio" (change)="toggleEditable($event)" name="type" id="humydite" value="humydite">
+      Humidité</label>
+    <label for="temperature">
+      <input type="radio" (change)="toggleEditable($event)" name="type" id="temperature" value="temperature">
+      Température</label>
+    <label for="cloud">
+      <input type="radio" (change)="toggleEditable($event)" name="type" id="cloud" value="cloud">
+      Nuage</label>
+    <label for="precipitation">
+      <input type="radio" (change)="toggleEditable($event)" name="type" id="precipitation" value="precipitation">
+      Précipitation</label>
+    <label for="vent">
+      <input type="radio" (change)="toggleEditable($event)" name="type" id="vent" value="wind">
+      Vent</label>
 
-<div class="card p-4"  *ngIf="datasets">
-    <canvas baseChart [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="type">
-    </canvas>
-
-  
+  </fieldset>
 </div>
-<fieldset>
-      <div>
-        <input type="radio" (change)="toggleEditable($event)" name="type" id="pression" value="pression">
-        <label for="pression">Pression</label>
-      </div>
-      <div>
-        <input type="radio" (change)="toggleEditable($event)" name="type" id="humydite" value="humydite">
-        <label for="humydite">Humidité</label>
 
-      </div>
-      <div>
-        <input type="radio" (change)="toggleEditable($event)" name="type" id="temperature" value="temperature">
-        <label for="temperature">Température</label>
 
-      </div>
-      <div>
-        <input type="radio" (change)="toggleEditable($event)" name="type" id="cloud" value="cloud">
-        <label for="cloud">Nuage</label>
-
-      </div>
-
-      <div>
-        <input type="radio" (change)="toggleEditable($event)" name="type" id="precipitation" value="precipitation">
-        <label for="precipitation">Précipitation</label>
-
-      </div>
-      <div>
-        <input type="radio" (change)="toggleEditable($event)" name="type" id="vent" value="wind">
-        <label for="vent">Vent</label>
-
-      </div>
-      
-</fieldset>
 <script>
-
-function adddata(){
-	//this.datasets.data.datasets[0].data[7] = 60;
-  this.labels  = "Newly Added";
-  this.datasets.update();
-}
+  function adddata() {
+    //this.datasets.data.datasets[0].data[7] = 60;
+    this.labels = "Newly Added";
+    this.datasets.update();
+  }
 </script>
