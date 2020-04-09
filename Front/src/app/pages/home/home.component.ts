@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { PrevisionService } from "src/app/services/prevision.service";
+import { Component, OnInit } from '@angular/core';
+import { PrevisionService } from 'src/app/services/prevision.service';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   cities: any = [];
@@ -18,13 +18,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.previsionService.getCitiesAndTemperatures().subscribe((data) => {
-      for (let i in data) {
+      for (const i in data) {
         this.cities.push(data[i]);
       }
-      let byName = this.cities.slice(0);
-      byName.sort(function (a, b) {
-        let x = a.name.toLowerCase();
-        let y = b.name.toLowerCase();
+      const byName = this.cities.slice(0);
+      byName.sort(function(a: { name: string; }, b: { name: string; }) {
+        const x = a.name.toLowerCase();
+        const y = b.name.toLowerCase();
         return x < y ? -1 : x > y ? 1 : 0;
       });
       this.cities = byName;

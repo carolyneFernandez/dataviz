@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GraphicComponent } from "./graphic.component";
+import { GraphicComponent } from './graphic.component';
 
-describe("GraphicComponent", () => {
+describe('GraphicComponent', () => {
   let component: GraphicComponent;
   let fixture: ComponentFixture<GraphicComponent>;
 
@@ -18,7 +18,7 @@ describe("GraphicComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WindGraphComponent } from "./wind-graph.component";
+import { WindGraphComponent } from './wind-graph.component';
 
-describe("WindGraphComponent", () => {
+describe('WindGraphComponent', () => {
   let component: WindGraphComponent;
   let fixture: ComponentFixture<WindGraphComponent>;
 
@@ -18,7 +18,7 @@ describe("WindGraphComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

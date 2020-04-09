@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "button-city",
-  templateUrl: "./button-city.component.html",
-  styleUrls: ["./button-city.component.scss"],
+  selector: 'button-city',
+  templateUrl: './button-city.component.html',
+  styleUrls: ['./button-city.component.scss'],
 })
 export class ButtonCityComponent implements OnInit {
   @Input() city: any;
@@ -13,7 +13,7 @@ export class ButtonCityComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onClick(navCity: String) {
+  onClick(navCity: string) {
     this.router.navigate([`meteo/${navCity}`]);
   }
 }

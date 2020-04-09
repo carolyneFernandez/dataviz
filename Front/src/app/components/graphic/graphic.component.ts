@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { ChartOptions, ChartType } from "chart.js";
+import { Component, OnInit } from '@angular/core';
+import { ChartOptions, ChartType } from 'chart.js';
 
-import { ChartDataSets } from "chart.js";
-import { Label } from "ng2-charts";
-import { PrevisionService } from "../../services/prevision.service";
-import { ActivatedRoute } from "@angular/router";
+import { ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
+import { PrevisionService } from '../../services/prevision.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: "app-graphic",
-  templateUrl: "./graphic.component.html",
-  styleUrls: ["./graphic.component.scss"],
+  selector: 'app-graphic',
+  templateUrl: './graphic.component.html',
+  styleUrls: ['./graphic.component.scss'],
 })
 export class GraphicComponent implements OnInit {
   public dataCitiesTime: any = [];
@@ -18,12 +18,12 @@ export class GraphicComponent implements OnInit {
 
   public dateTime: any = [];
 
-  public type: ChartType = "bar";
+  public type: ChartType = 'bar';
 
   public labels: Label[] = [];
 
   public datasets: ChartDataSets[];
-  private city: String;
+  private city: string;
 
   public options: ChartOptions = {
     scales: {
@@ -31,7 +31,7 @@ export class GraphicComponent implements OnInit {
         {
           scaleLabel: {
             display: true,
-            labelString: "Température",
+            labelString: 'Température',
           },
           ticks: {
             beginAtZero: true,
@@ -42,7 +42,7 @@ export class GraphicComponent implements OnInit {
         {
           scaleLabel: {
             display: true,
-            labelString: "Journée",
+            labelString: 'Journée',
           },
         },
       ],
@@ -53,24 +53,24 @@ export class GraphicComponent implements OnInit {
     private prevService: PrevisionService,
     private route: ActivatedRoute
   ) {
-    this.city = this.route.snapshot.paramMap.get("nameCity");
+    this.city = this.route.snapshot.paramMap.get('nameCity');
   }
 
   ngOnInit() {
     this.prevService.getFollowingDays(this.city).subscribe((data) => {
-      for (let i in data) {
-        this.dataCitiesTime.push(data[i]["Temperature"].value);
-        this.dataCitiesTimeMin.push(data[i]["Temperature"].value_min);
-        this.dataCitiesTimeMax.push(data[i]["Temperature"].value_max);
+      for (const i in data) {
+        this.dataCitiesTime.push(data[i].Temperature.value);
+        this.dataCitiesTimeMin.push(data[i].Temperature.value_min);
+        this.dataCitiesTimeMax.push(data[i].Temperature.value_max);
 
-        let dateTemp = data[i].dateObj.split("T")[0];
-        let date = new Date(dateTemp);
-        let dateString = date.getDate() + "/" + date.getMonth();
+        const dateTemp = data[i].dateObj.split('T')[0];
+        const date = new Date(dateTemp);
+        const dateString = date.getDate() + '/' + date.getMonth();
         this.dateTime.push(dateString);
       }
       this.datasets = [
         {
-          label: "Température minimale",
+          label: 'Température minimale',
           data: [
             this.dataCitiesTimeMin[0],
             this.dataCitiesTimeMin[1],
@@ -79,23 +79,23 @@ export class GraphicComponent implements OnInit {
             this.dataCitiesTimeMin[4],
           ],
           backgroundColor: [
-            "rgba(219, 10, 91, 1)",
-            "rgba(219, 10, 91, 1)",
-            "rgba(219, 10, 91, 1)",
-            "rgba(219, 10, 91, 1)",
-            "rgba(219, 10, 91, 1)",
+            'rgba(219, 10, 91, 1)',
+            'rgba(219, 10, 91, 1)',
+            'rgba(219, 10, 91, 1)',
+            'rgba(219, 10, 91, 1)',
+            'rgba(219, 10, 91, 1)',
           ],
           borderColor: [
-            "rgba(219, 10, 91, 1)",
-            "rgba(219, 10, 91, 1)",
-            "rgba(219, 10, 91, 1)",
-            "rgba(219, 10, 91, 1)",
-            "rgba(219, 10, 91, 1)",
+            'rgba(219, 10, 91, 1)',
+            'rgba(219, 10, 91, 1)',
+            'rgba(219, 10, 91, 1)',
+            'rgba(219, 10, 91, 1)',
+            'rgba(219, 10, 91, 1)',
           ],
           borderWidth: 1,
         },
         {
-          label: "Prévisions",
+          label: 'Prévisions',
           data: [
             this.dataCitiesTime[0],
             this.dataCitiesTime[1],
@@ -104,23 +104,23 @@ export class GraphicComponent implements OnInit {
             this.dataCitiesTime[4],
           ],
           backgroundColor: [
-            "rgba(34, 167, 240, 1)",
-            "rgba(34, 167, 240, 1)",
-            "rgba(34, 167, 240, 1)",
-            "rgba(34, 167, 240, 1)",
-            "rgba(34, 167, 240, 1)",
+            'rgba(34, 167, 240, 1)',
+            'rgba(34, 167, 240, 1)',
+            'rgba(34, 167, 240, 1)',
+            'rgba(34, 167, 240, 1)',
+            'rgba(34, 167, 240, 1)',
           ],
           borderColor: [
-            "rgba(34, 167, 240, 1)",
-            "rgba(34, 167, 240, 1)",
-            "rgba(34, 167, 240, 1)",
-            "rgba(34, 167, 240, 1)",
-            "rgba(34, 167, 240, 1)",
+            'rgba(34, 167, 240, 1)',
+            'rgba(34, 167, 240, 1)',
+            'rgba(34, 167, 240, 1)',
+            'rgba(34, 167, 240, 1)',
+            'rgba(34, 167, 240, 1)',
           ],
           borderWidth: 1,
         },
         {
-          label: "Température maximale",
+          label: 'Température maximale',
           data: [
             this.dataCitiesTimeMax[0],
             this.dataCitiesTimeMax[1],
@@ -129,18 +129,18 @@ export class GraphicComponent implements OnInit {
             this.dataCitiesTimeMax[4],
           ],
           backgroundColor: [
-            "rgba(247, 202, 24, 1)",
-            "rgba(247, 202, 24, 1)",
-            "rgba(247, 202, 24, 1)",
-            "rgba(247, 202, 24, 1)",
-            "rgba(247, 202, 24, 1)",
+            'rgba(247, 202, 24, 1)',
+            'rgba(247, 202, 24, 1)',
+            'rgba(247, 202, 24, 1)',
+            'rgba(247, 202, 24, 1)',
+            'rgba(247, 202, 24, 1)',
           ],
           borderColor: [
-            "rgba(247, 202, 24, 1)",
-            "rgba(247, 202, 24, 1)",
-            "rgba(247, 202, 24, 1)",
-            "rgba(247, 202, 24, 1)",
-            "rgba(247, 202, 24, 1)",
+            'rgba(247, 202, 24, 1)',
+            'rgba(247, 202, 24, 1)',
+            'rgba(247, 202, 24, 1)',
+            'rgba(247, 202, 24, 1)',
+            'rgba(247, 202, 24, 1)',
           ],
           borderWidth: 1,
         },
