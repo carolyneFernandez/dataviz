@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
+var CronJob = require("cron").CronJob;
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -110,64 +111,127 @@ function dbRemplissageJour1(
     dateRetrive,
     cityIcon
 ) {
-    return new Promise((resolve) => {
+
+    return new Promise(async(resolve) => {
+        var date = new Date();
+        var todayDay = date.getDate();
+        var todayMonth = date.getMonth() + 1;
+        var todayYear = date.getFullYear();
+        var todayHour = date.getHours();
+        var todayDate = `${todayYear}-${todayMonth}-${todayDay} ${todayHour}:00:00.00`;
+        var todayDateObj = new Date(todayDate);
         City.findOne({
-                where: {
-                    name: cityName,
-                },
-            })
-            .then((cityfinded) => {
-                if (cityfinded === undefined) {
-                    console.log(`la ville ${cityName} n'existe pas.`);
-                } else {
-                    City.create(cityModelData)
-                        .then((newCity) => {
-                            var newcityId = newCity.get('id');
-                            Temperature.create(temperatureModelData)
-                                .then((newTemp) => {
-                                    var newTempId = newTemp.get('id');
-                                    Cloud.create(cloudModelData)
-                                        .then((newCloud) => {
-                                            var newCloudId = newCloud.get('id');
-                                            Wind.create(windModelData)
-                                                .then((newWind) => {
-                                                    var newWindId = newWind.get('id');
-                                                    Precipitation.create(precipitationModelData)
-                                                        .then((newPrecipitation) => {
-                                                            var newPrecipitationId = newPrecipitation.get(
-                                                                'id'
-                                                            );
-                                                            Data.create({
-                                                                    pression: cityPression,
-                                                                    humidity: cityHumidity,
-                                                                    weather: cityWeather,
-                                                                    dateObj: dateRetrive,
-                                                                    icon: cityIcon,
-                                                                    temperatureId: newTempId,
-                                                                    windId: newWindId,
-                                                                    precipitationId: newPrecipitationId,
-                                                                    cloudId: newCloudId,
-                                                                    cityId: newcityId,
-                                                                })
-                                                                .then((_) => {
-                                                                    console.log(`DAY 1, ${cityName} : OK.`);
-                                                                })
-                                                                .catch((err) => console.log(err));
-                                                        })
-                                                        .catch((err) => console.log(err));
-                                                })
-                                                .catch((err) => console.log(err));
-                                        })
-                                        .catch((err) => console.log(err));
-                                })
-                                .catch((err) => console.log(err));
-                        })
-                        .catch((err) => console.log(err));
-                }
-            })
-            .catch((err) =>
-                console.log(`Erreur rechecherche ville ${cityName} : ${err}.`)
-            );
+            where: {
+                name: cityName
+            }
+        }).then(async cityfinded => {
+            if (cityfinded === undefined || cityfinded === "" || cityfinded === null) {
+                var newCity = await City.create(cityModelData);
+                var newCityID = newCity.id;
+
+                var newTemp = await Temperature.create(temperatureModelData);
+                var newTempID = newTemp.id;
+
+                var newWind = await Wind.create(windModelData);
+                var newWindID = newWind.id;
+
+                var newCloud = await Cloud.create(cloudModelData);
+                var newCloudID = newCloud.id;
+
+                var newPrecipitation = await Precipitation.create(precipitationModelData);
+                var newPrecipitationID = newPrecipitation.id;
+
+                var newData = await Data.create({
+                    pression: cityPression,
+                    humidity: cityHumidity,
+                    weather: cityWeather,
+                    dateObj: dateRetrive,
+                    icon: cityIcon,
+                    temperatureId: newTempID,
+                    windId: newWindID,
+                    precipitationId: newPrecipitationID,
+                    cloudId: newCloudID,
+                    cityId: newCityID,
+                });
+            } else {
+                City.findOne({
+                    where: {
+                        name: cityName
+                    }
+                }).then(async findedCity => {
+                    var findedCityId = findedCity.id;
+                    var datafinded = await Data.findOne({ where: { cityId: findedCityId } });
+                    var dateRetrieveAPI = new Date(dateRetrive);
+                    if (datafinded.dateObj.toISOString() == dateRetrieveAPI.toISOString()) {
+                        var dataLinkTempId = datafinded.temperatureId;
+                        var dataLinkWindId = datafinded.windId;
+                        var dataLinkPrecipitationId = datafinded.precipitationId;
+                        var dataLinkCloudId = datafinded.cloudId;
+
+                        var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                        updateTemp.value = temperatureModelData.value;
+                        updateTemp.value_max = temperatureModelData.value_max;
+                        updateTemp.value_min = temperatureModelData.value_min;
+                        updateTemp.feeling = temperatureModelData.feeling;
+                        updateTemp.save();
+
+                        var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                        updateWind.direction_degree = windModelData.direction_degree;
+                        updateWind.direction_code = windModelData.direction_code;
+                        updateWind.direction_name = windModelData.direction_name;
+                        updateWind.speed = windModelData.speed;
+                        updateWind.speed_name = windModelData.speed_name;
+                        updateWind.save();
+
+                        var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                        updatePrecipitation.value = precipitationModelData.value;
+                        updatePrecipitation.mode = precipitationModelData.mode;
+                        updatePrecipitation.save();
+
+                        var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                        updateCloud.cover = cloudModelData.cover;
+                        updateCloud.name = cloudModelData.name;
+                        updateCloud.save();
+
+                        datafinded.pression = cityPression;
+                        datafinded.humidity = cityHumidity;
+                        datafinded.weather = cityWeather;
+                        datafinded.dateObj = dateRetrive;
+                        datafinded.icon = cityIcon;
+                        datafinded.save();
+                        console.log(`DAY 1, ${cityName} (OK): UPDATED.`);
+                    } else {
+                        var newTemp = await Temperature.create(temperatureModelData);
+                        var newTempID = newTemp.id;
+
+                        var newWind = await Wind.create(windModelData);
+                        var newWindID = newWind.id;
+
+                        var newCloud = await Cloud.create(cloudModelData);
+                        var newCloudID = newCloud.id;
+
+                        var newPrecipitation = await Precipitation.create(precipitationModelData);
+                        var newPrecipitationID = newPrecipitation.id;
+
+                        var newData = await Data.create({
+                            pression: cityPression,
+                            humidity: cityHumidity,
+                            weather: cityWeather,
+                            dateObj: dateRetrive,
+                            icon: cityIcon,
+                            temperatureId: newTempID,
+                            windId: newWindID,
+                            precipitationId: newPrecipitationID,
+                            cloudId: newCloudID,
+                            cityId: findedCityId
+                        });
+                        console.log(`DAY 1, ${cityName} (OK): CREATED.`);
+                    }
+
+
+                }).catch(err => console.log("err day 1 : ", err))
+            }
+        }).catch(err => console.log("err day 1 : ", err))
         resolve('resolved!');
     });
 }
@@ -185,46 +249,82 @@ function dbRemplissageJour2(
     dateRetrive2,
     cityIcon2
 ) {
-    return new Promise((resolve) => {
-        City.findOne({ where: { name: cityName } })
-            .then((findedCity) => {
-                var findedCityId = findedCity.get('id');
-                Temperature.create(temperatureModelData2)
-                    .then((newTemp) => {
-                        var newTempId2 = newTemp.get('id');
-                        Cloud.create(cloudModelData2)
-                            .then((newCloud) => {
-                                var newCloudId2 = newCloud.get('id');
-                                Wind.create(windModelData2)
-                                    .then((newWind) => {
-                                        var newWindId2 = newWind.get('id');
-                                        Precipitation.create(precipitationModelData2)
-                                            .then((newPrecipitation) => {
-                                                var newPrecipitationId2 = newPrecipitation.get('id');
-                                                Data.create({
-                                                    pression: cityPression2,
-                                                    humidity: cityHumidity2,
-                                                    weather: cityWeather2,
-                                                    dateObj: dateRetrive2,
-                                                    icon: cityIcon2,
-                                                    temperatureId: newTempId2,
-                                                    windId: newWindId2,
-                                                    precipitationId: newPrecipitationId2,
-                                                    cloudId: newCloudId2,
-                                                    cityId: findedCityId,
-                                                }).then((_) => {
-                                                    console.log(`DAY 2, ${cityName}: OK.`);
-                                                });
-                                            })
-                                            .catch((err) => console.log(err));
-                                    })
-                                    .catch((err) => console.log(err));
-                            })
-                            .catch((err) => console.log(err));
-                    })
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log('ERREUR MON FRèRE! : ', err));
+    return new Promise(async(resolve) => {
+        City.findOne({
+            where: {
+                name: cityName
+            }
+        }).then(async findedCity => {
+            var findedCityId = findedCity.id;
+            var dateRetrieveAPI = new Date(dateRetrive2);
+            var datafinded = await Data.findOne({ where: { cityId: findedCityId, dateObj: dateRetrieveAPI.toISOString() } });
+
+            if (datafinded === null) {
+                var newTemp = await Temperature.create(temperatureModelData2);
+                var newTempID = newTemp.id;
+
+                var newWind = await Wind.create(windModelData2);
+                var newWindID = newWind.id;
+
+                var newCloud = await Cloud.create(cloudModelData2);
+                var newCloudID = newCloud.id;
+
+                var newPrecipitation = await Precipitation.create(precipitationModelData2);
+                var newPrecipitationID = newPrecipitation.id;
+
+                var newData = await Data.create({
+                    pression: cityPression2,
+                    humidity: cityHumidity2,
+                    weather: cityWeather2,
+                    dateObj: dateRetrive2,
+                    icon: cityIcon2,
+                    temperatureId: newTempID,
+                    windId: newWindID,
+                    precipitationId: newPrecipitationID,
+                    cloudId: newCloudID,
+                    cityId: findedCityId
+                });
+                console.log(`DAY 2, ${cityName} (OK): CREATED.`);
+            } else {
+                var dataLinkTempId = datafinded.temperatureId;
+                var dataLinkWindId = datafinded.windId;
+                var dataLinkPrecipitationId = datafinded.precipitationId;
+                var dataLinkCloudId = datafinded.cloudId;
+
+                var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                updateTemp.value = temperatureModelData2.value;
+                updateTemp.value_max = temperatureModelData2.value_max;
+                updateTemp.value_min = temperatureModelData2.value_min;
+                updateTemp.feeling = temperatureModelData2.feeling;
+                updateTemp.save();
+
+                var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                updateWind.direction_degree = windModelData2.direction_degree;
+                updateWind.direction_code = windModelData2.direction_code;
+                updateWind.direction_name = windModelData2.direction_name;
+                updateWind.speed = windModelData2.speed;
+                updateWind.speed_name = windModelData2.speed_name;
+                updateWind.save();
+
+                var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                updatePrecipitation.value = precipitationModelData2.value;
+                updatePrecipitation.mode = precipitationModelData2.mode;
+                updatePrecipitation.save();
+
+                var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                updateCloud.cover = cloudModelData2.cover;
+                updateCloud.name = cloudModelData2.name;
+                updateCloud.save();
+
+                datafinded.pression = cityPression2;
+                datafinded.humidity = cityHumidity2;
+                datafinded.weather = cityWeather2;
+                datafinded.dateObj = dateRetrive2;
+                datafinded.icon = cityIcon2;
+                datafinded.save();
+                console.log(`DAY 2, ${cityName} (OK): UPDATED.`);
+            }
+        }).catch(err => console.log("err day 2 : ", err))
         resolve('resolved!');
     });
 }
@@ -242,46 +342,82 @@ function dbRemplissageJour3(
     dateRetrive3,
     cityIcon3
 ) {
-    return new Promise((resolve) => {
-        City.findOne({ where: { name: cityName } })
-            .then((findedCity) => {
-                var findedCityId = findedCity.get('id');
-                Temperature.create(temperatureModelData3)
-                    .then((newTemp) => {
-                        var newTempId3 = newTemp.get('id');
-                        Cloud.create(cloudModelData3)
-                            .then((newCloud) => {
-                                var newCloudId3 = newCloud.get('id');
-                                Wind.create(windModelData3)
-                                    .then((newWind) => {
-                                        var newWindId3 = newWind.get('id');
-                                        Precipitation.create(precipitationModelData3)
-                                            .then((newPrecipitation) => {
-                                                var newPrecipitationId3 = newPrecipitation.get('id');
-                                                Data.create({
-                                                    pression: cityPression3,
-                                                    humidity: cityHumidity3,
-                                                    weather: cityWeather3,
-                                                    dateObj: dateRetrive3,
-                                                    icon: cityIcon3,
-                                                    temperatureId: newTempId3,
-                                                    windId: newWindId3,
-                                                    precipitationId: newPrecipitationId3,
-                                                    cloudId: newCloudId3,
-                                                    cityId: findedCityId,
-                                                }).then((_) => {
-                                                    console.log(`DAY 3, ${cityName}: OK.`);
-                                                });
-                                            })
-                                            .catch((err) => console.log(err));
-                                    })
-                                    .catch((err) => console.log(err));
-                            })
-                            .catch((err) => console.log(err));
-                    })
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log('ERREUR MON FRèRE! : ', err));
+    return new Promise(async(resolve) => {
+        City.findOne({
+            where: {
+                name: cityName
+            }
+        }).then(async findedCity => {
+            var findedCityId = findedCity.id;
+            var dateRetrieveAPI = new Date(dateRetrive3);
+            var datafinded = await Data.findOne({ where: { cityId: findedCityId, dateObj: dateRetrieveAPI.toISOString() } });
+
+            if (datafinded === null) {
+                var newTemp = await Temperature.create(temperatureModelData3);
+                var newTempID = newTemp.id;
+
+                var newWind = await Wind.create(windModelData3);
+                var newWindID = newWind.id;
+
+                var newCloud = await Cloud.create(cloudModelData3);
+                var newCloudID = newCloud.id;
+
+                var newPrecipitation = await Precipitation.create(precipitationModelData3);
+                var newPrecipitationID = newPrecipitation.id;
+
+                var newData = await Data.create({
+                    pression: cityPression3,
+                    humidity: cityHumidity3,
+                    weather: cityWeather3,
+                    dateObj: dateRetrive3,
+                    icon: cityIcon3,
+                    temperatureId: newTempID,
+                    windId: newWindID,
+                    precipitationId: newPrecipitationID,
+                    cloudId: newCloudID,
+                    cityId: findedCityId
+                });
+                console.log(`DAY 3, ${cityName} (OK): CREATED.`);
+            } else {
+                var dataLinkTempId = datafinded.temperatureId;
+                var dataLinkWindId = datafinded.windId;
+                var dataLinkPrecipitationId = datafinded.precipitationId;
+                var dataLinkCloudId = datafinded.cloudId;
+
+                var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                updateTemp.value = temperatureModelData3.value;
+                updateTemp.value_max = temperatureModelData3.value_max;
+                updateTemp.value_min = temperatureModelData3.value_min;
+                updateTemp.feeling = temperatureModelData3.feeling;
+                updateTemp.save();
+
+                var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                updateWind.direction_degree = windModelData3.direction_degree;
+                updateWind.direction_code = windModelData3.direction_code;
+                updateWind.direction_name = windModelData3.direction_name;
+                updateWind.speed = windModelData3.speed;
+                updateWind.speed_name = windModelData3.speed_name;
+                updateWind.save();
+
+                var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                updatePrecipitation.value = precipitationModelData3.value;
+                updatePrecipitation.mode = precipitationModelData3.mode;
+                updatePrecipitation.save();
+
+                var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                updateCloud.cover = cloudModelData3.cover;
+                updateCloud.name = cloudModelData3.name;
+                updateCloud.save();
+
+                datafinded.pression = cityPression3;
+                datafinded.humidity = cityHumidity3;
+                datafinded.weather = cityWeather3;
+                datafinded.dateObj = dateRetrive3;
+                datafinded.icon = cityIcon3;
+                datafinded.save();
+                console.log(`DAY 3, ${cityName} (OK): UPDATED.`);
+            }
+        }).catch(err => console.log("err day 3 : ", err))
         resolve('resolved!');
     });
 }
@@ -299,46 +435,82 @@ function dbRemplissageJour4(
     dateRetrive4,
     cityIcon4
 ) {
-    return new Promise((resolve) => {
-        City.findOne({ where: { name: cityName } })
-            .then((findedCity) => {
-                var findedCityId = findedCity.get('id');
-                Temperature.create(temperatureModelData4)
-                    .then((newTemp) => {
-                        var newTempId4 = newTemp.get('id');
-                        Cloud.create(cloudModelData4)
-                            .then((newCloud) => {
-                                var newCloudId4 = newCloud.get('id');
-                                Wind.create(windModelData4)
-                                    .then((newWind) => {
-                                        var newWindId4 = newWind.get('id');
-                                        Precipitation.create(precipitationModelData4)
-                                            .then((newPrecipitation) => {
-                                                var newPrecipitationId4 = newPrecipitation.get('id');
-                                                Data.create({
-                                                    pression: cityPression4,
-                                                    humidity: cityHumidity4,
-                                                    weather: cityWeather4,
-                                                    dateObj: dateRetrive4,
-                                                    icon: cityIcon4,
-                                                    temperatureId: newTempId4,
-                                                    windId: newWindId4,
-                                                    precipitationId: newPrecipitationId4,
-                                                    cloudId: newCloudId4,
-                                                    cityId: findedCityId,
-                                                }).then((_) => {
-                                                    console.log(`DAY 4, ${cityName}: OK.`);
-                                                });
-                                            })
-                                            .catch((err) => console.log(err));
-                                    })
-                                    .catch((err) => console.log(err));
-                            })
-                            .catch((err) => console.log(err));
-                    })
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log('ERREUR MON FRèRE! : ', err));
+    return new Promise(async(resolve) => {
+        City.findOne({
+            where: {
+                name: cityName
+            }
+        }).then(async findedCity => {
+            var findedCityId = findedCity.id;
+            var dateRetrieveAPI = new Date(dateRetrive4);
+            var datafinded = await Data.findOne({ where: { cityId: findedCityId, dateObj: dateRetrieveAPI.toISOString() } });
+
+            if (datafinded === null) {
+                var newTemp = await Temperature.create(temperatureModelData4);
+                var newTempID = newTemp.id;
+
+                var newWind = await Wind.create(windModelData4);
+                var newWindID = newWind.id;
+
+                var newCloud = await Cloud.create(cloudModelData4);
+                var newCloudID = newCloud.id;
+
+                var newPrecipitation = await Precipitation.create(precipitationModelData4);
+                var newPrecipitationID = newPrecipitation.id;
+
+                var newData = await Data.create({
+                    pression: cityPression4,
+                    humidity: cityHumidity4,
+                    weather: cityWeather4,
+                    dateObj: dateRetrive4,
+                    icon: cityIcon4,
+                    temperatureId: newTempID,
+                    windId: newWindID,
+                    precipitationId: newPrecipitationID,
+                    cloudId: newCloudID,
+                    cityId: findedCityId
+                });
+                console.log(`DAY 4, ${cityName} (OK): CREATED.`);
+            } else {
+                var dataLinkTempId = datafinded.temperatureId;
+                var dataLinkWindId = datafinded.windId;
+                var dataLinkPrecipitationId = datafinded.precipitationId;
+                var dataLinkCloudId = datafinded.cloudId;
+
+                var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                updateTemp.value = temperatureModelData4.value;
+                updateTemp.value_max = temperatureModelData4.value_max;
+                updateTemp.value_min = temperatureModelData4.value_min;
+                updateTemp.feeling = temperatureModelData4.feeling;
+                updateTemp.save();
+
+                var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                updateWind.direction_degree = windModelData4.direction_degree;
+                updateWind.direction_code = windModelData4.direction_code;
+                updateWind.direction_name = windModelData4.direction_name;
+                updateWind.speed = windModelData4.speed;
+                updateWind.speed_name = windModelData4.speed_name;
+                updateWind.save();
+
+                var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                updatePrecipitation.value = precipitationModelData4.value;
+                updatePrecipitation.mode = precipitationModelData4.mode;
+                updatePrecipitation.save();
+
+                var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                updateCloud.cover = cloudModelData4.cover;
+                updateCloud.name = cloudModelData4.name;
+                updateCloud.save();
+
+                datafinded.pression = cityPression4;
+                datafinded.humidity = cityHumidity4;
+                datafinded.weather = cityWeather4;
+                datafinded.dateObj = dateRetrive4;
+                datafinded.icon = cityIcon4;
+                datafinded.save();
+                console.log(`DAY 4, ${cityName} (OK): UPDATED.`);
+            }
+        }).catch(err => console.log("err day 4 : ", err))
         resolve('resolved!');
     });
 }
@@ -356,46 +528,82 @@ function dbRemplissageJour5(
     dateRetrive5,
     cityIcon5
 ) {
-    return new Promise((resolve) => {
-        City.findOne({ where: { name: cityName } })
-            .then((findedCity) => {
-                var findedCityId = findedCity.get('id');
-                Temperature.create(temperatureModelData5)
-                    .then((newTemp) => {
-                        var newTempId5 = newTemp.get('id');
-                        Cloud.create(cloudModelData5)
-                            .then((newCloud) => {
-                                var newCloudId5 = newCloud.get('id');
-                                Wind.create(windModelData5)
-                                    .then((newWind) => {
-                                        var newWindId5 = newWind.get('id');
-                                        Precipitation.create(precipitationModelData5)
-                                            .then((newPrecipitation) => {
-                                                var newPrecipitationId5 = newPrecipitation.get('id');
-                                                Data.create({
-                                                    pression: cityPression5,
-                                                    humidity: cityHumidity5,
-                                                    weather: cityWeather5,
-                                                    dateObj: dateRetrive5,
-                                                    icon: cityIcon5,
-                                                    temperatureId: newTempId5,
-                                                    windId: newWindId5,
-                                                    precipitationId: newPrecipitationId5,
-                                                    cloudId: newCloudId5,
-                                                    cityId: findedCityId,
-                                                }).then((_) => {
-                                                    console.log(`DAY 5, ${cityName}: OK.`);
-                                                });
-                                            })
-                                            .catch((err) => console.log(err));
-                                    })
-                                    .catch((err) => console.log(err));
-                            })
-                            .catch((err) => console.log(err));
-                    })
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log('ERREUR MON FRèRE! : ', err));
+    return new Promise(async(resolve) => {
+        City.findOne({
+            where: {
+                name: cityName
+            }
+        }).then(async findedCity => {
+            var findedCityId = findedCity.id;
+            var dateRetrieveAPI = new Date(dateRetrive5);
+            var datafinded = await Data.findOne({ where: { cityId: findedCityId, dateObj: dateRetrieveAPI.toISOString() } });
+
+            if (datafinded === null) {
+                var newTemp = await Temperature.create(temperatureModelData5);
+                var newTempID = newTemp.id;
+
+                var newWind = await Wind.create(windModelData5);
+                var newWindID = newWind.id;
+
+                var newCloud = await Cloud.create(cloudModelData5);
+                var newCloudID = newCloud.id;
+
+                var newPrecipitation = await Precipitation.create(precipitationModelData5);
+                var newPrecipitationID = newPrecipitation.id;
+
+                var newData = await Data.create({
+                    pression: cityPression5,
+                    humidity: cityHumidity5,
+                    weather: cityWeather5,
+                    dateObj: dateRetrive5,
+                    icon: cityIcon5,
+                    temperatureId: newTempID,
+                    windId: newWindID,
+                    precipitationId: newPrecipitationID,
+                    cloudId: newCloudID,
+                    cityId: findedCityId
+                });
+                console.log(`DAY 5, ${cityName} (OK): CREATED.`);
+            } else {
+                var dataLinkTempId = datafinded.temperatureId;
+                var dataLinkWindId = datafinded.windId;
+                var dataLinkPrecipitationId = datafinded.precipitationId;
+                var dataLinkCloudId = datafinded.cloudId;
+
+                var updateTemp = await Temperature.findOne({ where: { id: dataLinkTempId } });
+                updateTemp.value = temperatureModelData5.value;
+                updateTemp.value_max = temperatureModelData5.value_max;
+                updateTemp.value_min = temperatureModelData5.value_min;
+                updateTemp.feeling = temperatureModelData5.feeling;
+                updateTemp.save();
+
+                var updateWind = await Wind.findOne({ where: { id: dataLinkWindId } });
+                updateWind.direction_degree = windModelData5.direction_degree;
+                updateWind.direction_code = windModelData5.direction_code;
+                updateWind.direction_name = windModelData5.direction_name;
+                updateWind.speed = windModelData5.speed;
+                updateWind.speed_name = windModelData5.speed_name;
+                updateWind.save();
+
+                var updatePrecipitation = await Precipitation.findOne({ where: { id: dataLinkPrecipitationId } });
+                updatePrecipitation.value = precipitationModelData5.value;
+                updatePrecipitation.mode = precipitationModelData5.mode;
+                updatePrecipitation.save();
+
+                var updateCloud = await Cloud.findOne({ where: { id: dataLinkCloudId } });
+                updateCloud.cover = cloudModelData5.cover;
+                updateCloud.name = cloudModelData5.name;
+                updateCloud.save();
+
+                datafinded.pression = cityPression5;
+                datafinded.humidity = cityHumidity5;
+                datafinded.weather = cityWeather5;
+                datafinded.dateObj = dateRetrive5;
+                datafinded.icon = cityIcon5;
+                datafinded.save();
+                console.log(`DAY 5, ${cityName} (OK): UPDATED.`);
+            }
+        }).catch(err => console.log("err day 5 : ", err))
         resolve('resolved!');
     });
 }
@@ -599,7 +807,7 @@ async function requestAndDb(
 
             setTimeout(
                 dbRemplissageJour2,
-                35000,
+                60000,
                 cityModelData2,
                 temperatureModelData2,
                 cloudModelData2,
@@ -697,7 +905,7 @@ async function requestAndDb(
 
             setTimeout(
                 dbRemplissageJour3,
-                70000,
+                120000,
                 cityModelData3,
                 temperatureModelData3,
                 cloudModelData3,
@@ -799,7 +1007,7 @@ async function requestAndDb(
 
             setTimeout(
                 dbRemplissageJour4,
-                140000,
+                180000,
                 cityModelData4,
                 temperatureModelData4,
                 cloudModelData4,
@@ -899,7 +1107,7 @@ async function requestAndDb(
 
             setTimeout(
                 dbRemplissageJour5,
-                280000,
+                240000,
                 cityModelData5,
                 temperatureModelData5,
                 cloudModelData5,
@@ -942,7 +1150,24 @@ async function readCities() {
     });
 }
 
-//  readCities();
+/**
+ * Update la base de donnée tous les jours à 12h
+ */
+var updateDatabase = new CronJob({
+    cronTime: '0 0 12 1-31 * *',
+    onTick: function() {
+        console.log('MàJ de la base en cours....');
+        readCities();
+    },
+    start: false,
+    timeZone: 'Europe/Paris'
+});
+updateDatabase.start();
+
+/**
+ * Rempli la base de donnée dès le lancement du serveur, soit : npm start
+ */
+readCities();
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
