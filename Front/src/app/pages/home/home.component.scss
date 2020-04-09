@@ -1,0 +1,44 @@
+#list-button {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+button-city {
+  width: calc(25% - 20px);
+  margin-bottom: 20px;
+  @media screen and (max-width: 1024px) {
+    width: calc(50% - 20px);
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+}
+
+.nav-bar {
+  width: 50%;
+  margin: 0 auto 40px auto;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+}
+
+.container {
+  &::before {
+    display: none;
+  }
+}
+
+.ui-wrapper {
+  display: flex;
+  align-items: center;
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.img-item {
+  width: 25px;
+  margin: 0 10px;
+}

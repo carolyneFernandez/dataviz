@@ -1,0 +1,7 @@
+<div class="card-body p-4" *ngIf="datasets">
+  <div class="card-title">
+    Evolution de la température
+  </div>
+  <canvas baseChart [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="type">
+  </canvas>
+</div>

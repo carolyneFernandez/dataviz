@@ -1,0 +1,39 @@
+.btn {
+  color: #000;
+  background-color: #fff;
+  font-weight: bold;
+  display: block;
+  padding: 5px 20px;
+
+  p {
+    margin: 0;
+  }
+
+  img {
+    filter: contrast(85%);
+    height: 50px;
+  }
+}
+
+.city-name {
+  font-size: 100%;
+  max-width: 50%;
+  overflow: hidden;
+}
+
+.temp {
+  font-size: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#weather {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
