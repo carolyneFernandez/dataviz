@@ -53,8 +53,21 @@
 .result {
   width: 60%;
   margin: 0 auto;
-  background: #7ed8f6;
+  background: #88f67e;
   border-radius: 8px;
   text-align: center;
   padding: 10px;
+}
+
+.error {
+  width: 60%;
+  margin: 0 auto;
+  background: #f6cc7e;
+  border-radius: 8px;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  p {
+    margin: 0;
+  }
 }

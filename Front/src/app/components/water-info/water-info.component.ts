@@ -12,6 +12,8 @@ export class WaterInfoComponent implements OnInit {
   public cityName: string;
   public currentStation: string;
   public stationInfos: any;
+  public showError = false;
+  public showResult = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,10 +31,15 @@ export class WaterInfoComponent implements OnInit {
     this.previsionService
       .getWaterInfos(this.cityName, codeStation)
       .then((result) => {
+        console.log(result);
         if (result.length === 0) {
-          this.stationInfos = 'Cette station ne possède pas de données.';
+          result.resultat = 0;
+          this.showError = true;
+          this.showResult = false;
         } else {
           this.stationInfos = result[result.length - 1];
+          this.showResult = true;
+          this.showError = false;
         }
       });
   }

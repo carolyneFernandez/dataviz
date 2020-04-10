@@ -95,7 +95,7 @@ export class GraphicLineMultiComponent implements OnInit {
 
         const dateTemp = data[i].dateObj.split('T')[0];
         const date = new Date(dateTemp);
-        const dateString = date.getDate() + '/' + date.getMonth();
+        const dateString = date.getDate() + '/' + (date.getMonth() + 1);
         this.dateTime.push(dateString);
       }
 

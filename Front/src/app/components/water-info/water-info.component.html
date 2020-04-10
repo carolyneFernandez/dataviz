@@ -20,7 +20,10 @@
     <p>
       Station courante : <strong>{{ currentStation }}</strong>
     </p>
-    <div *ngIf="stationInfos" class="result">
+    <div *ngIf="showError" class="error">
+      <p>Les données sont indisponibles...</p>
+    </div>
+    <div *ngIf="showResult" class="result">
       <h3 class="title">Teneur en Nitrate :</h3>
       <ul>
         <li>

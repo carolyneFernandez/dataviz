@@ -14,7 +14,7 @@
     <img alt="image pression" class="img-item" src="../assets/images/map.svg" />
   </div>
 
-  <div style="width: 30%; margin: auto;" *ngIf="showList">
+  <div class="nav-bar" *ngIf="showList">
     <input
       type="search"
       class="form-control"
@@ -23,7 +23,7 @@
     />
   </div>
 
-  <div id="list-button" class="container" *ngIf="showList">
+  <div class="list-button" *ngIf="showList">
     <button-city
       [city]="cities"
       *ngFor="let cities of cities | filter: searchText"
