@@ -19,17 +19,15 @@ L'identifiant est **root** et le mot de passe est **root**.
 Créez une nouvelle base de données nommée **dataviz**.
 
 ## Installation du back
+
 A présent, rendez-vous dans le dossier Back/backend.
 Installez les modules nécessaires :
 `npm install`
 Pour créer le schéma de la base de données, exécutez la commande suivante :
 `sequelize db:migrate`
 Pour plus d'informations sur Sequelize, je vous invite à vous documenter [dessus](https://sequelize.org/v5/)).
-Dans le fichier Back/backend/app.js, retirez les commentaires de la ligne "readCities()", et exécutez la commande suivante :
-`sequelize db:migrate`
 Puis :
 `npm start`
-La ligne 'readCities()' permet de remplir la base de données. Une fois le npm start arrivé au cinquième jour, remettez en commentaire la ligne 'readCities()'.
 Le back est prêt et à l'écoute.
 
 
